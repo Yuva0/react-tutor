@@ -13,7 +13,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "stelios": "^0.1.16",
+    "sass": "^1.77.8",
+    "stelios": "^0.1.17",
     "typescript": "^4.9.5"
   },
   "scripts": {

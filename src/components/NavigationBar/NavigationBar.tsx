@@ -2,7 +2,7 @@ import React from "react";
 import {
   NavigationBar as NavigationBarUI,
   NavigationBarGroup,
-  NavigationBarHeader,
+  // NavigationBarHeader,
   NavigationBarItem,
 } from "stelios";
 
@@ -43,7 +43,10 @@ const NavigationBar = () => {
   }, []);
 
   return (
-    <NavigationBarUI style={{ top: "4rem", height: "calc(100vh - 4rem)" }}>
+    <NavigationBarUI
+      className="navigation-bar"
+      style={{ top: "4rem", height: "calc(100vh - 4rem)" }}
+    >
       {topics}
     </NavigationBarUI>
   );
