@@ -12,10 +12,10 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconSearch,
-  IconSettings,
 } from "@tabler/icons-react";
 
 import cstutor from "../../assets/images/CSTutor_logo.png";
+import Settings from "./Settings";
 
 const Header = () => {
   return (
@@ -29,7 +29,9 @@ const Header = () => {
           />
         </HeaderItem>
         <HeaderItem>
-          <Text variant="h2" color="#d18800">CSTutor</Text>
+          <Text variant="h2" color="#d18800">
+            CSTutor
+          </Text>
         </HeaderItem>
       </HeaderGroup>
       <HeaderGroup>
@@ -39,21 +41,14 @@ const Header = () => {
           placeholder="Search..."
         />
       </HeaderGroup>
-      <HeaderGroup>
-        <HeaderItem>
-          <IconButton
-            size="small"
-            variant="outlined"
-            color="primary"
-            icon={<IconSettings />}
-          />
-        </HeaderItem>
+      <HeaderGroup style={{marginRight: "4rem"}}>
         <HeaderItem>
           <IconButton
             size="small"
             variant="outlined"
             color="primary"
             icon={<IconBrandGithub />}
+            onClick={() => window.open("https://github.com/yuva0")}
           />
         </HeaderItem>
         <HeaderItem>
@@ -62,7 +57,15 @@ const Header = () => {
             variant="outlined"
             color="primary"
             icon={<IconBrandLinkedin />}
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/in/tanuj-sengupta-872a05129/"
+              )
+            }
           />
+        </HeaderItem>
+        <HeaderItem>
+          <Settings />
         </HeaderItem>
       </HeaderGroup>
     </HeaderUI>

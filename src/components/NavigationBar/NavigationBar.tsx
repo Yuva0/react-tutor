@@ -3,7 +3,8 @@ import {
   NavigationBar as NavigationBarUI,
   NavigationBarGroup,
   // NavigationBarHeader,
-  NavigationBarItem,
+  NavigationBarGroupItem,
+  ColorPicker,
 } from "stelios";
 
 import content from "../../assets/data/topics/topics.json";
@@ -25,9 +26,9 @@ const NavigationBar = () => {
         if (subtopics) {
           for (let subkey in subtopics) {
             subtopicsComponents.push(
-              <NavigationBarItem key={subkey}>
+              <NavigationBarGroupItem key={subkey}>
                 {subtopics[subkey].title}
-              </NavigationBarItem>
+              </NavigationBarGroupItem>
             );
           }
         }
