@@ -5,7 +5,6 @@ import {
   HeaderItem,
   IconButton,
   Input,
-  Button,
   Text,
 } from "stelios";
 import {
@@ -14,22 +13,18 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 
-import cstutor from "../../assets/images/CSTutor_logo.png";
 import Settings from "./Settings";
+import styled from "styled-components";
 
 const Header = () => {
   return (
     <HeaderUI expandable={false} height="3.5rem">
-      <HeaderGroup style={{ marginLeft: "4rem" }}>
-        <HeaderItem>
-          <img
-            style={{ width: "4rem", height: "4rem" }}
-            src={cstutor}
-            alt="CS Tutor"
-          />
-        </HeaderItem>
-        <HeaderItem>
-          <Text variant="h2" color="#d18800">
+      <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
+        <HeaderItem style={{ height: "100%" }}>
+          <Text
+            variant="h2"
+            style={{ fontFamily: `"Playwrite HR Lijeva", cursive` }}
+          >
             CSTutor
           </Text>
         </HeaderItem>
@@ -41,7 +36,7 @@ const Header = () => {
           placeholder="Search..."
         />
       </HeaderGroup>
-      <HeaderGroup style={{marginRight: "4rem"}}>
+      <HeaderGroup style={{ marginRight: "4rem" }}>
         <HeaderItem>
           <IconButton
             size="small"

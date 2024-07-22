@@ -46,7 +46,7 @@ const NavigationBar = () => {
   return (
     <NavigationBarUI
       className="navigation-bar"
-      style={{ top: "4rem", height: "calc(100vh - 4rem)" }}
+      style={{ top: "3.5rem", height: "calc(100vh - 3.5rem)", paddingTop:"0.5rem" }}
     >
       {topics}
     </NavigationBarUI>
