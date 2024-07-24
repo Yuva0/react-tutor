@@ -21,12 +21,12 @@ const Header = () => {
     <HeaderUI expandable={false} height="3.5rem">
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
         <HeaderItem style={{ height: "100%" }}>
-          <Text
+          {/* <Text
             variant="h2"
             style={{ fontFamily: `"Playwrite HR Lijeva", cursive` }}
           >
             CSTutor
-          </Text>
+          </Text> */}
         </HeaderItem>
       </HeaderGroup>
       <HeaderGroup>

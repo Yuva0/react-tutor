@@ -17,7 +17,6 @@ const NavigationBar = () => {
   const [topic, setTopic] = React.useState(params.idTopic);
   const [category, setCategory] = React.useState(params.idCategory);
 
-  console.log(params);
 
   React.useEffect(() => {
     setTopic(params.idTopic);
@@ -30,12 +29,11 @@ const NavigationBar = () => {
       let categoriesComponents = [];
 
       for (let key in CATEGORIES) {
-        let category = CATEGORIES[key];
-        let _topics = category.topics;
+        let _category = CATEGORIES[key];
+        let _topics = _category.topics;
         let topicsComponents = [];
         if (_topics) {
           for (let subkey in _topics) {
-            console.log(subkey, topic)
             topicsComponents.push(
               <NavigationBarGroupItem value={subkey} key={subkey} selected={subkey === topic}>
                 {_topics[subkey].title}
@@ -44,7 +42,7 @@ const NavigationBar = () => {
           }
         }
         categoriesComponents.push(
-          <NavigationBarGroup key={key} title={category.title}>
+          <NavigationBarGroup key={key} title={_category.title} expanded={category === key}>
             {topicsComponents}
           </NavigationBarGroup>
         );
@@ -52,7 +50,7 @@ const NavigationBar = () => {
 
       return categoriesComponents;
     });
-  }, []);
+  }, [topic]);
 
   return (
     <NavigationBarUI
