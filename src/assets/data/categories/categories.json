@@ -1,0 +1,188 @@
+{
+  "data-structures": {
+    "title": "Data Structures",
+    "description": "Data structures are a way of organizing and storing data so that it can be accessed and modified efficiently. They define the relationship between the data, and the operations that can be performed on the data.",
+    "topics": {
+      "arrays": {
+        "title": "Arrays",
+        "description": "An array is a collection of elements that are stored at contiguous memory locations. It is the most basic data structure that stores elements in a linear fashion."
+      },
+      "linked-lists": {
+        "title": "Linked Lists",
+        "description": "A linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. The elements in a linked list are linked using pointers."
+      },
+      "stacks": {
+        "title": "Stacks",
+        "description": "A stack is a linear data structure that follows the Last In First Out (LIFO) principle. It has two main operations: push, which adds an element to the top of the stack, and pop, which removes the top element from the stack."
+      },
+      "queues": {
+        "title": "Queues",
+        "description": "A queue is a linear data structure that follows the First In First Out (FIFO) principle. It has two main operations: enqueue, which adds an element to the back of the queue, and dequeue, which removes the front element from the queue."
+      },
+      "trees": {
+        "title": "Trees",
+        "description": "A tree is a non-linear data structure that consists of nodes connected by edges. The top node is called the root, and the nodes below the root are called children. Trees are used to represent hierarchical relationships between elements."
+      },
+      "graphs": {
+        "title": "Graphs",
+        "description": "A graph is a non-linear data structure that consists of nodes connected by edges. The nodes are called vertices, and the edges are the lines that connect the vertices. Graphs are used to represent relationships between elements."
+      },
+      "hash-tables": {
+        "title": "Hash Tables",
+        "description": "A hash table is a data structure that stores key-value pairs. It uses a hash function to map keys to values, which allows for efficient retrieval of data. Hash tables are used to implement associative arrays, sets, and caches."
+      },
+      "heaps": {
+        "title": "Heaps",
+        "description": "A heap is a binary tree data structure that satisfies the heap property. In a min-heap, the parent node is smaller than its children, and in a max-heap, the parent node is larger than its children. Heaps are used to implement priority queues and sorting algorithms."
+      }
+    }
+  },
+  "algorithms": {
+    "title": "Algorithms",
+    "description": "Algorithms are step-by-step procedures for solving problems. They define the sequence of operations that need to be performed to solve a problem. Algorithms can be expressed in many different ways, such as natural language, pseudocode, or programming languages.",
+    "topics": {
+      "searching": {
+        "title": "Searching",
+        "description": "Searching is the process of finding a specific element in a collection of elements. There are many different searching algorithms, such as linear search, binary search, and hash-based search."
+      },
+      "sorting": {
+        "title": "Sorting",
+        "description": "Sorting is the process of arranging elements in a specific order. There are many different sorting algorithms, such as bubble sort, selection sort, insertion sort, merge sort, quick sort, and heap sort."
+      },
+      "recursion": {
+        "title": "Recursion",
+        "description": "Recursion is a programming technique in which a function calls itself to solve a smaller instance of the same problem. Recursion is used to solve problems that can be broken down into smaller subproblems."
+      },
+      "dynamic-programming": {
+        "title": "Dynamic Programming",
+        "description": "Dynamic programming is a method for solving complex problems by breaking them down into simpler subproblems. It involves storing the results of subproblems so that they do not need to be recalculated."
+      },
+      "greedy-algorithms": {
+        "title": "Greedy Algorithms",
+        "description": "Greedy algorithms are algorithms that make a series of choices that are locally optimal at each step. Greedy algorithms are used to solve optimization problems, such as finding the shortest path in a graph or the minimum spanning tree."
+      },
+      "divide-and-conquer": {
+        "title": "Divide and Conquer",
+        "description": "Divide and conquer is a problem-solving technique that involves breaking a problem down into smaller subproblems, solving the subproblems independently, and then combining the solutions to solve the original problem."
+      },
+      "backtracking": {
+        "title": "Backtracking",
+        "description": "Backtracking is a problem-solving technique that involves exploring all possible solutions to a problem by making a series of choices, and then backtracking when a choice leads to a dead end."
+      },
+      "graph-algorithms": {
+        "title": "Graph Algorithms",
+        "description": "Graph algorithms are algorithms that operate on graphs, such as finding the shortest path between two nodes, or finding the minimum spanning tree of a graph. Graph algorithms are used to solve problems in many different domains, such as computer networking, social networks, and bioinformatics."
+      }
+    }
+  },
+  "frontend": {
+    "title": "Frontend",
+    "description": "Frontend development is the practice of creating the user interface of a website or web application. It involves designing and building the layout, structure, and appearance of the website, as well as implementing interactive features and functionality.",
+    "topics": {
+      "html": {
+        "title": "HTML",
+        "description": "HTML (HyperText Markup Language) is the standard markup language for creating web pages. It defines the structure and content of a web page using a system of tags and attributes."
+      },
+      "css": {
+        "title": "CSS",
+        "description": "CSS (Cascading Style Sheets) is a style sheet language used for describing the presentation of a document written in HTML. It defines the layout, appearance, and design of a web page."
+      },
+      "javascript": {
+        "title": "JavaScript",
+        "description": "JavaScript is a programming language that is used to create interactive and dynamic elements on a web page. It is commonly used for client-side scripting, such as form validation, animations, and interactive maps."
+      },
+      "react": {
+        "title": "React",
+        "description": "React is a JavaScript library for building user interfaces. It allows developers to create reusable UI components and manage the state of the application efficiently."
+      },
+      "angular": {
+        "title": "Angular",
+        "description": "Angular is a platform and framework for building single-page client applications using HTML and TypeScript. It provides a set of tools and libraries for building complex web applications."
+      },
+      "vue": {
+        "title": "Vue",
+        "description": "Vue.js is a progressive JavaScript framework for building user interfaces. It is designed to be incrementally adoptable, and can be used to build single-page applications and complex web interfaces."
+      },
+      "sass": {
+        "title": "Sass",
+        "description": "Sass is a preprocessor scripting language that is interpreted or compiled into CSS. It provides features such as variables, nesting, and mixins, which make it easier to write and maintain CSS code."
+      },
+      "bootstrap": {
+        "title": "Bootstrap",
+        "description": "Bootstrap is a front-end framework for building responsive and mobile-first websites. It provides a set of CSS and JavaScript components that can be used to create modern and visually appealing web pages."
+      }
+    }
+  },
+  "backend": {
+    "title": "Backend",
+    "description": "Backend development is the practice of creating the server-side logic of a website or web application. It involves designing and building the database, server, and application logic that powers the frontend of the website.",
+    "topics": {
+      "nodejs": {
+        "title": "Node.js",
+        "description": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to run JavaScript on the server-side, and build scalable and high-performance web applications."
+      },
+      "express": {
+        "title": "Express",
+        "description": "Express is a web application framework for Node.js. It provides a set of features for building web applications and APIs, such as routing, middleware, and templating."
+      },
+      "mongodb": {
+        "title": "MongoDB",
+        "description": "MongoDB is a NoSQL database that stores data in flexible, JSON-like documents. It is a popular choice for building scalable and high-performance web applications, as it allows for fast and efficient data storage and retrieval."
+      },
+      "mysql": {
+        "title": "MySQL",
+        "description": "MySQL is an open-source relational database management system. It is a popular choice for building web applications that require a relational database, as it provides a fast and reliable way to store and retrieve data."
+      },
+      "postgresql": {
+        "title": "PostgreSQL",
+        "description": "PostgreSQL is an open-source relational database management system. It is known for its reliability, robustness, and support for advanced features such as full-text search, JSON support, and geospatial data."
+      },
+      "graphql": {
+        "title": "GraphQL",
+        "description": "GraphQL is a query language for APIs and a runtime for executing those queries. It allows clients to request only the data they need, and provides a more efficient and flexible alternative to traditional REST APIs."
+      },
+      "rest-apis": {
+        "title": "REST APIs",
+        "description": "REST (Representational State Transfer) is an architectural style for designing networked applications. It defines a set of constraints that should be followed when building web services, such as statelessness, uniform interface, and cacheability."
+      },
+      "jwt": {
+        "title": "JWT",
+        "description": "JWT (JSON Web Token) is an open standard for creating access tokens that assert some number of claims. JWTs are commonly used for authentication and information exchange in web applications."
+      },
+      "docker": {
+        "title": "Docker",
+        "description": "Docker is a platform for developing, shipping, and running applications in containers. Containers are lightweight, portable, and self-sufficient units that can run on any platform that supports Docker."
+      }
+    }
+  },
+  "languages": {
+    "title": "Languages",
+    "description": "Programming languages are formal languages that are used to write instructions that can be executed by a computer. They define the syntax and semantics of the instructions, and provide a way to communicate with the computer.",
+    "topics": {
+      "c": {
+        "title": "C",
+        "description": "C is a general-purpose programming language that was developed in the 1970s. It is known for its efficiency, flexibility, and low-level features, and is used to write operating systems, system software, and embedded systems."
+      },
+      "c-plus-plus": {
+        "title": "C++",
+        "description": "C++ is a general-purpose programming language that is based on C. It adds object-oriented features, such as classes and inheritance, to C, and is used to write high-performance applications, games, and system software."
+      },
+      "java": {
+        "title": "Java",
+        "description": "Java is a general-purpose programming language that was developed by Sun Microsystems in the 1990s. It is known for its portability, security, and performance, and is used to write enterprise applications, web applications, and mobile apps."
+      },
+      "python": {
+        "title": "Python",
+        "description": "Python is a high-level programming language that was developed in the late 1980s. It is known for its simplicity, readability, and versatility, and is used to write web applications, data analysis scripts, and automation tools."
+      },
+      "typescript": {
+        "title": "TypeScript",
+        "description": "TypeScript is a superset of JavaScript that adds static typing and other features to the language. It is used to build large-scale applications, and provides tools for catching errors and improving code quality."
+      },
+      "ruby": {
+        "title": "Ruby",
+        "description": "Ruby is a high-level programming language that was developed in the mid-1990s. It is known for its simplicity, readability, and productivity, and is used to write web applications, automation scripts, and data analysis tools."
+      }
+    }
+  }
+}

@@ -173,10 +173,20 @@ const Settings = () => {
   const _onClickRevert = () => {
     setAppearance(colors.appearance as "light" | "dark");
     setPrimaryColor(colors.accent.primary);
+    setSecondaryColor(colors.accent.secondary);
+    setDangerColor(colors.accent.danger);
+    setWarningColor(colors.accent.warning);
+    setSuccessColor(colors.accent.success);
+    setInfoColor(colors.accent.info);
     updateTheme({
       appearance: colors.appearance as "light" | "dark",
       accent: {
         primary: colors.accent.primary,
+        secondary: colors.accent.secondary,
+        danger: colors.accent.danger,
+        warning: colors.accent.warning,
+        success: colors.accent.success,
+        info: colors.accent.info,
       },
     });
   };
