@@ -6,9 +6,9 @@ import Header from "../Header/Header";
 const Layout = () => {
   return (
     <>
+      <Outlet />
       <Header />
       <NavigationBar />
-      <Outlet />
     </>
   );
 };

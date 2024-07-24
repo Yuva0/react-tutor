@@ -1,8 +1,8 @@
 import React from "react";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
+// import NavigationBar from "./components/NavigationBar/NavigationBar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header/Header";
-import { SideBar, SideBarItem, ThemeProvider } from "stelios";
+import { ThemeProvider } from "stelios";
 import colors from "./tokens/colors.json";
 import Homepage from "./pages/Homepage/Homepage";
 import Topic from "./pages/Topic/Topic";

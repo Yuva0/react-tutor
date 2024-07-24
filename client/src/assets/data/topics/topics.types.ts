@@ -4,7 +4,7 @@ export type TopicsProps = {
     description?: string;
     category: string;
     content?: {
-      introduction?: any;
+      [key: string]: any;
     }
   };
 }
