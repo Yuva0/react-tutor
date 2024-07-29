@@ -1,94 +1,105 @@
 import React, { useEffect, useState } from "react";
-import topics from "../../assets/data/topics/topics.json";
-import { TopicsProps } from "../../assets/data/topics/topics.types";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
-import { Text } from "stelios";
-
+import { useParams } from "react-router-dom";
 import Body from "../../components/Body/Body";
 import SideBar from "../../components/SideBar/SideBar";
+import Markdown from "markdown-to-jsx";
 import styled from "styled-components";
+import { useData } from "../../components/DataProvider/DataProvider";
+import { CodeDisplay, CodeEditor, List, ListItem, Text } from "stelios";
 
-const TOPICS: TopicsProps = topics;
-
-const StyledSection = styled.div`
+const StyledGradient = styled.div`
+  position: fixed;
+  width: 100%;
+  height:30rem;
+`;
+const StyledMain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 2rem 2rem 5rem 2rem;
+  text-align: justify;
+`;
+const StyledSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 const StyledSubsection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-`;
-
-const StyledSectionContainer = styled.div`
-  margin-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding-top: 1rem;
+  gap: 0.5rem;
 `;
 
 const Topic = () => {
-  const navigate = useNavigate();
+  const data = useData();
   const { idTopic, idCategory } = useParams();
-  const [topicData, setTopicData] = useState<TopicsProps[0] | null>(null);
+
+  const [topics, setTopics] = useState<any>(data.topics);
+  const [categories, setCategories] = useState<any>(data.categories);
 
   useEffect(() => {
-    try {
-      if (!idTopic || !idCategory)
-        throw new Error("No topic or category selected");
-      const content = TOPICS[idTopic];
+    setTopics(data.topics);
+    setCategories(data.categories);
+  }, [data]);
 
-      if (!content) throw new Error("No topic or category selected");
-      setTopicData(content);
-    } catch (e) {
-      console.error(e);
-      navigate("/404-not-found");
-    }
-  }, [idTopic, idCategory, navigate]);
+  if (!topics) return <Body>Loading</Body>;
+  if (!categories) return <Body>Loading</Body>;
 
-  // if (!topicData || !topicData.content) return (
-  //   <Navigate to="/404-not-found" />
-  // )
-  if (!topicData || !topicData.content) return (
-    <Body>
-      Error
-    </Body>
-  );
-  const contentObj = topicData.content;
-  const contentKeys = Object.keys(contentObj);
-
-  const ContentElements = contentKeys.map((contentKey, index) => {
-    if (!contentKey) return null;
-    return (
-      <StyledSection key={index}>
-        <Text variant="h5">{contentObj[contentKey].title}</Text>
-        <StyledSubsection>
-        {contentObj[contentKey].content.map((contentItem: string, index: number) => (
-          <Text key={index} variant="paragraph">{contentItem}</Text>
-        ))}
-        </StyledSubsection>
-      </StyledSection>
-    );
+  const topicData = topics.find((topic: any) => {
+    if(!topic.idTitle) return null;
+    console.log(topic.idTitle, idTopic);
+    return topic.idTitle === idTopic;
   });
 
   return (
     <Body>
       <SideBar />
-      <div
-        style={{
-          padding: "2rem",
-          textAlign: "justify",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.25rem",
-        }}
-      >
-        <Text variant="h2">{topicData.title}</Text>
-        <StyledSectionContainer>
-          {ContentElements}
-        </StyledSectionContainer>
-      </div>
+      <StyledMain>
+        <Text variant="h3">{topicData.title}</Text>
+        <Markdown
+          children={topicData.content}
+          options={{
+            overrides: {
+              Text: {
+                component: ({ children, ...props }) => (
+                  <Text {...props}>{children}</Text>
+                ),
+              },
+              StyledSubsection: {
+                component: ({ children, ...props }) => (
+                  <StyledSubsection {...props}>{children}</StyledSubsection>
+                ),
+              },
+              StyledSection: {
+                component: ({ children, ...props }) => (
+                  <StyledSection {...props}>{children}</StyledSection>
+                ),
+              },
+              CodeEditor: {
+                component: ({ children, ...props }) => (
+                  <CodeEditor {...props}>{children}</CodeEditor>
+                ),
+              },
+              CodeDisplay: {
+                component: ({ children, ...props }) => (
+                  <CodeDisplay {...props}>{children}</CodeDisplay>
+                ),
+              },
+              List: {
+                component: ({ children, ...props }) => (
+                  <List {...props}>{children}</List>
+                ),
+              },
+              ListItem: {
+                component: ({ children, ...props }) => (
+                  <ListItem {...props}>{children}</ListItem>
+                ),
+              },
+            },
+          }}
+        />
+      </StyledMain>
     </Body>
   );
 };

@@ -1,18 +1,21 @@
 const mongoose = require("mongoose");
 
-
 const CategorySchema = new mongoose.Schema(
   {
-    title: {
+    idCategory: {
       type: String,
       required: true,
       unique: true,
     },
-    idTitle: {
+    category: {
       type: String,
       required: true,
       unique: true,
     },
+    topics: {
+      type: [String],
+      default: [],
+    }
   },
   { timestamps: true }
 );

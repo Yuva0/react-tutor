@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const TopicSchema = new mongoose.Schema(
   {
-    title: {
+    idTitle: {
       type: String,
       required: true,
       unique: true,
     },
-    idTitle: {
+    title: {
       type: String,
       required: true,
       unique: true,
@@ -19,7 +19,7 @@ const TopicSchema = new mongoose.Schema(
     content: {
       type: String,
       required: true,
-    }
+    },
   },
   { timestamps: true }
 );

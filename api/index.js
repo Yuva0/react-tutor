@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
-const topicRoute = require("./routes/topics");
+const topicRoute = require("./routes/topic");
+const topicReferenceRoute = require("./routes/topic-reference");
 const categoryRoute = require("./routes/category");
 
 const app = express();
@@ -20,8 +21,9 @@ mongoose
 
 app.use(cors());
 app.use("/api/topic", topicRoute);
+app.use("/api/topic-reference", topicReferenceRoute);
 app.use("/api/category", categoryRoute);
 
-app.listen("5000", () => {
+app.listen(process.env.PORT, () => {
   console.log("Backend is running.");
 });

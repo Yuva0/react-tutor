@@ -1,36 +1,33 @@
 const router = require("express").Router();
 
-const Topic = require("../models/Topics.js");
+const Topic = require("../models/Topic.js");
 
 // CREATE Topic
 router.post("/", async (req, res) => {
-  const newSkill = new Topic(req.body);
+  const newTopic = new Topic(req.body);
   try {
-    const saveSkill = await newSkill.save();
-    res.status(200).json(saveSkill);
+    const saveTopic = await newTopic.save();
+    res.status(200).json(saveTopic);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
 // UPDATE Topic
-router.put("/:key", async (req, res) => {
+router.put("/:idTitle", async (req, res) => {
   try {
-    const topic = await Topic.findById(req.params.key);
-    if (!topic) return null;
-    try {
-      // todo
-      const updatedTopic = await topic.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).json(updatedTopic);
-    } catch (err) {
-      res.status(500).json(err);
+    const topic = await Topic.findById(req.params.idTitle);
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
     }
+    const updatedTopic = await Topic.findByIdAndUpdate(
+      { idTitle: req.params.idTitle },
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedTopic);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -39,14 +36,14 @@ router.put("/:key", async (req, res) => {
 // GET Topic BY Key
 router.get("/:idTitle", async (req, res) => {
   try {
-    const skill = await Topic.find({ idTitle: req.params.idTitle });
-    res.status(200).json(skill);
+    const topic = await Topic.find({ idTitle: req.params.idTitle });
+    res.status(200).json(topic);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//GET all skills
+//GET all topics
 router.get("/", async (req, res) => {
   try {
     let topics;

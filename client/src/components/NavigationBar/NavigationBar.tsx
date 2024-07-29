@@ -1,21 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useData } from "../DataProvider/DataProvider";
 import {
-  NavigationBar as NavigationBarStelios,
   NavigationBarGroup,
   NavigationBarGroupItem,
+  NavigationBar as NavigationBarUI,
 } from "stelios";
-import { useParams, useNavigate } from "react-router-dom";
-
-import content from "../../assets/data/categories/categories.json";
-import { CategoriesProps } from "../../assets/data/categories/categories.types";
-
-const CATEGORIES: CategoriesProps = content;
+import Body from "../Body/Body";
 
 const NavigationBar = () => {
-  let [categories, setCategories] = React.useState<any>([]);
-  let { idTopic, idCategory } = useParams();
-
+  const data = useData();
+  const { idTopic, idCategory } = useParams();
   const navigate = useNavigate();
+
+  const [topics, setTopics] = useState<any>(data.topics);
+  const [categories, setCategories] = useState<any>(data.categories);
+
+  useEffect(() => {
+    setTopics(data.topics);
+    setCategories(data.categories);
+  }, [data]);
 
   const _onTopicClick = useCallback(
     (e: React.MouseEvent, topic: string, category: string) => {
@@ -26,46 +30,35 @@ const NavigationBar = () => {
     [navigate]
   );
 
-  React.useEffect(() => {
-    setCategories(() => {
-      if (!CATEGORIES) return;
-      let categoriesComponents = [];
+  if (!categories) return <Body>Loading</Body>;
+  if (!topics) return <Body>Loading</Body>;
 
-      for (let _category in CATEGORIES) {
-        let _categoryData = CATEGORIES[_category];
-        let _topics = _categoryData.topics;
-        let topicsComponents = [];
-        if (_topics) {
-          for (let _topic in _topics) {
-            topicsComponents.push(
-              <NavigationBarGroupItem
-                value={_topic}
-                key={_topic}
-                selected={_topic === idTopic}
-                onClick={(e) => _onTopicClick(e, _topic, _category)}
-              >
-                {_topics[_topic].title}
-              </NavigationBarGroupItem>
-            );
-          }
-        }
-        categoriesComponents.push(
-          <NavigationBarGroup
-            key={_category}
-            title={_categoryData.title}
-            expanded={idCategory === _category}
-          >
-            {topicsComponents}
-          </NavigationBarGroup>
-        );
-      }
-
-      return categoriesComponents;
-    });
-  }, [idTopic, idCategory, _onTopicClick]);
-
+  const ChildrenElement = categories.map((category: any, index: number) => {
+    return (
+      <NavigationBarGroup
+        key={index}
+        title={category.category}
+        expanded={idCategory === category.idCategory}
+      >
+        {category.topics.map((topic: string, index: number) => {
+          const _topic = topics.find((t: any) => t.idTitle === topic);
+          if (!_topic) return null;
+          return (
+            <NavigationBarGroupItem
+              key={index}
+              value={topic}
+              selected={idTopic === topic}
+              onClick={(e) => _onTopicClick(e, topic, category.idCategory)}
+            >
+              {_topic.title}
+            </NavigationBarGroupItem>
+          );
+        })}
+      </NavigationBarGroup>
+    );
+  });
   return (
-    <NavigationBarStelios
+    <NavigationBarUI
       className="navigation-bar"
       style={{
         top: "3.5rem",
@@ -73,8 +66,8 @@ const NavigationBar = () => {
         paddingTop: "0.5rem",
       }}
     >
-      {categories}
-    </NavigationBarStelios>
+      {ChildrenElement}
+    </NavigationBarUI>
   );
 };
 

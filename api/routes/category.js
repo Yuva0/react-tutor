@@ -5,40 +5,43 @@ const Category = require("../models/Category.js");
 router.post("/", async (req, res) => {
   const newCategory = new Category(req.body);
   try {
-    const saveCategory = await newCategory.save();
-    res.status(200).json(saveCategory);
+    const savedCategory = await newCategory.save();
+    res.status(200).json(savedCategory);
   } catch (error) {
-    res.status(500).json(error);
+    if (error.code === 11000) {
+      // Duplicate key error
+      res.status(400).json({ message: "Duplicate key error", error });
+    } else {
+      console.log(error);
+      res.status(500).json({ message: "Server error", error });
+    }
   }
 });
 
-// UPDATE Category
-router.put("/:key", async (req, res) => {
+// UPDATE Category using category id
+router.put("/:idCategory", async (req, res) => {
   try {
-    const category = await Category.findById(req.params.key);
-    if (!category) return null;
-    try {
-      // todo
-      const updatedCategory = await category.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).json(updatedCategory);
-    } catch (err) {
-      res.status(500).json(err);
+    const category = await Category.findOne({ idCategory: req.params.idCategory });
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
     }
+    const updatedCategory = await Category.findOneAndUpdate(
+      { idCategory: req.params.idCategory },
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedCategory);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // GET Category BY Key
-router.get("/:idTitle", async (req, res) => {
+router.get("/:idCategory", async (req, res) => {
   try {
-    const category = await Category.find({ idTitle: req.params.idTitle });
+    const category = await Category.find({ idCategory: req.params.idCategory });
     res.status(200).json(category);
   } catch (err) {
     res.status(500).json(err);

@@ -18,7 +18,7 @@ import styled from "styled-components";
 
 const Header = () => {
   return (
-    <HeaderUI expandable={false} height="3.5rem">
+    <HeaderUI expandable={false} height="3.5rem" style={{background: "transparent"}}>
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
         <HeaderItem style={{ height: "100%" }}>
           {/* <Text
