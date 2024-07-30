@@ -23,7 +23,7 @@ const SideBar = () => {
   // const contentIndex = Object.keys(topicContent.content);
 
   return (
-    <SideBarStelios top="6rem">
+    <SideBarStelios top="6rem" style={{background: "transparent"}}>
       {/* {contentIndex.map((item, index) => {
         return (
           <SideBarItem key={index}>{makeFirstLetterCapital(item)}</SideBarItem>
