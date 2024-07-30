@@ -3,15 +3,23 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "./helpers/helpers";
 import Header from "./components/Header/Header";
-import { ThemeProvider } from "stelios";
+import { ThemeProvider, useTheme } from "stelios";
 import colors from "./tokens/colors.json";
 import Homepage from "./pages/Homepage/Homepage";
 import Topic from "./pages/Topic/Topic";
 import Error from "./pages/Error/Error";
 import Layout from "./components/Layout/Layout";
 import { DataProvider } from "./components/DataProvider/DataProvider";
-import styled from "styled-components";
 
+const BodyContainer = ({
+  children,
+}: {
+  children: React.ReactNode | React.ReactNode[];
+}) => {
+  const colorPalette = useTheme().theme.colorPalette;
+
+  return <div style={{backgroundColor: "white"}}>{children}</div>;
+};
 
 function App() {
   return (
@@ -21,17 +29,19 @@ function App() {
         accent={{ primary: colors.accent.primary }}
         appearance={colors.appearance as "light" | "dark"}
       >
-        <DataProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Homepage />} />
-              <Route path="/:idCategory/:idTopic" element={<Topic />} />
-              <Route path="/404-not-found" element={<Error />} />
-              <Route path="*" element={<Navigate to="/404-not-found" />} />
-            </Route>
-          </Routes>
-        </DataProvider>
+        <BodyContainer>
+          <DataProvider>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Homepage />} />
+                <Route path="/:idCategory/:idTopic" element={<Topic />} />
+                <Route path="/404-not-found" element={<Error />} />
+                <Route path="*" element={<Navigate to="/404-not-found" />} />
+              </Route>
+            </Routes>
+          </DataProvider>
+        </BodyContainer>
       </ThemeProvider>
     </BrowserRouter>
   );

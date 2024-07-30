@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Body from "../../components/Body/Body";
+import ContentContainer from "../../components/ContentContainer/ContentContainer";
 import SideBar from "../../components/SideBar/SideBar";
 import Markdown from "markdown-to-jsx";
 import styled from "styled-components";
@@ -10,7 +10,7 @@ import { CodeDisplay, CodeEditor, List, ListItem, Text } from "stelios";
 const StyledGradient = styled.div`
   position: fixed;
   width: 100%;
-  height:30rem;
+  height: 30rem;
 `;
 const StyledMain = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ const StyledSubsection = styled.div`
 
 const Topic = () => {
   const data = useData();
-  const { idTopic, idCategory } = useParams();
+  const { idTopic } = useParams();
 
   const [topics, setTopics] = useState<any>(data.topics);
   const [categories, setCategories] = useState<any>(data.categories);
@@ -43,17 +43,17 @@ const Topic = () => {
     setCategories(data.categories);
   }, [data]);
 
-  if (!topics) return <Body>Loading</Body>;
-  if (!categories) return <Body>Loading</Body>;
+  if (!topics) return <ContentContainer>Loading</ContentContainer>;
+  if (!categories) return <ContentContainer>Loading</ContentContainer>;
 
   const topicData = topics.find((topic: any) => {
-    if(!topic.idTitle) return null;
+    if (!topic.idTitle) return null;
     console.log(topic.idTitle, idTopic);
     return topic.idTitle === idTopic;
   });
 
   return (
-    <Body>
+    <ContentContainer>
       <SideBar />
       <StyledMain>
         <Text variant="h3">{topicData.title}</Text>
@@ -100,7 +100,7 @@ const Topic = () => {
           }}
         />
       </StyledMain>
-    </Body>
+    </ContentContainer>
   );
 };
 

@@ -6,7 +6,7 @@ interface paletteProps {
   $colorPalette: any;
 }
 
-const StyledBody = styled.div<paletteProps>`
+const StyledContentContainer = styled.div<paletteProps>`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -15,14 +15,14 @@ const StyledBody = styled.div<paletteProps>`
   padding: 3.5rem 10rem 0 15rem;
 `;
 
-const Body = ({
+const ContentContainer = ({
   children,
 }: {
   children: React.ReactNode | [React.ReactNode];
 }) => {
   const colorPalette = useTheme().theme.colorPalette;
 
-  return <StyledBody $colorPalette={colorPalette}>{children}</StyledBody>;
+  return <StyledContentContainer $colorPalette={colorPalette}>{children}</StyledContentContainer>;
 };
 
-export default Body;
+export default ContentContainer;

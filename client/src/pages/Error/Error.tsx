@@ -1,4 +1,4 @@
-import Body from "../../components/Body/Body";
+import Body from "../../components/ContentContainer/ContentContainer";
 
 const Error = () => {
   return (

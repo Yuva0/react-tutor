@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Body from "../../components/Body/Body";
+import Body from "../../components/ContentContainer/ContentContainer";
 import SideBar from "../../components/SideBar/SideBar";
 import Markdown from "markdown-to-jsx";
 import styled from "styled-components";

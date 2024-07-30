@@ -5,7 +5,6 @@ import {
   HeaderItem,
   IconButton,
   Input,
-  Text,
 } from "stelios";
 import {
   IconBrandGithub,
@@ -14,11 +13,10 @@ import {
 } from "@tabler/icons-react";
 
 import Settings from "./Settings";
-import styled from "styled-components";
 
 const Header = () => {
   return (
-    <HeaderUI expandable={false} height="3.5rem" style={{background: "transparent"}}>
+    <HeaderUI expandable={false} height="3.5rem">
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
         <HeaderItem style={{ height: "100%" }}>
           {/* <Text
