@@ -3,6 +3,8 @@ import FunctionComponent from "../content/FunctionComponent";
 import UseEffect from "../content/UseEffect";
 import UseState from "../content/UseState";
 import UseMemo from "../content/UseMemo";
+import UseCallback from "../content/UseCallback";
+import UseRef from "../content/UseRef";
 
 interface ContentProviderProps {
   component?: string;
@@ -21,6 +23,10 @@ const ContentProvider = ({ component }: ContentProviderProps) => {
         return <UseEffect />;
       case "use-memo":
         return <UseMemo />; 
+      case "use-callback":
+        return <UseCallback />;
+      case "use-ref":
+        return <UseRef />;
       default:
         return null;
     }

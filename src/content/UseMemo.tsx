@@ -108,7 +108,7 @@ const UseMemo = () => {
       <StyledTopicContent>
         <StyledSection>
           <StyledSubsection>
-            <Breadcrumbs>
+            <Breadcrumbs size="small" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-memo" title="useMemo" />
             </Breadcrumbs>

@@ -140,7 +140,7 @@ const UseEffect: React.FunctionComponent = () => {
       <StyledTopicContent>
         <StyledSection>
           <StyledSubsection>
-            <Breadcrumbs>
+            <Breadcrumbs size="small" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-effect" title="useEffect" />
             </Breadcrumbs>
