@@ -148,33 +148,78 @@ const UseRef: React.FC = () => {
             <List>
               <ListItem>
                 Accessing DOM Elements:
-                <Text>useRef is commonly used to access DOM elements directly.</Text>
-                <CodeDisplay language="javascript" text={ACCESS_DOM} /> 
+                <Text>
+                  useRef is commonly used to access DOM elements directly.
+                </Text>
+                <CodeDisplay language="javascript" text={ACCESS_DOM} />
                 <List variant="unordered">
-                  <ListItem>inputRef is created using useRef(null), initializing it with null.</ListItem>
-                  <ListItem>The ref attribute of the input element is set to inputRef, connecting the DOM element to the ref.</ListItem>
-                  <ListItem>In the useEffect hook, inputRef.current gives direct access to the DOM element, allowing us to call the focus method on it.</ListItem>
+                  <ListItem>
+                    inputRef is created using useRef(null), initializing it with
+                    null.
+                  </ListItem>
+                  <ListItem>
+                    The ref attribute of the input element is set to inputRef,
+                    connecting the DOM element to the ref.
+                  </ListItem>
+                  <ListItem>
+                    In the useEffect hook, inputRef.current gives direct access
+                    to the DOM element, allowing us to call the focus method on
+                    it.
+                  </ListItem>
                 </List>
               </ListItem>
               <ListItem>
                 Storing Mutable Values
-                <Text>useRef can store values that persist across renders without causing re-renders.</Text>
-                <CodeDisplay language="javascript" text={STORING_MUTABLE_EXAMPLE} />
+                <Text>
+                  useRef can store values that persist across renders without
+                  causing re-renders.
+                </Text>
+                <CodeDisplay
+                  language="javascript"
+                  text={STORING_MUTABLE_EXAMPLE}
+                />
                 <List>
-                  <ListItem>count is created using useRef(0), initializing it with 0.</ListItem>
-                  <ListItem>count.current is incremented in the increment function without causing a re-render.</ListItem>
-                  <ListItem>The Force Render button uses setRender to force a re-render, demonstrating that count.current retains its value across renders.</ListItem>
+                  <ListItem>
+                    count is created using useRef(0), initializing it with 0.
+                  </ListItem>
+                  <ListItem>
+                    count.current is incremented in the increment function
+                    without causing a re-render.
+                  </ListItem>
+                  <ListItem>
+                    The Force Render button uses setRender to force a re-render,
+                    demonstrating that count.current retains its value across
+                    renders.
+                  </ListItem>
                 </List>
               </ListItem>
               <ListItem>
                 Persisting Values Across Renders:
-                <Text>useRef can be used to keep track of values that need to persist across renders but do not require re-rendering when updated.</Text>
-                <CodeDisplay language="javascript" text={VALUE_ACROSS_RERENDERS} />
+                <Text>
+                  useRef can be used to keep track of values that need to
+                  persist across renders but do not require re-rendering when
+                  updated.
+                </Text>
+                <CodeDisplay
+                  language="javascript"
+                  text={VALUE_ACROSS_RERENDERS}
+                />
                 <List>
-                  <ListItem>intervalId is created using useRef(null), initializing it with null.</ListItem>
-                  <ListItem>count is created using useRef(0), initializing it with 0.</ListItem>
-                  <ListItem>In the useEffect hook, intervalId.current stores the ID of the interval, and count.current is incremented every second.</ListItem>
-                  <ListItem>The cleanup function clears the interval using intervalId.current.</ListItem>
+                  <ListItem>
+                    intervalId is created using useRef(null), initializing it
+                    with null.
+                  </ListItem>
+                  <ListItem>
+                    count is created using useRef(0), initializing it with 0.
+                  </ListItem>
+                  <ListItem>
+                    In the useEffect hook, intervalId.current stores the ID of
+                    the interval, and count.current is incremented every second.
+                  </ListItem>
+                  <ListItem>
+                    The cleanup function clears the interval using
+                    intervalId.current.
+                  </ListItem>
                 </List>
               </ListItem>
             </List>
@@ -182,29 +227,46 @@ const UseRef: React.FC = () => {
           <StyledSubsection id="summary">
             <Text size="large">Summary</Text>
             <List>
-              <ListItem>Initialization: useRef(initialValue) returns a ref object with a current property set to initialValue.</ListItem>
-              <ListItem>DOM Access: Attach the ref to a DOM element using the ref attribute. Access the element via ref.current.</ListItem>
-              <ListItem>Mutable Values: Store mutable values that persist across renders without causing re-renders.</ListItem>
-              <ListItem>Persistent Values: Maintain values across renders without causing re-renders, suitable for storing interval IDs, timers, and other values.</ListItem>
+              <ListItem>
+                Initialization: useRef(initialValue) returns a ref object with a
+                current property set to initialValue.
+              </ListItem>
+              <ListItem>
+                DOM Access: Attach the ref to a DOM element using the ref
+                attribute. Access the element via ref.current.
+              </ListItem>
+              <ListItem>
+                Mutable Values: Store mutable values that persist across renders
+                without causing re-renders.
+              </ListItem>
+              <ListItem>
+                Persistent Values: Maintain values across renders without
+                causing re-renders, suitable for storing interval IDs, timers,
+                and other values.
+              </ListItem>
             </List>
           </StyledSubsection>
           <StyledSubsection>
-            <Text>useRef is a versatile hook that helps manage mutable values and direct DOM manipulations in functional components, making it a crucial tool for complex React applications.</Text>
+            <Text>
+              useRef is a versatile hook that helps manage mutable values and
+              direct DOM manipulations in functional components, making it a
+              crucial tool for complex React applications.
+            </Text>
           </StyledSubsection>
         </StyledSection>
-        <SideBar top="6rem" right="4rem">
-          {sections.map((section) => (
-            <SideBarItem
-            size="small"
-              key={section.id}
-              selected={sidebarSelected === section.id}
-              onClick={() => onSideBarItemClick(section.id)}
-            >
-              {section.title}
-            </SideBarItem>
-          ))}
-        </SideBar>
       </StyledTopicContent>
+      <SideBar top="6rem" right="4rem">
+        {sections.map((section) => (
+          <SideBarItem
+            size="small"
+            key={section.id}
+            selected={sidebarSelected === section.id}
+            onClick={() => onSideBarItemClick(section.id)}
+          >
+            {section.title}
+          </SideBarItem>
+        ))}
+      </SideBar>
     </StyledMain>
   );
 };
