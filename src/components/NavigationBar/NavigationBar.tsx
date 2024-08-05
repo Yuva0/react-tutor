@@ -56,6 +56,8 @@ const NavigationBar = () => {
         boxSizing: "border-box",
         height: "calc(100vh - 3.5rem)",
         padding: "0.5rem 0",
+        backgroundColor: "transparent",
+        borderRight: 0
       }}
     >
       {NavigationBarContent}

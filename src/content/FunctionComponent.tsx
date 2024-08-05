@@ -18,6 +18,17 @@ import {
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
 
+const sectionsID = [
+  "introduction",
+  "definition",
+  "props",
+  "stateless-vs-stateful",
+  "using-hooks",
+  "use-state-example",
+  "use-effect-example",
+  "props-and-hooks",
+];
+
 const INTRODUCTION = `In React, a FunctionComponent (also known as a functional component) is a simpler way to write components using JavaScript functions. Unlike class components, which are defined using ES6 classes, functional components are defined as plain JavaScript functions.`;
 const DEFINITION = `A FunctionComponent is defined as a JavaScript function that takes props as an argument and returns React elements (JSX). Here is an example of a basic functional component:`;
 const PROPS = `Props are passed to a FunctionComponent as an argument. The props object contains all the data passed from the parent component. You can access these props and use them within your component:`;
@@ -108,21 +119,25 @@ const FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
 
   React.useEffect(() => {
-    const handleIntersection = (entries:any) => {
-      entries.forEach((entry:any) => {
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      for (const entry of entries) {
         if (entry.isIntersecting) {
           setSidebarSelected(entry.target.id);
+          break;
         }
-      });
+      }
     };
 
     const observer = new IntersectionObserver(handleIntersection, {
       threshold: 1,
-      
+      rootMargin: "64px",
     });
 
-    const sections = document.querySelectorAll('[id]');
-    sections.forEach((section) => observer.observe(section));
+    const sections = sectionsID.map((id) => document.getElementById(id));
+    sections.forEach((section) => {
+      if (!section) return;
+      return observer.observe(section);
+    });
 
     return () => {
       observer.disconnect();
@@ -205,7 +220,7 @@ const FunctionComponent = () => {
             <Text
               variant="paragraph"
               size="large"
-              style={{ marginTop: "0.75rem", scrollMarginTop:"4rem" }}
+              style={{ marginTop: "0.75rem", scrollMarginTop: "4rem" }}
               id="advantages"
             >
               Advantages
@@ -237,7 +252,11 @@ const FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem" style={{ background: "transparent", position:"fixed" }}>
+      <SideBar
+        top="6rem"
+        right="4rem"
+        style={{ background: "transparent", position: "fixed" }}
+      >
         <SideBarItem
           size="small"
           selected={sidebarSelected === "introduction"}
@@ -274,25 +293,49 @@ const FunctionComponent = () => {
         >
           Stateless vs Stateful
         </SideBarItem>
-        <SideBarGroup title="Using Hooks" size="small" onClick={() => onSideBarItemClick("using-hooks")}>
+        <SideBarGroup
+          title="Using Hooks"
+          size="small"
+          selected={sidebarSelected === "using-hooks"}
+          onClick={() => onSideBarItemClick("using-hooks")}
+        >
           <SideBarGroupItem
             size="small"
+            selected={sidebarSelected === "use-state-example"}
             onClick={() => {
               onSideBarItemClick("use-state-example");
             }}
           >
             useState Example
           </SideBarGroupItem>
-          <SideBarGroupItem size="small" onClick={() => {
+          <SideBarGroupItem
+            size="small"
+            selected={sidebarSelected === "use-effect-example"}
+            onClick={() => {
               onSideBarItemClick("use-effect-example");
-            }}>useEffect Example</SideBarGroupItem>
-          <SideBarGroupItem size="small" onClick={() => {
+            }}
+          >
+            useEffect Example
+          </SideBarGroupItem>
+          <SideBarGroupItem
+            size="small"
+            selected={sidebarSelected === "advantages"}
+            onClick={() => {
               onSideBarItemClick("advantages");
-            }}>Advantages</SideBarGroupItem>
+            }}
+          >
+            Advantages
+          </SideBarGroupItem>
         </SideBarGroup>
-        <SideBarItem size="small" onClick={() => {
-              onSideBarItemClick("props-and-hooks");
-            }}>Props and Hooks</SideBarItem>
+        <SideBarItem
+          size="small"
+          selected={sidebarSelected === "props-and-hooks"}
+          onClick={() => {
+            onSideBarItemClick("props-and-hooks");
+          }}
+        >
+          Props and Hooks
+        </SideBarItem>
       </SideBar>
     </StyledMain>
   );

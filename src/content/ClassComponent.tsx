@@ -20,6 +20,13 @@ import {
 } from "../components/StyledInternalComponents/StyledInternalComponents";
 import { IconExclamationCircleFilled } from "@tabler/icons-react";
 
+const sectionsID = [
+  "introduction",
+  "basic-structure",
+  "state-management",
+  "lifecycle-methods",
+];
+
 const ALERT_TITLE = "Do Not Use";
 const ALERT_DESCRIPTION = (
   <>
@@ -110,6 +117,34 @@ class Counter extends Component {
 }`;
 
 const ClassComponent = () => {
+  const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+
+  React.useEffect(() => {
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setSidebarSelected(entry.target.id);
+          break;
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 1,
+      rootMargin: "64px",
+    });
+
+    const sections = sectionsID.map((id) => document.getElementById(id));
+    sections.forEach((section) => {
+      if (!section) return;
+      return observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <StyledMain>
       <StyledTopicContent>
@@ -131,16 +166,18 @@ const ClassComponent = () => {
               description={ALERT_DESCRIPTION}
             ></Alert>
           </StyledSubsection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Text variant="h4">Introduction</Text>
             <Text variant="paragraph">{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
-          <StyledSubsection>
+          <StyledSubsection id="basic-structure">
             <Text variant="paragraph" size="large">
               Basic Structure
             </Text>
             <Text variant="paragraph">{BASIC_STRUCTURE_CONTENT}</Text>
-            <Text variant="paragraph">Example</Text>
+            <Text variant="paragraph" id="example">
+              Example
+            </Text>
             <CodeDisplay language="JSX" text={BASIC_STRUCTURE_EXAMPLE} />
           </StyledSubsection>
           <StyledSubsection>
@@ -186,7 +223,7 @@ const ClassComponent = () => {
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="state-management">
             <Text variant="h4">State Management</Text>
             <Text variant="paragraph" size="large">
               Initializing State
@@ -198,7 +235,7 @@ const ClassComponent = () => {
             <Text variant="paragraph">Example</Text>
             <CodeDisplay language="JSX" text={INITIALIZATION_EXAMPLE} />
           </StyledSubsection>
-          <StyledSubsection>
+          <StyledSubsection id="updating-state">
             <Text variant="paragraph" size="large">
               Updating State
             </Text>
@@ -228,9 +265,9 @@ const ClassComponent = () => {
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="lifecycle-methods">
             <Text variant="h4">Lifecycle Methods</Text>
-            <Text variant="paragraph" size="large">
+            <Text variant="paragraph" size="large" id="mounting">
               Mounting
             </Text>
             <Text variant="paragraph">
@@ -238,7 +275,7 @@ const ClassComponent = () => {
               created and inserted into the DOM.
             </Text>
           </StyledSubsection>
-          <StyledSubsection>
+          <StyledSubsection id="updating">
             <Text variant="paragraph" size="large">
               Updating
             </Text>
@@ -246,7 +283,7 @@ const ClassComponent = () => {
               These methods are called when a component is being re-rendered.
             </Text>
           </StyledSubsection>
-          <StyledSubsection>
+          <StyledSubsection id="unmounting">
             <Text variant="paragraph" size="large">
               Unmounting
             </Text>
@@ -258,20 +295,27 @@ const ClassComponent = () => {
         </StyledSection>
       </StyledTopicContent>
       <SideBar top="6rem" right="4rem" style={{ background: "transparent" }}>
-        <SideBarItem size="small">Introduction</SideBarItem>
-        <SideBarGroup size="small" title="Basic Structure">
-          <SideBarGroupItem size="small">Example</SideBarGroupItem>
-          <SideBarGroupItem size="small">Explanation</SideBarGroupItem>
-        </SideBarGroup>
-        <SideBarGroup size="small" title="State Management">
-          <SideBarGroupItem size="small">Initializing State</SideBarGroupItem>
-          <SideBarGroupItem size="small">Updating State</SideBarGroupItem>
-        </SideBarGroup>
-        <SideBarGroup size="small" title="Lifecycle Methods">
-          <SideBarGroupItem size="small">Mounting</SideBarGroupItem>
-          <SideBarGroupItem size="small">Updating</SideBarGroupItem>
-          <SideBarGroupItem size="small">Unmounting</SideBarGroupItem>
-        </SideBarGroup>
+        <SideBarItem size="small" selected={sidebarSelected === "introduction"}>
+          Introduction
+        </SideBarItem>
+        <SideBarItem
+          size="small"
+          selected={sidebarSelected === "basic-structure"}
+        >
+          Basic Structure
+        </SideBarItem>
+        <SideBarItem
+          size="small"
+          selected={sidebarSelected === "state-management"}
+        >
+          State Management
+        </SideBarItem>
+        <SideBarItem
+          size="small"
+          selected={sidebarSelected === "lifecycle-methods"}
+        >
+          Lifecycle Methods
+        </SideBarItem>
       </SideBar>
     </StyledMain>
   );
