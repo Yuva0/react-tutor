@@ -2,6 +2,7 @@ import ClassComponent from "../content/ClassComponent";
 import FunctionComponent from "../content/FunctionComponent";
 import UseEffect from "../content/UseEffect";
 import UseState from "../content/UseState";
+import UseMemo from "../content/UseMemo";
 
 interface ContentProviderProps {
   component?: string;
@@ -17,7 +18,9 @@ const ContentProvider = ({ component }: ContentProviderProps) => {
       case "use-state":
         return <UseState />;
       case "use-effect":
-        return <UseEffect />; 
+        return <UseEffect />;
+      case "use-memo":
+        return <UseMemo />; 
       default:
         return null;
     }
