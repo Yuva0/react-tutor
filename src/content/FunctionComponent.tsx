@@ -3,8 +3,6 @@ import {
   Breadcrumbs,
   BreadcrumbsItem,
   SideBar,
-  SideBarGroup,
-  SideBarGroupItem,
   SideBarItem,
   Text,
   CodeDisplay,
@@ -24,8 +22,6 @@ const sectionsID = [
   "props",
   "stateless-vs-stateful",
   "using-hooks",
-  "use-state-example",
-  "use-effect-example",
   "props-and-hooks",
 ];
 
@@ -293,40 +289,13 @@ const FunctionComponent = () => {
         >
           Stateless vs Stateful
         </SideBarItem>
-        <SideBarGroup
-          title="Using Hooks"
+        <SideBarItem
           size="small"
           selected={sidebarSelected === "using-hooks"}
           onClick={() => onSideBarItemClick("using-hooks")}
         >
-          <SideBarGroupItem
-            size="small"
-            selected={sidebarSelected === "use-state-example"}
-            onClick={() => {
-              onSideBarItemClick("use-state-example");
-            }}
-          >
-            useState Example
-          </SideBarGroupItem>
-          <SideBarGroupItem
-            size="small"
-            selected={sidebarSelected === "use-effect-example"}
-            onClick={() => {
-              onSideBarItemClick("use-effect-example");
-            }}
-          >
-            useEffect Example
-          </SideBarGroupItem>
-          <SideBarGroupItem
-            size="small"
-            selected={sidebarSelected === "advantages"}
-            onClick={() => {
-              onSideBarItemClick("advantages");
-            }}
-          >
-            Advantages
-          </SideBarGroupItem>
-        </SideBarGroup>
+          Using Hooks
+        </SideBarItem>
         <SideBarItem
           size="small"
           selected={sidebarSelected === "props-and-hooks"}
