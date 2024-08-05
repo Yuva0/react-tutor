@@ -1,5 +1,4 @@
 import React from "react";
-import ContentContainer from "../../components/ContentContainer/ContentContainer";
 import styled from "styled-components";
 import { useTheme } from "stelios";
 interface PaletteProps {

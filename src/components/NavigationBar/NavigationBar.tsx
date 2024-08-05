@@ -6,7 +6,6 @@ import {
   NavigationBarItem,
   NavigationBar as NavigationBarUI,
 } from "stelios";
-import Body from "../ContentContainer/ContentContainer";
 import Topics from "../../content/Topics";
 
 const NavigationBar = () => {

@@ -16,7 +16,7 @@ import Settings from "./Settings";
 
 const Header = () => {
   return (
-    <HeaderUI expandable={false} height="3.5rem">
+    <HeaderUI id="header" expandable={false} height="3.5rem">
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
         <HeaderItem style={{ height: "100%" }}>
           {/* <Text

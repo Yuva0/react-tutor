@@ -7,7 +7,6 @@ import { ThemeProvider } from "stelios";
 import colors from "./tokens/colors.json";
 import Homepage from "./pages/Homepage/Homepage";
 import Error from "./pages/Error/Error";
-import Layout from "./components/Layout/Layout";
 import Topic from "./pages/Topic/Topic";
 
 function App() {
@@ -20,12 +19,10 @@ function App() {
       >
         <Header />
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Homepage />} />
-            <Route path="/:idCategory/:idTopic" element={<Topic />} />
-            <Route path="/404-not-found" element={<Error />} />
-            <Route path="*" element={<Navigate to="/404-not-found" />} />
-          </Route>
+          <Route index element={<Homepage />} />
+          <Route path="/:idCategory/:idTopic" element={<Topic />} />
+          <Route path="/404-not-found" element={<Error />} />
+          <Route path="*" element={<Navigate to="/404-not-found" />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

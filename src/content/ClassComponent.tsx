@@ -20,88 +20,61 @@ import {
 } from "../components/StyledInternalComponents/StyledInternalComponents";
 import { IconExclamationCircleFilled } from "@tabler/icons-react";
 
-const ClassComponent = () => {
-  return (
-    <StyledMain id="styled-main">
-      <StyledTopicContent>
-        <StyledSection>
-          <StyledSubsection>
-            <Breadcrumbs size="small" color="primary" delimiter="/">
-              <BreadcrumbsItem title="Guides" />
-              <BreadcrumbsItem
-                link="/components/class-component"
-                title="Class-Components"
-              />
-            </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection>
-            <Alert
-              color="danger"
-              titleIcon={<IconExclamationCircleFilled />}
-              title="Do Not Use"
-              description="React recommends not to use class components. Please use function components instead"
-            ></Alert>
-          </StyledSubsection>
-          <StyledSubsection>
-            <Text variant="h4">Introduction</Text>
-            <Text variant="paragraph">
-              Class components are the original way to create components in
-              React. They are ES6 classes that extend from React.Component and
-              can have state and lifecycle methods.
-            </Text>
-          </StyledSubsection>
-          <StyledSubsection>
-            <Text variant="paragraph" size="large">
-              Basic Structure
-            </Text>
-            <Text variant="paragraph">
-              A class component is defined by a class that extends
-              React.Component. The class must have a render method that returns
-              the component's UI.
-            </Text>
-          </StyledSubsection>
-          <StyledSubsection>
-            <Text variant="paragraph">Example</Text>
-            <CodeDisplay
-              language="JSX"
-              text={`import React, { Component } from 'react';
+const ALERT_TITLE = "Do Not Use";
+const ALERT_DESCRIPTION = (
+  <>
+    <Text noColor size="small">
+      React recommends not to use class components. Please use function
+      components instead.
+    </Text>
+    <Text noColor size="small">
+      Before React 16.8, class components were the only way to create components
+      with state and lifecycle methods. <br /> With the introduction of hooks,
+      function components can now have state and lifecycle methods, making class
+      components obsolete.
+    </Text>
+  </>
+);
 
-class Greeting extends Component {
+const INTRODUCTION_CONTENT = `A class component in React is a fundamental way to define components using ES6 class syntax. These components are more feature-rich compared to functional components, particularly before the introduction of hooks. Class components extend the React.Component base class, giving them access to various built-in features, such as state management and lifecycle methods.`;
+
+const BASIC_STRUCTURE_CONTENT =
+  "A class component is defined by a class that extends React.Component. The class must have a render method that returns the component's UI.";
+const BASIC_STRUCTURE_EXAMPLE = `import React, { Component } from 'react';
+
+class MyComponent extends Component {
+  // Initializing state
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: 'Hello, World!'
+    };
+  }
+
+  // Required render method
   render() {
-    return <h1>Hello, {this.props.name}!</h1>;
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+        <p>This is a basic class component.</p>
+      </div>
+    );
   }
 }
-  
-export default Greeting;`}
-            />
-          </StyledSubsection>
-          <StyledSubsection>
-            <List title="Use Case" variant="unordered">
-              <ListItem>
-                Components that need to manage their own state.
-              </ListItem>
-              <ListItem>
-                Components that need to use lifecycle methods.
-              </ListItem>
-            </List>
-          </StyledSubsection>
-        </StyledSection>
-        <StyledSection>
-          <StyledSubsection>
-            <Text variant="h4">State Management</Text>
-            <Text variant="paragraph" size="large">
-              Initializing State
-            </Text>
-            <Text variant="paragraph">
-              State in a class component is typically initialized in the
-              constructor.
-            </Text>
-          </StyledSubsection>
-          <StyledSubsection>
-            <Text variant="paragraph">Example</Text>
-            <CodeDisplay
-              language="JSX"
-              text={`import React, { Component } from 'react';
+
+export default MyComponent;
+`;
+
+const EXPLANATION_1 = `import React, { Component } from 'react';`;
+const EXPLANATION_2 = `class MyComponent extends Component {`;
+const EXPLANATION_3 = `constructor(props) {
+  super(props);
+  this.state = {
+    message: 'Hello, World!'
+  };
+}`;
+
+const INITIALIZATION_EXAMPLE = `import React, { Component } from 'react';
 
 class Counter extends Component {
   constructor(props) {
@@ -112,23 +85,9 @@ class Counter extends Component {
     return <h1>{this.state.count}</h1>;
   }
 
-}`}
-            />
-          </StyledSubsection>
-          <StyledSubsection>
-            <Text variant="paragraph" size="large">
-              Updating State
-            </Text>
-            <Text variant="paragraph">
-              State is updated using the setState method, which merges the new
-              state with the current state and triggers a re-render.
-            </Text>
-          </StyledSubsection>
-          <StyledSubsection>
-            <Text variant="paragraph">Example</Text>
-            <CodeDisplay
-              language="JSX"
-              text={`import React, { Component } from 'react';
+}`;
+
+const UPDATING_EXAMPLE = `import React, { Component } from 'react';
               
 class Counter extends Component {
   constructor(props) {
@@ -148,8 +107,124 @@ class Counter extends Component {
       </div>
     );
   }
-}`}
-            />
+}`;
+
+const ClassComponent = () => {
+  return (
+    <StyledMain>
+      <StyledTopicContent>
+        <StyledSection>
+          <StyledSubsection>
+            <Breadcrumbs size="small" color="primary" delimiter="/">
+              <BreadcrumbsItem title="Components" />
+              <BreadcrumbsItem
+                link="/components/class-component"
+                title="Class Components"
+              />
+            </Breadcrumbs>
+          </StyledSubsection>
+          <StyledSubsection>
+            <Alert
+              color="danger"
+              titleIcon={<IconExclamationCircleFilled />}
+              title={ALERT_TITLE}
+              description={ALERT_DESCRIPTION}
+            ></Alert>
+          </StyledSubsection>
+          <StyledSubsection>
+            <Text variant="h4">Introduction</Text>
+            <Text variant="paragraph">{INTRODUCTION_CONTENT}</Text>
+          </StyledSubsection>
+          <StyledSubsection>
+            <Text variant="paragraph" size="large">
+              Basic Structure
+            </Text>
+            <Text variant="paragraph">{BASIC_STRUCTURE_CONTENT}</Text>
+            <Text variant="paragraph">Example</Text>
+            <CodeDisplay language="JSX" text={BASIC_STRUCTURE_EXAMPLE} />
+          </StyledSubsection>
+          <StyledSubsection>
+            <Text variant="paragraph">Explanation</Text>
+            <List>
+              <ListItem>
+                Importing React and Component:
+                <CodeDisplay
+                  style={{ margin: "0.75rem 0 0.75rem 0" }}
+                  language="JSX"
+                  text={EXPLANATION_1}
+                />
+                <Text style={{ marginBottom: "1.25rem" }}>
+                  This line imports React and the Component class from the React
+                  library.
+                </Text>
+              </ListItem>
+              <ListItem>
+                Defining the Class Component:
+                <CodeDisplay
+                  style={{ margin: "0.75rem 0 1rem 0" }}
+                  language="JSX"
+                  text={EXPLANATION_2}
+                />
+                <Text style={{ marginBottom: "1.25rem" }}>
+                  This defines a new class component named MyComponent that
+                  extends React.Component.
+                </Text>
+              </ListItem>
+              <ListItem>
+                Constructor and State Initialization:
+                <CodeDisplay
+                  style={{ margin: "0.75rem 0 1rem 0" }}
+                  language="JSX"
+                  text={EXPLANATION_3}
+                />
+                <Text style={{ marginBottom: "1.25rem" }}>
+                  The constructor is used to initialize the component's state.
+                  Here, the state contains a single property message.
+                </Text>
+              </ListItem>
+            </List>
+          </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
+          <StyledSubsection>
+            <Text variant="h4">State Management</Text>
+            <Text variant="paragraph" size="large">
+              Initializing State
+            </Text>
+            <Text variant="paragraph">
+              State in a class component is typically initialized in the
+              constructor.
+            </Text>
+            <Text variant="paragraph">Example</Text>
+            <CodeDisplay language="JSX" text={INITIALIZATION_EXAMPLE} />
+          </StyledSubsection>
+          <StyledSubsection>
+            <Text variant="paragraph" size="large">
+              Updating State
+            </Text>
+            <Text variant="paragraph">
+              State is updated using the setState method, which merges the new
+              state with the current state and triggers a re-render.
+            </Text>
+            <Text variant="paragraph">Example</Text>
+            <CodeDisplay language="JSX" text={UPDATING_EXAMPLE} />
+            <Text variant="paragraph">Explanation</Text>
+            <List>
+              <ListItem>
+                Increment Method:
+                <Text style={{ marginBottom: "1.25rem" }}>
+                  The increment method is called when the button is clicked. It
+                  updates the count state by incrementing it by 1.
+                </Text>
+              </ListItem>
+              <ListItem>
+                Button Element:
+                <Text style={{ marginBottom: "1.25rem" }}>
+                  The button element has an onClick event handler that calls the
+                  increment method when clicked.
+                </Text>
+              </ListItem>
+            </List>
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
@@ -182,11 +257,11 @@ class Counter extends Component {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" style={{ background: "transparent" }}>
+      <SideBar top="6rem" right="4rem" style={{ background: "transparent" }}>
         <SideBarItem size="small">Introduction</SideBarItem>
         <SideBarGroup size="small" title="Basic Structure">
           <SideBarGroupItem size="small">Example</SideBarGroupItem>
-          <SideBarGroupItem size="small">Use Case</SideBarGroupItem>
+          <SideBarGroupItem size="small">Explanation</SideBarGroupItem>
         </SideBarGroup>
         <SideBarGroup size="small" title="State Management">
           <SideBarGroupItem size="small">Initializing State</SideBarGroupItem>

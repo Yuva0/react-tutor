@@ -1,9 +1,5 @@
-import Body from "../../components/ContentContainer/ContentContainer";
-
 const Error = () => {
-  return (
-    <Body>Error</Body>
-  )
+  return <div>Error</div>;
 };
 
 export default Error;
