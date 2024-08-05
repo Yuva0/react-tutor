@@ -12,7 +12,7 @@ const StyledContentContainer = styled.div<paletteProps>`
   min-height: 100vh;
   background-color: ${(props) => props.$colorPalette.primary.appearance === "light" ? "white" : "black"};
   color: ${(props) => props.$colorPalette.primary.grayScale[11]};
-  padding: 3.5rem 10rem 0 15rem;
+  padding: 3.5rem 0 0 15rem;
   box-sizing: border-box;
 `;
 

@@ -16,11 +16,11 @@ const Topics: TopicsProps = {
       "understanding-react": {
         title: "Understanding React",
       },
-      "what-is-jsx": {
-        title: "JSX?",
+      "jsx": {
+        title: "JSX",
       },
-      "what-is-virtual-dom": {
-        title: "Virtual DOM?",
+      "virtual-dom": {
+        title: "Virtual DOM",
       },
     },
   },
