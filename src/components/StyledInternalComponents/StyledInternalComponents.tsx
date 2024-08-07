@@ -7,6 +7,7 @@ export const StyledMain = styled.div`
   gap: 1rem;
   padding: 2rem 3rem 3rem 3rem;
   box-sizing: border-box;
+  min-height: 100vh;
 `;
 
 export const StyledTopicContent = styled.div`

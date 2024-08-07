@@ -38,7 +38,7 @@ const Header = () => {
         <HeaderItem>
           <IconButton
             size="small"
-            variant="outlined"
+            variant="soft"
             color="primary"
             icon={<IconBrandGithub />}
             onClick={() => window.open("https://github.com/yuva0")}
@@ -47,7 +47,7 @@ const Header = () => {
         <HeaderItem>
           <IconButton
             size="small"
-            variant="outlined"
+            variant="soft"
             color="primary"
             icon={<IconBrandLinkedin />}
             onClick={() =>

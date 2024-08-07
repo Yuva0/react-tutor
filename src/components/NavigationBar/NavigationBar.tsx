@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   NavigationBarGroup,
@@ -14,7 +14,7 @@ const NavigationBar = () => {
   const { idTopic, idCategory } = useParams();
 
   const _onNavigateToTopic = (
-    e: React.MouseEvent,
+    e: React.MouseEvent | React.KeyboardEvent,
     topic: string,
     category: string
   ) => {

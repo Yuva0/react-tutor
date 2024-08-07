@@ -11,7 +11,7 @@ interface PaletteProps {
 
 const StyledDiv = styled.div<PaletteProps>`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100vh;
   background-color: ${(props) =>
     props.$colorPalette.primary.appearance === "light" ? "white" : "black"};
@@ -26,7 +26,6 @@ const Topic = () => {
 
   return (
     <StyledDiv
-      style={{ display: "flex", flexDirection: "row" }}
       $colorPalette={colorPalette}
     >
       <NavigationBar />

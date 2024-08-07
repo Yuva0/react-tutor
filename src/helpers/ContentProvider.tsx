@@ -5,7 +5,9 @@ import UseState from "../content/UseState";
 import UseMemo from "../content/UseMemo";
 import UseCallback from "../content/UseCallback";
 import UseRef from "../content/UseRef";
-import UseContext from "../content/useContext";
+import UseContext from "../content/UseContext";
+import Error from "../pages/Error/Error";
+import UnderstandingReact from "../content/UnderstandingReact";
 
 interface ContentProviderProps {
   component?: string;
@@ -30,8 +32,10 @@ const ContentProvider = ({ component }: ContentProviderProps) => {
         return <UseRef />;
       case "use-context":
         return <UseContext />;
+      case "understanding-react":
+        return <UnderstandingReact />;
       default:
-        return null;
+        return <Error />;
     }
   };
 

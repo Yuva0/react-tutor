@@ -9,8 +9,6 @@ import {
   BreadcrumbsItem,
   SideBar,
   SideBarItem,
-  SideBarGroup,
-  SideBarGroupItem,
 } from "stelios";
 import {
   StyledMain,

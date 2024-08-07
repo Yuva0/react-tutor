@@ -195,7 +195,7 @@ const Settings = () => {
     <>
       <IconButton
         size="small"
-        variant="outlined"
+        variant="soft"
         icon={<IconSettings />}
         onClick={_handleDrawerOpen}
       />
