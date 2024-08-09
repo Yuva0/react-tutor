@@ -1,3 +1,4 @@
+import { ListItem } from "stelios";
 import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
@@ -39,7 +40,7 @@ export const StyledTopicContent = styled.div`
 export const StyledSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   scroll-margin-top: 5rem;
    &.fade-in {
     animation: ${fadeIn} 0.2s ease-in-out;

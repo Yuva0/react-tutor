@@ -120,7 +120,7 @@ const ClassComponent = () => {
 
   React.useEffect(() => {
     setIsMounted(true);
-  },[]);
+  }, []);
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -148,7 +148,7 @@ const ClassComponent = () => {
     };
   }, []);
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
 
   return (
     <StyledMain>
@@ -162,19 +162,20 @@ const ClassComponent = () => {
                 title="Class Components"
               />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection>
             <Alert
               color="danger"
               titleIcon={<IconExclamationCircleFilled />}
               title={ALERT_TITLE}
               description={ALERT_DESCRIPTION}
+              style={{ marginTop: "1rem" }}
             ></Alert>
           </StyledSubsection>
           <StyledSubsection id="introduction">
             <Text variant="h4">Introduction</Text>
             <Text variant="paragraph">{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="basic-structure">
             <Text variant="paragraph" size="large">
               Basic Structure
@@ -195,7 +196,7 @@ const ClassComponent = () => {
                   language="JSX"
                   text={EXPLANATION_1}
                 />
-                <Text style={{ marginBottom: "1.25rem" }}>
+                <Text>
                   This line imports React and the Component class from the React
                   library.
                 </Text>
@@ -207,7 +208,7 @@ const ClassComponent = () => {
                   language="JSX"
                   text={EXPLANATION_2}
                 />
-                <Text style={{ marginBottom: "1.25rem" }}>
+                <Text>
                   This defines a new class component named MyComponent that
                   extends React.Component.
                 </Text>
@@ -219,7 +220,7 @@ const ClassComponent = () => {
                   language="JSX"
                   text={EXPLANATION_3}
                 />
-                <Text style={{ marginBottom: "1.25rem" }}>
+                <Text>
                   The constructor is used to initialize the component's state.
                   Here, the state contains a single property message.
                 </Text>
@@ -240,7 +241,7 @@ const ClassComponent = () => {
             <Text variant="paragraph">Example</Text>
             <CodeDisplay language="JSX" text={INITIALIZATION_EXAMPLE} />
           </StyledSubsection>
-          <StyledSubsection id="updating-state">
+          <StyledSubsection id="updating-state" style={{marginTop:"0.5rem"}}>
             <Text variant="paragraph" size="large">
               Updating State
             </Text>
@@ -250,18 +251,17 @@ const ClassComponent = () => {
             </Text>
             <Text variant="paragraph">Example</Text>
             <CodeDisplay language="JSX" text={UPDATING_EXAMPLE} />
-            <Text variant="paragraph">Explanation</Text>
-            <List>
+            <List title="Explanation">
               <ListItem>
-                Increment Method:
-                <Text style={{ marginBottom: "1.25rem" }}>
+                <Text>Increment Method:</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   The increment method is called when the button is clicked. It
                   updates the count state by incrementing it by 1.
                 </Text>
               </ListItem>
-              <ListItem>
-                Button Element:
-                <Text style={{ marginBottom: "1.25rem" }}>
+              <ListItem style={{ marginTop: "0.5rem" }}>
+                <Text>Button Element:</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   The button element has an onClick event handler that calls the
                   increment method when clicked.
                 </Text>
@@ -270,33 +270,38 @@ const ClassComponent = () => {
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
-          <StyledSubsection id="lifecycle-methods">
-            <Text variant="h4">Lifecycle Methods</Text>
-            <Text variant="paragraph" size="large" id="mounting">
-              Mounting
-            </Text>
-            <Text variant="paragraph">
-              These methods are called when an instance of a component is being
-              created and inserted into the DOM.
-            </Text>
-          </StyledSubsection>
-          <StyledSubsection id="updating">
-            <Text variant="paragraph" size="large">
-              Updating
-            </Text>
-            <Text variant="paragraph">
-              These methods are called when a component is being re-rendered.
-            </Text>
-          </StyledSubsection>
-          <StyledSubsection id="unmounting">
-            <Text variant="paragraph" size="large">
-              Unmounting
-            </Text>
-            <Text variant="paragraph">
-              This method is called when a component is being removed from the
-              DOM.
-            </Text>
-          </StyledSubsection>
+          <List
+            title={
+              <Text variant="paragraph" size="large">
+                Lifecycle Methods
+              </Text>
+            }
+          >
+            <ListItem>
+              <Text variant="paragraph">Mounting</Text>
+              <Text variant="paragraph" style={{ marginTop: "0.25rem" }}>
+                These methods are called when an instance of a component is
+                being created and inserted into the DOM.
+              </Text>
+            </ListItem>
+
+            <ListItem style={{ marginTop: "0.5rem" }}>
+              <Text variant="paragraph">Updating</Text>
+              <Text variant="paragraph" style={{ marginTop: "0.25rem" }}>
+                These methods are called when a component is being re-rendered.
+              </Text>
+            </ListItem>
+
+            <ListItem style={{ marginTop: "0.5rem" }}>
+              <Text variant="paragraph">
+                Unmounting
+              </Text>
+              <Text variant="paragraph" style={{ marginTop: "0.25rem" }}>
+                This method is called when a component is being removed from the
+                DOM.
+              </Text>
+            </ListItem>
+          </List>
         </StyledSection>
       </StyledTopicContent>
       <SideBar top="6rem" right="4rem" style={{ background: "transparent" }}>

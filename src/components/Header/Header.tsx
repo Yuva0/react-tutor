@@ -5,6 +5,7 @@ import {
   HeaderItem,
   IconButton,
   Input,
+  useTheme,
 } from "stelios";
 import {
   IconBrandGithub,
@@ -15,8 +16,13 @@ import {
 import Settings from "./Settings";
 
 const Header = () => {
+  
+  const colorPalette = useTheme().theme.colorPalette;
+
+  console.log(colorPalette);
+
   return (
-    <HeaderUI id="header" expandable={false} height="3.5rem">
+    <HeaderUI id="header" expandable={false} height="3.5rem" style={{outline:0}}>
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
         <HeaderItem style={{ height: "100%" }}>
           {/* <Text
@@ -29,6 +35,7 @@ const Header = () => {
       </HeaderGroup>
       <HeaderGroup>
         <Input
+          color="primary"
           leadingIcon={<IconSearch />}
           width="40rem"
           placeholder="Search..."

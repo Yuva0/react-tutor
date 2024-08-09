@@ -61,7 +61,7 @@ const NavigationBar = () => {
         boxSizing: "border-box",
         height: "calc(100vh - 3.5rem)",
         padding: "0.5rem 0",
-        borderRight: 0,
+        // borderRight: 0,
         backgroundColor: colorPalette.primary.appearance === "light" ? "white" : "black",
       }}
     >

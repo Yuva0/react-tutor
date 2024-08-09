@@ -1,16 +1,71 @@
 import { lazy, Suspense } from "react";
 import Loading from "../content/Loading";
-const UseMemo = lazy(() => import("../content/UseMemo"));
-const ClassComponent = lazy(() => import("../content/ClassComponent"));
-const FunctionComponent = lazy(() => import("../content/FunctionComponent"));
-const UseEffect = lazy(() => import("../content/UseEffect"));
-const UseState = lazy(() => import("../content/UseState"));
-const UseCallback = lazy(() => import("../content/UseCallback"));
-const UseRef = lazy(() => import("../content/UseRef"));
-const UseContext = lazy(() => import("../content/UseContext"));
-const Error = lazy(() => import("../pages/Error/Error"));
-const UnderstandingReact = lazy(() => import("../content/UnderstandingReact"));
-const JSX = lazy(() => import("../content/JSX"));
+const UseMemo = lazy(() => {
+  return Promise.all([
+    import("../content/UseMemo"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const ClassComponent = lazy(() => {
+  return Promise.all([
+    import("../content/ClassComponent"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const FunctionComponent = lazy(() => {
+  return Promise.all([
+    import("../content/FunctionComponent"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const UseEffect = lazy(() => {
+  return Promise.all([
+    import("../content/UseEffect"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const UseState = lazy(() => {
+  return Promise.all([
+    import("../content/UseState"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const UseCallback = lazy(() => {
+  return Promise.all([
+    import("../content/UseMemo"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const UseRef = lazy(() => {
+  return Promise.all([
+    import("../content/UseRef"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const UseContext = lazy(() => {
+  return Promise.all([
+    import("../content/UseContext"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const Error = lazy(() => {
+  return Promise.all([
+    import("../pages/Error/Error"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const UnderstandingReact = lazy(() => {
+  return Promise.all([
+    import("../content/UnderstandingReact"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+const JSX = lazy(() => {
+  return Promise.all([
+    import("../content/JSX"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
 
 interface ContentProviderProps {
   topic?: string;
@@ -61,7 +116,7 @@ const ContentProvider = ({ topic, category }: ContentProviderProps) => {
   };
 
   return (
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <ContentFn />
     </Suspense>
   );

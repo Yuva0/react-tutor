@@ -155,12 +155,12 @@ const FunctionComponent = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain id="styled-main">
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Components" />
               <BreadcrumbsItem
@@ -168,13 +168,17 @@ const FunctionComponent = () => {
                 title="Function Components"
               />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection id="introduction">
-            <Text variant="paragraph" size="large">
+            <Text
+              variant="paragraph"
+              size="large"
+              style={{ marginTop: "1rem" }}
+            >
               Introduction
             </Text>
             <Text>{INTRODUCTION}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="definition">
             <Text variant="paragraph" size="large">
               Definition
@@ -182,6 +186,8 @@ const FunctionComponent = () => {
             <Text>{DEFINITION}</Text>
             <CodeDisplay language="JSX" text={DEFINITION_EXAMPLE} />
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="props">
             <Text variant="paragraph" size="large">
               Props
@@ -191,12 +197,16 @@ const FunctionComponent = () => {
             <Text style={{ marginTop: "0.5rem" }}>{PROPS_DESTRUCTURING}</Text>
             <CodeDisplay language="JSX" text={PROPS_DESTRUCTURING_EXAMPLE} />
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="stateless-vs-stateful">
             <Text variant="paragraph" size="large">
               Stateless vs Stateful
             </Text>
             <Text>{STATELESS_VS_STATEFUL}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="using-hooks">
             <Text variant="paragraph" size="large">
               Using Hooks
@@ -241,6 +251,8 @@ const FunctionComponent = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="props-and-hooks">
             <Text variant="paragraph" size="large">
               Example with Props and Hooks
