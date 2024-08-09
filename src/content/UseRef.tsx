@@ -78,6 +78,11 @@ function Timer() {
 
 const UseRef: React.FC = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -120,7 +125,7 @@ const UseRef: React.FC = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent>
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
             <Breadcrumbs size="small" delimiter="/">

@@ -95,6 +95,11 @@ const BASIC_EXAMPLE_3_TEXT = `This effect fetches data from an API whenever the 
 
 const UseEffect: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -137,7 +142,7 @@ const UseEffect: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent>
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
             <Breadcrumbs size="small" delimiter="/">

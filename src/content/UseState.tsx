@@ -68,6 +68,11 @@ const sections = [
 
 const UseState: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -110,7 +115,7 @@ const UseState: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent>
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">

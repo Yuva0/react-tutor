@@ -109,7 +109,11 @@ const EXAMPLE_4 = `React’s ability to efficiently update and render just the r
 
 const UnderstandingReact: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
 
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       for (const entry of entries) {
@@ -151,7 +155,7 @@ const UnderstandingReact: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent>
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
             <Breadcrumbs size="small" delimiter="/">

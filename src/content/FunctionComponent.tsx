@@ -113,6 +113,7 @@ const PROPS_HOOKS_2 = `In summary, FunctionComponents in React are a more modern
 
 const FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -139,6 +140,9 @@ const FunctionComponent = () => {
       observer.disconnect();
     };
   }, []);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -153,7 +157,7 @@ const FunctionComponent = () => {
 
   return (
     <StyledMain id="styled-main">
-      <StyledTopicContent id="styled-topic-content">
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">

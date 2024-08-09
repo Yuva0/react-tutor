@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   StyledMain,
-  StyledSection,
   StyledSubsection,
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
@@ -109,6 +108,11 @@ const ChildComponent = React.memo(({ onClick }) => {
 
 const UseCallback = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -151,7 +155,7 @@ const UseCallback = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent>
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSubsection>
           <Breadcrumbs size="small" delimiter="/">
             <BreadcrumbsItem title="Hooks" />

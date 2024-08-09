@@ -63,7 +63,11 @@ const CONCLUSION = `useMemo is a powerful tool in React for optimizing performan
 
 const UseMemo = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
+  const [isMounted, setIsMounted] = React.useState(false);
 
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       for (const entry of entries) {
@@ -105,7 +109,7 @@ const UseMemo = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent>
+      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
             <Breadcrumbs size="small" delimiter="/">

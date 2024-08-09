@@ -20,7 +20,7 @@ const StyledDiv = styled.div<PaletteProps>`
 `;
 
 const Topic = () => {
-  const { idTopic } = useParams();
+  const { idTopic, idCategory} = useParams();
 
   const colorPalette = useTheme().theme.colorPalette;
 
@@ -28,8 +28,7 @@ const Topic = () => {
     <StyledDiv
       $colorPalette={colorPalette}
     >
-      <NavigationBar />
-      <ContentProvider component={idTopic} />
+      <ContentProvider category={idCategory}  topic={idTopic} />
     </StyledDiv>
   );
 };

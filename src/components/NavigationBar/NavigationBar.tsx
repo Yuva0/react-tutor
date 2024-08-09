@@ -5,6 +5,7 @@ import {
   NavigationBarGroupItem,
   NavigationBarItem,
   NavigationBar as NavigationBarUI,
+  useTheme,
 } from "stelios";
 import Topics from "../../content/Topics";
 
@@ -12,6 +13,7 @@ const NavigationBar = () => {
   const navigate = useNavigate();
 
   const { idTopic, idCategory } = useParams();
+  const colorPalette = useTheme().theme.colorPalette;
 
   const _onNavigateToTopic = (
     e: React.MouseEvent | React.KeyboardEvent,
@@ -48,6 +50,8 @@ const NavigationBar = () => {
     );
   });
 
+
+
   return (
     <NavigationBarUI
       className="navigation-bar"
@@ -56,8 +60,8 @@ const NavigationBar = () => {
         boxSizing: "border-box",
         height: "calc(100vh - 3.5rem)",
         padding: "0.5rem 0",
-        backgroundColor: "transparent",
-        borderRight: 0
+        borderRight: 0,
+        backgroundColor: colorPalette.primary.appearance === "light" ? "white" : "black",
       }}
     >
       {NavigationBarContent}
