@@ -8,6 +8,7 @@ import {
   CodeDisplay,
   List,
   ListItem,
+  Alert,
 } from "stelios";
 import {
   StyledMain,
@@ -16,9 +17,7 @@ import {
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
 
-const sections = [
-  { id: "introduction", title: "Introduction" },
-];
+const sections = [{ id: "introduction", title: "Introduction" }];
 
 const INTRODUCTION_FIRST = `JSX (JavaScript XML) is a syntax extension for JavaScript commonly used with React, a popular JavaScript library for building user interfaces. JSX allows you to write HTML-like code within JavaScript, making it easier to create and manage UI components. Here's a detailed explanation:`;
 const WHAT_IS_JSX_1 = `JSX is not a separate language but a syntax extension that looks similar to HTML or XML. It allows you to write HTML-like elements directly within JavaScript code.`;
@@ -97,6 +96,10 @@ const JSX: React.FunctionComponent = () => {
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
@@ -135,170 +138,153 @@ const JSX: React.FunctionComponent = () => {
     }
   };
 
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
+
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Components" />
               <BreadcrumbsItem link="/guides/jsx" title="JSX" />
             </Breadcrumbs>
           </StyledSubsection>
 
-          <StyledSubsection id="introduction">
+          <StyledSubsection>
             <Text variant="paragraph" size="large">
               Introduction
             </Text>
             <Text>{INTRODUCTION_FIRST}</Text>
-            <List
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.5rem",
-              }}
-            >
+            <Alert
+              style={{marginTop:"0.5rem"}}
+            color="success"
+            title={<Text noColor size="large"><b>What is JSX?</b></Text>}
+            description={
+              <>
+                <Text noColor>{WHAT_IS_JSX_1}</Text>
+                <Text noColor>{WHAT_IS_JSX_2}</Text>
+              </>
+            }
+          />
+          </StyledSubsection>
+          {/* <StyledSubsection>
+            <Text size="large">What is JSX?</Text>
+            <Text style={{ marginTop: "0.5rem" }}>{WHAT_IS_JSX_1}</Text>
+            <Text style={{ marginTop: "0.5rem" }}>{WHAT_IS_JSX_2}</Text>
+          </StyledSubsection> */}
+
+          <StyledSubsection>
+            <Text size="large">Why Use JSX?</Text>
+            <List variant="unordered">
               <ListItem>
-                <Text size="large">What is JSX?</Text>
-                <List variant="unordered">
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>{WHAT_IS_JSX_1}</Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>{WHAT_IS_JSX_2}</Text>
-                  </ListItem>
-                </List>
+                <Text>{WHY_USE_JSX_1}</Text>
               </ListItem>
               <ListItem>
-                <Text size="large">Why Use JSX?</Text>
-                <List variant="unordered">
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>{WHY_USE_JSX_1}</Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>{WHY_USE_JSX_2}</Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>{WHY_USE_JSX_3}</Text>
-                  </ListItem>
-                </List>
+                <Text style={{ marginTop: "0.5rem" }}>{WHY_USE_JSX_2}</Text>
               </ListItem>
               <ListItem>
-                <Text size="large">Basic Syntax</Text>
-                <List variant="unordered">
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>
-                      {BASIC_SYNTAX_1}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>
-                      {BASIC_SYNTAX_2}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text style={{ marginTop: "0.5rem" }}>
-                      {BASIC_SYNTAX_3}
-                    </Text>
-                  </ListItem>
-                </List>
-                <CodeDisplay
-                  text={BASIC_SYNTAX_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "1rem" }}
-                />
-                <Text style={{ marginTop: "1rem" }}>{BASIC_SYNTAX_LAST}</Text>
-              </ListItem>
-              <ListItem>
-                <Text size="large">Components and JSX</Text>
-                <Text style={{ marginTop: "0.5rem" }}>{COMPONENTS_JSX_1}</Text>
-                <CodeDisplay
-                  text={COMPONENTS_JSX_1_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "0.5rem" }}
-                />
-                <Text style={{ marginTop: "1rem" }}>{COMPONENTS_JSX_2}</Text>
-                <CodeDisplay
-                  text={COMPONENTS_JSX_2_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "0.5rem" }}
-                />
-                <Text style={{ marginTop: "1rem" }}>{COMPONENTS_JSX_3}</Text>
-                <CodeDisplay
-                  text={COMPONENTS_JSX_3_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "0.5rem" }}
-                />
-              </ListItem>
-              <ListItem>
-                <Text size="large">JSX Differences from HTML</Text>
-                <List variant="unordered">
-                  <ListItem>{JSX_DIFFERENCES_1}</ListItem>
-                  <ListItem>{JSX_DIFFERENCES_2}</ListItem>
-                  <ListItem>{JSX_DIFFERENCES_3}</ListItem>
-                </List>
-              </ListItem>
-              <ListItem>
-                <Text size="large">Javascript Expressions in JSX</Text>
-                <List variant="unordered">
-                  <ListItem>
-                    <Text>{JSX_EXPRESSION_1}</Text>
-                    <CodeDisplay
-                      text={JSX_EXPRESSION_EXAMPLE}
-                      language="jsx"
-                      style={{ marginTop: "1rem" }}
-                    />
-                  </ListItem>
-                </List>
-              </ListItem>
-              <ListItem>
-                <Text size="large">JSX is Type-Safe</Text>
-                <Text>{JSX_ELEMENTS_TYPESAFE}</Text>
-              </ListItem>
-              <ListItem>
-                <Text size="large">Fragments in JSX</Text>
-                <Text>{FRAGMENTS_1}</Text>
-                <Text>{FRAGMENTS_EXAMPLE}</Text>
-              </ListItem>
-              <ListItem>
-                <Text size="large">Conditional Rendering</Text>
-                <Text>{CONDITIONAL_RENDERING_1}</Text>
-                <CodeDisplay
-                  text={CONDITIONAL_RENDERING_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "1rem" }}
-                />
-              </ListItem>
-              <ListItem>
-                <Text size="large">Styling in JSX</Text>
-                <Text>{STYLING_JSX_1}</Text>
-                <CodeDisplay
-                  text={STYLING_JSX_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "1rem" }}
-                />
-              </ListItem>
-              <ListItem>
-                <Text size="large">Event Handling</Text>
-                <Text>{EVENT_HANDLING_1}</Text>
-                <CodeDisplay
-                  text={EVENT_HANDLING_EXAMPLE}
-                  language="jsx"
-                  style={{ marginTop: "1rem" }}
-                />
-              </ListItem>
-              <ListItem>
-                <Text size="large">Key Points</Text>
-                <List variant="unordered">
-                  <ListItem>{KEY_POINTS_1}</ListItem>
-                  <ListItem>{KEY_POINTS_2}</ListItem>
-                </List>
-              </ListItem>
-              <ListItem>
-                <Text size="large">JSX Compilation</Text>
-                <Text>{JSX_COMPILATION_1}</Text>
+                <Text style={{ marginTop: "0.5rem" }}>{WHY_USE_JSX_3}</Text>
               </ListItem>
             </List>
+
+            <List variant="unordered" style={{marginTop:"0.5rem"}} title={<Text size="large">Basic Syntax</Text>}>
+              <ListItem>
+                <Text>{BASIC_SYNTAX_1}</Text>
+              </ListItem>
+              <ListItem>
+                <Text style={{ marginTop: "0.5rem" }}>{BASIC_SYNTAX_2}</Text>
+              </ListItem>
+              <ListItem>
+                <Text style={{ marginTop: "0.5rem" }}>{BASIC_SYNTAX_3}</Text>
+              </ListItem>
+            </List>
+            <CodeDisplay
+              text={BASIC_SYNTAX_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "1rem" }}
+            />
+            <Text style={{ marginTop: "1rem" }}>{BASIC_SYNTAX_LAST}</Text>
+
+            <Text size="large">Components and JSX</Text>
+            <Text style={{ marginTop: "0.5rem" }}>{COMPONENTS_JSX_1}</Text>
+            <CodeDisplay
+              text={COMPONENTS_JSX_1_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "0.5rem" }}
+            />
+            <Text style={{ marginTop: "1rem" }}>{COMPONENTS_JSX_2}</Text>
+            <CodeDisplay
+              text={COMPONENTS_JSX_2_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "0.5rem" }}
+            />
+            <Text style={{ marginTop: "1rem" }}>{COMPONENTS_JSX_3}</Text>
+            <CodeDisplay
+              text={COMPONENTS_JSX_3_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "0.5rem" }}
+            />
+
+            <Text size="large">JSX Differences from HTML</Text>
+            <List variant="unordered">
+              <ListItem>{JSX_DIFFERENCES_1}</ListItem>
+              <ListItem>{JSX_DIFFERENCES_2}</ListItem>
+              <ListItem>{JSX_DIFFERENCES_3}</ListItem>
+            </List>
+
+            <Text size="large">Javascript Expressions in JSX</Text>
+            <List variant="unordered">
+              <ListItem>
+                <Text>{JSX_EXPRESSION_1}</Text>
+                <CodeDisplay
+                  text={JSX_EXPRESSION_EXAMPLE}
+                  language="jsx"
+                  style={{ marginTop: "1rem" }}
+                />
+              </ListItem>
+            </List>
+
+            <Text size="large">JSX is Type-Safe</Text>
+            <Text>{JSX_ELEMENTS_TYPESAFE}</Text>
+
+            <Text size="large">Fragments in JSX</Text>
+            <Text>{FRAGMENTS_1}</Text>
+            <Text>{FRAGMENTS_EXAMPLE}</Text>
+
+            <Text size="large">Conditional Rendering</Text>
+            <Text>{CONDITIONAL_RENDERING_1}</Text>
+            <CodeDisplay
+              text={CONDITIONAL_RENDERING_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "1rem" }}
+            />
+
+            <Text size="large">Styling in JSX</Text>
+            <Text>{STYLING_JSX_1}</Text>
+            <CodeDisplay
+              text={STYLING_JSX_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "1rem" }}
+            />
+
+            <Text size="large">Event Handling</Text>
+            <Text>{EVENT_HANDLING_1}</Text>
+            <CodeDisplay
+              text={EVENT_HANDLING_EXAMPLE}
+              language="jsx"
+              style={{ marginTop: "1rem" }}
+            />
+
+            <Text size="large">Key Points</Text>
+            <List variant="unordered">
+              <ListItem>{KEY_POINTS_1}</ListItem>
+              <ListItem>{KEY_POINTS_2}</ListItem>
+            </List>
+
+            <Text size="large">JSX Compilation</Text>
+            <Text>{JSX_COMPILATION_1}</Text>
+            {/* </ListItem> */}
           </StyledSubsection>
           <StyledSubsection>
             <Text size="large">Conclusion</Text>

@@ -113,6 +113,8 @@ const UseState: React.FunctionComponent = () => {
     }
   };
 
+  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>

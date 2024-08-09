@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import ContentProvider from "../../helpers/ContentProvider";
 import { useTheme } from "stelios";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import styled from "styled-components";
 
 interface PaletteProps {

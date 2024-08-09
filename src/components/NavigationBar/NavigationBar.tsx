@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import {
   NavigationBarGroup,
   NavigationBarGroupItem,
@@ -11,6 +11,7 @@ import Topics from "../../content/Topics";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
+
 
   const { idTopic, idCategory } = useParams();
   const colorPalette = useTheme().theme.colorPalette;

@@ -123,12 +123,13 @@ const UseRef: React.FC = () => {
     }
   };
 
+  if(!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
-            <Breadcrumbs size="small" delimiter="/">
+            <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-ref" title="useRef" />
             </Breadcrumbs>

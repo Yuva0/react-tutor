@@ -155,6 +155,7 @@ const FunctionComponent = () => {
     }
   };
 
+  if(!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain id="styled-main">
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>

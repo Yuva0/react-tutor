@@ -31,14 +31,14 @@ const COMPONENT_EXAMPLE = `function Welcome(props) {
 `;
 const ALERT_TITLE = (
   <Text size="large" noColor>
-    Prerequisite of React
+    <b>Prerequisite of React</b>
   </Text>
 );
 const ALERT_DESCRITPION_1 = `For learning React first you have a clear understanding of HTML, CSS and JavaScript. As React is a JavaScript library and uses most of its concept so you really have to understands the major concepts of it.`;
 const ALERT_DESCRITPION = (
   <>
-    <Text>{ALERT_DESCRITPION_1}</Text>
-    <List>
+    <Text noColor style={{marginTop:"0.5rem"}}>{ALERT_DESCRITPION_1}</Text>
+    <List title={<Text noColor style={{marginTop:'0.5rem'}}>The major concepts include:</Text>}>
       <ListItem>
         <Text noColor>HTML and CSS</Text>
       </ListItem>
@@ -153,12 +153,14 @@ const UnderstandingReact: React.FunctionComponent = () => {
     }
   };
 
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
+
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
           <StyledSubsection>
-            <Breadcrumbs size="small" delimiter="/">
+            <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Guides" />
               <BreadcrumbsItem
                 link="/hooks/understanding-react"

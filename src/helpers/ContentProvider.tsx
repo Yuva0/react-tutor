@@ -1,16 +1,16 @@
 import { lazy, Suspense } from "react";
-import { StyledMain } from "../components/StyledInternalComponents/StyledInternalComponents";
-import JSX from "../content/JSX";
+import Loading from "../content/Loading";
+const UseMemo = lazy(() => import("../content/UseMemo"));
 const ClassComponent = lazy(() => import("../content/ClassComponent"));
 const FunctionComponent = lazy(() => import("../content/FunctionComponent"));
 const UseEffect = lazy(() => import("../content/UseEffect"));
 const UseState = lazy(() => import("../content/UseState"));
-const UseMemo = lazy(() => import("../content/UseMemo"));
 const UseCallback = lazy(() => import("../content/UseCallback"));
 const UseRef = lazy(() => import("../content/UseRef"));
 const UseContext = lazy(() => import("../content/UseContext"));
 const Error = lazy(() => import("../pages/Error/Error"));
 const UnderstandingReact = lazy(() => import("../content/UnderstandingReact"));
+const JSX = lazy(() => import("../content/JSX"));
 
 interface ContentProviderProps {
   topic?: string;
@@ -61,7 +61,7 @@ const ContentProvider = ({ topic, category }: ContentProviderProps) => {
   };
 
   return (
-    <Suspense fallback={<StyledMain>Loading</StyledMain>}>
+    <Suspense fallback={<Loading/>}>
       <ContentFn />
     </Suspense>
   );
