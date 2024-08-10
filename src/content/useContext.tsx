@@ -16,6 +16,7 @@ import {
   SideBarItem,
   useTheme,
 } from "stelios";
+import { useWindowSize } from "../helpers/helpers";
 
 const sections = [
   { id: "what-is-context", title: "What is Context?" },
@@ -89,6 +90,8 @@ const MyComponent = () => {
 const UseContext: React.FC = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -157,7 +160,10 @@ const UseContext: React.FC = () => {
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+        className={isMounted ? "fade-in" : ""}
+      >
         <StyledSection id="what-is-context">
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
@@ -357,18 +363,20 @@ const UseContext: React.FC = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem">
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

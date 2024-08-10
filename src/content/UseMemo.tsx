@@ -16,6 +16,7 @@ import {
   SideBarItem,
   useTheme,
 } from "stelios";
+import { useWindowSize } from "../helpers/helpers";
 
 const sections = [
   { id: "introduction", title: "Introduction" },
@@ -62,6 +63,8 @@ const COMP_PERFORMANCE = `const renderedItems = useMemo(() => {
 const UseMemo = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -148,7 +151,10 @@ const UseMemo = () => {
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+        className={isMounted ? "fade-in" : ""}
+      >
         <StyledSection id="introduction">
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
@@ -337,18 +343,20 @@ const UseMemo = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem">
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

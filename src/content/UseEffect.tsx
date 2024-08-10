@@ -18,6 +18,7 @@ import {
   Alert,
 } from "stelios";
 import { IconMoodSmileDizzy } from "@tabler/icons-react";
+import { useWindowSize } from "../helpers/helpers";
 
 const sections = [
   { id: "introduction", title: "Introduction" },
@@ -96,6 +97,8 @@ const BASIC_EXAMPLE_3_TEXT = `This effect fetches data from an API whenever the 
 const UseEffect: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -212,7 +215,10 @@ const UseEffect: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+        className={isMounted ? "fade-in" : ""}
+      >
         <StyledSection>
           <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
@@ -224,7 +230,7 @@ const UseEffect: React.FunctionComponent = () => {
               titleIcon={<IconMoodSmileDizzy />}
               title="Fun Fact"
               description={ALERT_DESCRIPTION}
-              style={{marginTop:"0.5rem"}}
+              style={{ marginTop: "0.5rem" }}
             />
             <Text size="large" style={{ marginTop: "0.5rem" }}>
               Introduction
@@ -409,18 +415,20 @@ const UseEffect: React.FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem">
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

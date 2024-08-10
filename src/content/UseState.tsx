@@ -18,6 +18,7 @@ import {
   Alert,
 } from "stelios";
 import { IconMoodSmileDizzy } from "@tabler/icons-react";
+import { useWindowSize } from "../helpers/helpers";
 const BASIC_USAGE_1 = `import React, { useState } from 'react';`;
 const BASIC_USAGE_SYNTAX = `const [state, setState] = useState(initialState);`;
 const BASIC_USAGE_EXAMPLE = `import React, { useState } from 'react';
@@ -67,6 +68,8 @@ const sections = [
 const UseState: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   const color = useTheme().theme.colorPalette.primary.accentScale[10];
 
@@ -154,7 +157,10 @@ const UseState: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+        className={isMounted ? "fade-in" : ""}
+      >
         <StyledSection id="introduction">
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
@@ -168,7 +174,9 @@ const UseState: React.FunctionComponent = () => {
               description="The useState Hook is the most commonly used Hook in React."
               style={{ marginTop: "0.5rem" }}
             />
-            <Text size="large" style={{marginTop:"0.5rem"}}>Introduction</Text>
+            <Text size="large" style={{ marginTop: "0.5rem" }}>
+              Introduction
+            </Text>
             {INTRODUCTION_CONTENT}
           </StyledSubsection>
         </StyledSection>
@@ -310,18 +318,20 @@ const UseState: React.FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem" style={{ background: "transparent" }}>
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem" style={{ background: "transparent" }}>
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };
