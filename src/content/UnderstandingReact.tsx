@@ -18,6 +18,7 @@ import {
   useTheme,
 } from "stelios";
 import { IconInfoCircle } from "@tabler/icons-react";
+import { useWindowSize } from "../helpers/helpers";
 
 const sections = [
   { id: "introduction", title: "Introduction" },
@@ -110,6 +111,8 @@ const EXAMPLE_4 = `React's ability to efficiently update and render just the rig
 const UnderstandingReact: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -262,7 +265,10 @@ const UnderstandingReact: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        className={isMounted ? "fade-in" : ""}
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+      >
         <StyledSection id="introduction">
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
@@ -395,18 +401,20 @@ const UnderstandingReact: React.FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem">
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

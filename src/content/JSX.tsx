@@ -17,6 +17,7 @@ import {
   StyledSubsection,
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
+import { useWindowSize } from "../helpers/helpers";
 
 const sections = [
   { id: "introduction", title: "Introduction" },
@@ -24,7 +25,7 @@ const sections = [
   { id: "jsx-syntax", title: "JSX Syntax" },
   { id: "components-and-jsx", title: "Components and JSX" },
   { id: "jsx-differences", title: "JSX Differences" },
-  { id: "jsx-expressions", title: "Javascript Expressions" }
+  { id: "jsx-expressions", title: "Javascript Expressions" },
 ];
 
 const WHAT_IS_JSX_1 = `JSX is not a separate language but a syntax extension that looks similar to HTML or XML. It allows you to write HTML-like elements directly within JavaScript code.`;
@@ -93,6 +94,8 @@ const CONCLUSION_1 = `JSX makes writing React components more intuitive by allow
 const JSX: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -224,11 +227,14 @@ const JSX: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        className={isMounted ? "fade-in" : ""}
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+      >
         <StyledSection id="introduction">
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
-              <BreadcrumbsItem title="Components" />
+              <BreadcrumbsItem title="Guides" />
               <BreadcrumbsItem link="/guides/jsx" title="JSX" />
             </Breadcrumbs>
 
@@ -396,18 +402,20 @@ const JSX: React.FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem">
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

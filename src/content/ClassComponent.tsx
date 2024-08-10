@@ -17,12 +17,14 @@ import {
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
 import { IconExclamationCircleFilled } from "@tabler/icons-react";
+import { useWindowSize } from "../helpers/helpers";
 
-const sectionsID = [
-  "introduction",
-  "basic-structure",
-  "state-management",
-  "lifecycle-methods",
+const sections = [
+  { id: "introduction", title: "Introduction" },
+  { id: "basic-structure", title: "Basic Structure" },
+  { id: "state-management", title: "State Management" },
+  { id: "updating-state", title: "Updating State" },
+  { id: "lifecycle-methods", title: "Lifecycle Methods" },
 ];
 
 const ALERT_TITLE = "Do Not Use";
@@ -117,6 +119,8 @@ class Counter extends Component {
 const ClassComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -137,8 +141,10 @@ const ClassComponent = () => {
       rootMargin: "64px",
     });
 
-    const sections = sectionsID.map((id) => document.getElementById(id));
-    sections.forEach((section) => {
+    const _sections = sections.map((section) =>
+      document.getElementById(section.id)
+    );
+    _sections.forEach((section) => {
       if (!section) return;
       return observer.observe(section);
     });
@@ -148,12 +154,26 @@ const ClassComponent = () => {
     };
   });
 
+  const onSideBarItemClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  };
+
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
 
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
-        <StyledSection>
+      <StyledTopicContent
+        className={isMounted ? "fade-in" : ""}
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+      >
+        <StyledSection id="introduction">
           <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Components" />
@@ -170,13 +190,13 @@ const ClassComponent = () => {
               style={{ marginTop: "1rem" }}
             ></Alert>
           </StyledSubsection>
-          <StyledSubsection id="introduction">
-            <Text variant="h4">Introduction</Text>
+          <StyledSubsection>
+            <Text size="large">Introduction</Text>
             <Text variant="paragraph">{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="basic-structure">
+        <StyledSection id="basic-structure">
+          <StyledSubsection>
             <Text variant="paragraph" size="large">
               Basic Structure
             </Text>
@@ -228,9 +248,9 @@ const ClassComponent = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="state-management">
-            <Text variant="h4">State Management</Text>
+        <StyledSection id="state-management">
+          <StyledSubsection>
+            <Text size="large">State Management</Text>
             <Text variant="paragraph" size="large">
               Initializing State
             </Text>
@@ -241,7 +261,9 @@ const ClassComponent = () => {
             <Text variant="paragraph">Example</Text>
             <CodeDisplay language="JSX" text={INITIALIZATION_EXAMPLE} />
           </StyledSubsection>
-          <StyledSubsection id="updating-state" style={{marginTop:"0.5rem"}}>
+        </StyledSection>
+        <StyledSection id="updating-state">
+          <StyledSubsection style={{ marginTop: "0.5rem" }}>
             <Text variant="paragraph" size="large">
               Updating State
             </Text>
@@ -269,7 +291,7 @@ const ClassComponent = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="lifecycle-methods">
           <List
             title={
               <Text variant="paragraph" size="large">
@@ -293,9 +315,7 @@ const ClassComponent = () => {
             </ListItem>
 
             <ListItem style={{ marginTop: "0.5rem" }}>
-              <Text variant="paragraph">
-                Unmounting
-              </Text>
+              <Text variant="paragraph">Unmounting</Text>
               <Text variant="paragraph" style={{ marginTop: "0.25rem" }}>
                 This method is called when a component is being removed from the
                 DOM.
@@ -304,29 +324,20 @@ const ClassComponent = () => {
           </List>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem" style={{ background: "transparent" }}>
-        <SideBarItem size="small" selected={sidebarSelected === "introduction"}>
-          Introduction
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "basic-structure"}
-        >
-          Basic Structure
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "state-management"}
-        >
-          State Management
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "lifecycle-methods"}
-        >
-          Lifecycle Methods
-        </SideBarItem>
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

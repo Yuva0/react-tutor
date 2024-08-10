@@ -15,6 +15,7 @@ import {
   StyledSubsection,
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
+import { useWindowSize } from "../helpers/helpers";
 
 const sectionsID = [
   "introduction",
@@ -114,6 +115,8 @@ const PROPS_HOOKS_2 = `In summary, FunctionComponents in React are a more modern
 const FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -158,9 +161,12 @@ const FunctionComponent = () => {
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain id="styled-main">
-      <StyledTopicContent>
+      <StyledTopicContent
+        className={isMounted ? "fade-in" : ""}
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+      >
         <StyledSection id="introduction">
-          <StyledSubsection >
+          <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Components" />
               <BreadcrumbsItem
@@ -179,7 +185,7 @@ const FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
         <StyledSection id="definition">
-          <StyledSubsection >
+          <StyledSubsection>
             <Text variant="paragraph" size="large">
               Definition
             </Text>
@@ -265,64 +271,66 @@ const FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar
-        top="6rem"
-        right="4rem"
-        style={{ background: "transparent", position: "fixed" }}
-      >
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "introduction"}
-          onClick={() => {
-            onSideBarItemClick("introduction");
-          }}
+      {!mobile && (
+        <SideBar
+          top="6rem"
+          right="4rem"
+          style={{ background: "transparent", position: "fixed" }}
         >
-          Introduction
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "definition"}
-          onClick={() => {
-            onSideBarItemClick("definition");
-          }}
-        >
-          Definition
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "props"}
-          onClick={() => {
-            onSideBarItemClick("props");
-          }}
-        >
-          Props
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "stateless-vs-stateful"}
-          onClick={() => {
-            onSideBarItemClick("stateless-vs-stateful");
-          }}
-        >
-          Stateless vs Stateful
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "using-hooks"}
-          onClick={() => onSideBarItemClick("using-hooks")}
-        >
-          Using Hooks
-        </SideBarItem>
-        <SideBarItem
-          size="small"
-          selected={sidebarSelected === "props-and-hooks"}
-          onClick={() => {
-            onSideBarItemClick("props-and-hooks");
-          }}
-        >
-          Props and Hooks
-        </SideBarItem>
-      </SideBar>
+          <SideBarItem
+            size="small"
+            selected={sidebarSelected === "introduction"}
+            onClick={() => {
+              onSideBarItemClick("introduction");
+            }}
+          >
+            Introduction
+          </SideBarItem>
+          <SideBarItem
+            size="small"
+            selected={sidebarSelected === "definition"}
+            onClick={() => {
+              onSideBarItemClick("definition");
+            }}
+          >
+            Definition
+          </SideBarItem>
+          <SideBarItem
+            size="small"
+            selected={sidebarSelected === "props"}
+            onClick={() => {
+              onSideBarItemClick("props");
+            }}
+          >
+            Props
+          </SideBarItem>
+          <SideBarItem
+            size="small"
+            selected={sidebarSelected === "stateless-vs-stateful"}
+            onClick={() => {
+              onSideBarItemClick("stateless-vs-stateful");
+            }}
+          >
+            Stateless vs Stateful
+          </SideBarItem>
+          <SideBarItem
+            size="small"
+            selected={sidebarSelected === "using-hooks"}
+            onClick={() => onSideBarItemClick("using-hooks")}
+          >
+            Using Hooks
+          </SideBarItem>
+          <SideBarItem
+            size="small"
+            selected={sidebarSelected === "props-and-hooks"}
+            onClick={() => {
+              onSideBarItemClick("props-and-hooks");
+            }}
+          >
+            Props and Hooks
+          </SideBarItem>
+        </SideBar>
+      )}
     </StyledMain>
   );
 };

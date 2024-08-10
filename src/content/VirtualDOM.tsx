@@ -15,6 +15,7 @@ import {
   StyledSubsection,
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
+import { useWindowSize } from "../helpers/helpers";
 
 const sections = [
   { id: "introduction", title: "Introduction" },
@@ -27,6 +28,8 @@ const sections = [
 const VirtualDOM: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
+  const { width } = useWindowSize();
+  const mobile = width < 1200;
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -93,12 +96,15 @@ const VirtualDOM: React.FunctionComponent = () => {
 
   return (
     <StyledMain>
-      <StyledTopicContent className={isMounted ? "fade-in" : ""}>
+      <StyledTopicContent
+        className={isMounted ? "fade-in" : ""}
+        style={{ width: mobile ? "100%" : "calc(100% - 12rem" }}
+      >
         <StyledSection id="introduction">
           <StyledSubsection>
-            <Breadcrumbs>
+            <Breadcrumbs size="small" delimiter="/">
               <BreadcrumbsItem title="Guides" />
-              <BreadcrumbsItem link="/hooks/virtual-dom" title="Virtual DOM" />
+              <BreadcrumbsItem link="/guides/virtual-dom" title="Virtual DOM" />
             </Breadcrumbs>
             <Text size="large" style={{ marginTop: "1rem" }}>
               Introduction
@@ -285,18 +291,20 @@ const VirtualDOM: React.FunctionComponent = () => {
           </StyledSubsection>
         </StyledSection>
       </StyledTopicContent>
-      <SideBar top="6rem" right="4rem">
-        {sections.map((section) => (
-          <SideBarItem
-            size="small"
-            key={section.id}
-            selected={sidebarSelected === section.id}
-            onClick={() => onSideBarItemClick(section.id)}
-          >
-            {section.title}
-          </SideBarItem>
-        ))}
-      </SideBar>
+      {!mobile && (
+        <SideBar top="6rem" right="4rem">
+          {sections.map((section) => (
+            <SideBarItem
+              size="small"
+              key={section.id}
+              selected={sidebarSelected === section.id}
+              onClick={() => onSideBarItemClick(section.id)}
+            >
+              {section.title}
+            </SideBarItem>
+          ))}
+        </SideBar>
+      )}
     </StyledMain>
   );
 };
