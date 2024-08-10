@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   StyledMain,
+  StyledSection,
   StyledSubsection,
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
@@ -153,110 +154,137 @@ const UseCallback = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
-        <StyledSubsection>
-          <Breadcrumbs size="small" color="primary" delimiter="/">
-            <BreadcrumbsItem title="Hooks" />
-            <BreadcrumbsItem link="/hooks/use-callback" title="useCallback" />
-          </Breadcrumbs>
-        </StyledSubsection>
-        <StyledSubsection id="introduction">
-          <Text size="large">Introduction</Text>
-          <Text>{INTRODUCTION_CONTENT}</Text>
-          <Text size="large">Basic Usage</Text>
-          <Text>{BASIC_USAGE_1}</Text>
-          <CodeDisplay text={BASIC_USAGE_EXAMPLE} language="javascript" />
-          <Text>{BASIC_USAGE_2}</Text>
-        </StyledSubsection>
-
-        <StyledSubsection id="detailed-breakdown">
-          <Text size="large">Detailed Breakdown</Text>
-          <List>
-            <ListItem>
-              Function Definition
-              <Text>{FUNCTION_DEFINITION}</Text>
-              <Text>Example without `useCallback`:</Text>
-              <CodeDisplay
-                text={FUNCTION_DEFINITION_EXAMPLE}
-                language="javascript"
-              />
-              <Text>{FUNCTION_DEFINITION_EXPLANATION}</Text>
-            </ListItem>
-            <ListItem>
-              Memoization with `useCallback`
-              <Text>
-                To prevent this, you can use useCallback to memoize the
-                function:
-              </Text>
-              <CodeDisplay
-                text={MEMOIZATION_USE_CALLBACK}
-                language="javascript"
-              />
-              <Text>{MEMOIZATION_USE_CALLBACK_EXPLANATION}</Text>
-            </ListItem>
-            <ListItem>
-              Dependencies
-              <Text>{DEPENDENCIES}</Text>
-              <CodeDisplay text={DEPENDENCIES_EXAMPLE} language="javascript" />
-              <Text>{DEPENDENCIES_EXPLANATION}</Text>
-            </ListItem>
-            <ListItem>
-              Performance Considerations
-              <Text>{PERFORMANCE_CONSIDERATION}</Text>
-            </ListItem>
-          </List>
-        </StyledSubsection>
-        <StyledSubsection id="practical-example">
-          <Text size="large">Practical Example</Text>
-          <Text>{PRACTICAL_EXAMPLE_1}</Text>
-          <Text>Without useCallback:</Text>
-          <CodeDisplay text={PRACTICAL_EG_WO_CALLBACK} language="javascript" />
-          <Text>
-            n this example, every time ParentComponent re-renders, handleClick
-            is re-created, causing ChildComponent to re-render even though it
-            doesn't need to.
-          </Text>
-          <Text>With useCallback:</Text>
-          <CodeDisplay
-            text={PRACTICAL_EG_WITH_CALLBACK}
-            language="javascript"
-          />
-          <Text>
-            By using useCallback to memoize handleClick, the function is only
-            created once and will not change on subsequent renders. This
-            prevents unnecessary re-renders of ChildComponent.
-          </Text>
-        </StyledSubsection>
-        <StyledSubsection id="summary">
-          <Text size="large">Summary</Text>
-          <List variant="unordered">
-            <ListItem>
-              useCallback memoizes functions to prevent unnecessary
-              re-creations.
-            </ListItem>
-            <ListItem>
-              It accepts two arguments: the function to memoize and a dependency
-              array.
-            </ListItem>
-            <ListItem>
-              The function is only re-created if one of the dependencies
-              changes.
-            </ListItem>
-            <ListItem>
-              Using useCallback can optimize performance but should be used
-              judiciously to avoid overly complex dependency arrays and
-              unnecessary memoization overhead.
-            </ListItem>
-          </List>
-          <Text>
-            In summary, useCallback is a powerful tool for optimizing
-            performance in React applications by controlling when functions are
-            re-created and preventing unnecessary re-renders.
-          </Text>
-        </StyledSubsection>
+        <StyledSection>
+          <StyledSubsection id="introduction">
+            <Breadcrumbs size="small" color="primary" delimiter="/">
+              <BreadcrumbsItem title="Hooks" />
+              <BreadcrumbsItem link="/hooks/use-callback" title="useCallback" />
+            </Breadcrumbs>
+            <Text size="large" style={{ marginTop: "1rem" }}>
+              Introduction
+            </Text>
+            <Text>{INTRODUCTION_CONTENT}</Text>
+            <Text size="large">Basic Usage</Text>
+            <Text>{BASIC_USAGE_1}</Text>
+            <CodeDisplay text={BASIC_USAGE_EXAMPLE} language="javascript" />
+            <Text style={{ marginTop: "0.5rem" }}>{BASIC_USAGE_2}</Text>
+          </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
+          <StyledSubsection id="detailed-breakdown">
+            <List title={<Text size="large">Detailed Breakdown</Text>}>
+              <ListItem>
+                <Text>Function Definition</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
+                  {FUNCTION_DEFINITION}
+                </Text>
+                <Text style={{ marginTop: "0.5rem" }}>
+                  Example without `useCallback`:
+                </Text>
+                <CodeDisplay
+                  text={FUNCTION_DEFINITION_EXAMPLE}
+                  language="javascript"
+                  style={{ marginTop: "0.5rem" }}
+                />
+                <Text style={{ marginTop: "1rem" }}>
+                  {FUNCTION_DEFINITION_EXPLANATION}
+                </Text>
+              </ListItem>
+              <ListItem style={{ marginTop: "1rem" }}>
+                <Text>Memoization with `useCallback`</Text>
+                <Text style={{ marginTop: "0.5rem" }}>
+                  To prevent this, you can use useCallback to memoize the
+                  function:
+                </Text>
+                <CodeDisplay
+                  text={MEMOIZATION_USE_CALLBACK}
+                  language="javascript"
+                  style={{ marginTop: "0.5rem" }}
+                />
+                <Text style={{ marginTop: "1rem" }}>
+                  {MEMOIZATION_USE_CALLBACK_EXPLANATION}
+                </Text>
+              </ListItem>
+              <ListItem style={{ marginTop: "1rem" }}>
+                <Text>Dependencies</Text>
+                <Text style={{ marginTop: "0.5rem" }}>{DEPENDENCIES}</Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  text={DEPENDENCIES_EXAMPLE}
+                  language="javascript"
+                />
+                <Text style={{ marginTop: "1rem" }}>
+                  {DEPENDENCIES_EXPLANATION}
+                </Text>
+              </ListItem>
+              <ListItem style={{ marginTop: "1rem" }}>
+                <Text>Performance Considerations</Text>
+                <Text style={{ marginTop: "0.5rem" }}>
+                  {PERFORMANCE_CONSIDERATION}
+                </Text>
+              </ListItem>
+            </List>
+          </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
+          <StyledSubsection id="practical-example">
+            <Text size="large">Practical Example</Text>
+            <Text>{PRACTICAL_EXAMPLE_1}</Text>
+            <Text>Without useCallback:</Text>
+            <CodeDisplay
+              text={PRACTICAL_EG_WO_CALLBACK}
+              language="javascript"
+            />
+            <Text style={{ marginTop: "0.5rem" }}>
+              In this example, every time ParentComponent re-renders,
+              handleClick is re-created, causing ChildComponent to re-render
+              even though it doesn't need to.
+            </Text>
+            <Text style={{ marginTop: "0.5rem" }}>With useCallback:</Text>
+            <CodeDisplay
+              text={PRACTICAL_EG_WITH_CALLBACK}
+              language="javascript"
+            />
+            <Text style={{ marginTop: "0.5rem" }}>
+              By using useCallback to memoize handleClick, the function is only
+              created once and will not change on subsequent renders. This
+              prevents unnecessary re-renders of ChildComponent.
+            </Text>
+          </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
+          <StyledSubsection id="summary">
+            <Text size="large">Summary</Text>
+            <List variant="unordered" title={<Text>Key Takeaways:</Text>}>
+              <ListItem>
+                useCallback memoizes functions to prevent unnecessary
+                re-creations.
+              </ListItem>
+              <ListItem>
+                It accepts two arguments: the function to memoize and a
+                dependency array.
+              </ListItem>
+              <ListItem>
+                The function is only re-created if one of the dependencies
+                changes.
+              </ListItem>
+              <ListItem>
+                Using useCallback can optimize performance but should be used
+                judiciously to avoid overly complex dependency arrays and
+                unnecessary memoization overhead.
+              </ListItem>
+            </List>
+            <Text style={{ marginTop: "0.5rem" }}>
+              In summary, useCallback is a powerful tool for optimizing
+              performance in React applications by controlling when functions
+              are re-created and preventing unnecessary re-renders.
+            </Text>
+          </StyledSubsection>
+        </StyledSection>
       </StyledTopicContent>
       <SideBar top="6rem" right="4rem">
         {sections.map((section) => (

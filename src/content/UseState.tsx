@@ -113,22 +113,24 @@ const UseState: React.FunctionComponent = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
 
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-state" title="useState" />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection id="introduction">
-            <Text size="large">Introduction</Text>
+            <Text size="large" style={{ marginTop: "1rem" }}>
+              Introduction
+            </Text>
             <Text variant="paragraph">{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="basic-usage">
             <Text size="large">Basic Usage</Text>
             <Text>
@@ -136,6 +138,8 @@ const UseState: React.FunctionComponent = () => {
             </Text>
             <CodeDisplay language="JSX" text={BASIC_USAGE_1} />
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="syntax">
             <Text size="large">Syntax</Text>
             <Text>
@@ -152,6 +156,8 @@ const UseState: React.FunctionComponent = () => {
             <Text>Here's the syntax:</Text>
             <CodeDisplay language="JSX" text={BASIC_USAGE_SYNTAX} />
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="example">
             <Text size="large">Example</Text>
             <Text>
@@ -160,16 +166,17 @@ const UseState: React.FunctionComponent = () => {
             </Text>
             <CodeDisplay language="JSX" text={BASIC_USAGE_EXAMPLE} />
           </StyledSubsection>
-          <StyledSubsection id="explanation">
-            <Text size="large">Explanation</Text>
+        </StyledSection>
+        <StyledSection>
+          <Text size="large">Explanation</Text>
+          <StyledSubsection>
             <Text>{EXPLANATION_1}</Text>
             <Text>{EXPLANATION_2}</Text>
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
           <StyledSubsection id="rules-of-hooks">
-            <Text size="large">Rules of Hooks</Text>
-            <List>
+            <List title={<Text size="large">Rules of Hooks</Text>}>
               <ListItem>
                 Hooks should only be called at the top level of a functional
                 component or another custom Hook.
@@ -212,8 +219,7 @@ const UseState: React.FunctionComponent = () => {
         </StyledSection>
         <StyledSection>
           <StyledSubsection>
-            <Text size="large">Summary</Text>
-            <List variant="ordered">
+            <List variant="ordered" title={<Text size="large">Summary</Text>}>
               <ListItem>
                 The useState Hook allows functional components to have their own
                 state.
@@ -232,7 +238,7 @@ const UseState: React.FunctionComponent = () => {
                 calculates the new state value.
               </ListItem>
             </List>
-            <Text>
+            <Text style={{ marginTop: "0.5rem" }}>
               Using useState effectively allows you to manage state in
               functional components, providing more flexibility and simplifying
               your React code.

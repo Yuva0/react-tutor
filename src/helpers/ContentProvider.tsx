@@ -32,7 +32,7 @@ const UseState = lazy(() => {
 });
 const UseCallback = lazy(() => {
   return Promise.all([
-    import("../content/UseMemo"),
+    import("../content/UseCallback"),
     new Promise((resolve) => setTimeout(resolve, 300)),
   ]).then(([moduleExports]) => moduleExports);
 });

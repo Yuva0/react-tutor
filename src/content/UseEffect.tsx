@@ -140,22 +140,24 @@ const UseEffect: React.FunctionComponent = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
 
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-effect" title="useEffect" />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection id="introduction">
-            <Text size="large">Introduction</Text>
+            <Text size="large" style={{ marginTop: "1rem" }}>
+              Introduction
+            </Text>
             <Text>{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="basic-usage">
             <Text size="large">Basic Usage</Text>
             <Text>
@@ -168,29 +170,52 @@ const UseEffect: React.FunctionComponent = () => {
               <ListItem>{BASIC_USAGE_DEP}</ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="examples">
-            <Text size="large">Examples</Text>
-            <List variant="ordered">
+            <List variant="ordered" title={<Text size="large">Examples:</Text>}>
               <ListItem>
-                Basic Example:
-                <CodeDisplay language="JSX" text={BASIC_EXAMPLE_1} />
-                <Text>{BASIC_EXAMPLE_1_TEXT}</Text>
+                <Text>Basic Example:</Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="JSX"
+                  text={BASIC_EXAMPLE_1}
+                />
+                <Text style={{ marginTop: "1rem" }}>
+                  {BASIC_EXAMPLE_1_TEXT}
+                </Text>
               </ListItem>
-              <ListItem>
-                Effect with Cleanup:
-                <CodeDisplay language="JSX" text={BASIC_EXAMPLE_2} />
-                <Text>{BASIC_EXAMPLE_2_TEXT}</Text>
+              <ListItem style={{ marginTop: "0.5rem" }}>
+                <Text>Effect with Cleanup:</Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="JSX"
+                  text={BASIC_EXAMPLE_2}
+                />
+                <Text style={{ marginTop: "1rem" }}>
+                  {BASIC_EXAMPLE_2_TEXT}
+                </Text>
               </ListItem>
-              <ListItem>
-                Conditional Effect:
-                <CodeDisplay language="JSX" text={BASIC_EXAMPLE_3} />
-                <Text>{BASIC_EXAMPLE_3_TEXT}</Text>
+              <ListItem style={{ marginTop: "0.5rem" }}>
+                <Text>Conditional Effect:</Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="JSX"
+                  text={BASIC_EXAMPLE_3}
+                />
+                <Text style={{ marginTop: "1rem" }}>
+                  {BASIC_EXAMPLE_3_TEXT}
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="rules-of-hooks">
-            <Text size="large">Rules of Hooks</Text>
-            <List variant="unordered">
+            <List
+              variant="unordered"
+              title={<Text size="large">Rules of Hooks</Text>}
+            >
               <ListItem>
                 Call Hooks at the Top Level: Don't call hooks inside loops,
                 conditions, or nested functions. Always use hooks at the top
@@ -203,9 +228,13 @@ const UseEffect: React.FunctionComponent = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="common-side-effect">
-            <Text size="large">Common Side Effects</Text>
-            <List variant="unordered">
+            <List
+              variant="unordered"
+              title={<Text size="large">Common Side Effects</Text>}
+            >
               <ListItem>Data fetching</ListItem>
               <ListItem>Setting up subscriptions</ListItem>
               <ListItem>Manually changing the DOM</ListItem>
@@ -213,6 +242,8 @@ const UseEffect: React.FunctionComponent = () => {
               <ListItem>Logging</ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="tips-and-best-practices">
             <Text size="large">Tips And Best Practices</Text>
             <List>

@@ -107,26 +107,33 @@ const UseMemo = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-memo" title="useMemo" />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection id="introduction">
-            <Text size="large">Introduction</Text>
+            <Text size="large" style={{ marginTop: "1rem" }}>
+              Introduction
+            </Text>
             <Text>{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection>
             <Text size="large">Syntax</Text>
             <CodeDisplay text={SYNTAX_EXAMPlE} language="javascript" />
-            <Text>`useMemo` takes two arguments:</Text>
-            <List>
+            <List
+              title={
+                <Text style={{ marginTop: "1rem" }}>
+                  `useMemo` takes two arguments:
+                </Text>
+              }
+            >
               <ListItem>A function that computes a value.</ListItem>
               <ListItem>
                 A dependency array that lists variables which, when changed,
@@ -134,13 +141,18 @@ const UseMemo = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection>
             <Text size="large">Purpose</Text>
             <Text>{PURPOSE_CONTENT}</Text>
             <Text>Example:</Text>
             <CodeDisplay text={PURPOSE_EXAMPLE} language="javascript" />
-            <Text>In this example:</Text>
-            <List>
+            <List
+              title={
+                <Text style={{ marginTop: "1rem" }}>In this example:</Text>
+              }
+            >
               <ListItem>
                 The `expensiveCalculation` function is only called when `a` or
                 `b` changes.
@@ -151,29 +163,34 @@ const UseMemo = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="detailed-breakdown">
-            <Text size="large">Detailed Breakdown</Text>
-            <List>
+            <List title={<Text size="large">Detailed Breakdown</Text>}>
               <ListItem>
                 <Text>Function Execution</Text>
-                <Text>{FN_EXECUTION}</Text>
+                <Text style={{ marginTop: "0.25rem" }}>{FN_EXECUTION}</Text>
               </ListItem>
-              <ListItem>
+              <ListItem style={{ marginTop: "0.5rem" }}>
                 <Text>Dependency Array</Text>
-                <Text>{DEPENDENCY_ARRAY}</Text>
+                <Text style={{ marginTop: "0.25rem" }}>{DEPENDENCY_ARRAY}</Text>
               </ListItem>
-              <ListItem>
+              <ListItem style={{ marginTop: "0.5rem" }}>
                 <Text>Memoization</Text>
-                <Text>{MEMOIZATION}</Text>
+                <Text style={{ marginTop: "0.25rem" }}>{MEMOIZATION}</Text>
               </ListItem>
-              <ListItem>
+              <ListItem style={{ marginTop: "0.5rem" }}>
                 <Text>Caching Strategy</Text>
-                <Text>
-                  `useMemo` employs a caching strategy that ensures values are
-                  recalculated only when necessary. This is particularly useful
-                  for:
-                </Text>
-                <List variant="unordered">
+                <List
+                  variant="unordered"
+                  title={
+                    <Text style={{ marginTop: "0.25rem" }}>
+                      `useMemo` employs a caching strategy that ensures values
+                      are recalculated only when necessary. This is particularly
+                      useful for:
+                    </Text>
+                  }
+                >
                   <ListItem>
                     Expensive calculations: Computations that require
                     significant CPU resources.
@@ -185,14 +202,18 @@ const UseMemo = () => {
                   </ListItem>
                 </List>
               </ListItem>
-              <ListItem>
+              <ListItem style={{ marginTop: "0.5rem" }}>
                 <Text>Comparison with useCallback</Text>
-                <Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   useCallback is similar to useMemo, but it memoizes a function
                   instead of a value:
                 </Text>
-                <CodeDisplay language="javascript" text={MEMOIZED_CALLBACK} />
-                <Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="javascript"
+                  text={MEMOIZED_CALLBACK}
+                />
+                <Text style={{ marginTop: "1rem" }}>
                   Use useCallback when you need to memoize a function to avoid
                   passing new function references to child components, which can
                   prevent unnecessary re-renders.
@@ -200,37 +221,55 @@ const UseMemo = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="practical-use-cases">
-            <Text size="large">Practical Use Cases</Text>
-            <List variant="ordered">
+            <List
+              variant="ordered"
+              title={<Text size="large">Practical Use Cases</Text>}
+            >
               <ListItem>
-                Complex Cases
-                <CodeDisplay language="javascript" text={COMPLEX_CALCULATION} />
-                <Text>
+                <Text>Complex Cases</Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="javascript"
+                  text={COMPLEX_CALCULATION}
+                />
+                <Text style={{ marginTop: "1rem" }}>
                   In this example, sortedList is only recalculated if list
                   changes.
                 </Text>
               </ListItem>
-              <ListItem>
-                Avoiding Referential Equality Issues
-                <CodeDisplay language="javascript" text={MEMOIZED_OPTION} />
-                <Text>
+              <ListItem style={{ marginTop: "0.5rem" }}>
+                <Text>Avoiding Referential Equality Issues</Text>
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="javascript"
+                  text={MEMOIZED_OPTION}
+                />
+                <Text style={{ marginTop: "1rem" }}>
                   Here, memoizedOptions ensures the same object reference is
                   used across renders, which can be important for dependency
                   checks or child component props.
                 </Text>
               </ListItem>
-              <ListItem>
-                Component Performance
-                <Text>
+              <ListItem style={{ marginTop: "0.5rem" }}>
+                <Text>Component Performance</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   In components with heavy computations or expensive renders,
                   useMemo can significantly improve performance by minimizing
                   unnecessary calculations:
                 </Text>
-                <CodeDisplay language="javascript" text={COMP_PERFORMANCE} />
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="javascript"
+                  text={COMP_PERFORMANCE}
+                />
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="conclusion">
             <Text size="large">Conclusion</Text>
             <Text>{CONCLUSION}</Text>

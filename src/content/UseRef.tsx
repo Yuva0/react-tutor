@@ -123,26 +123,28 @@ const UseRef: React.FC = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="introduction">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-ref" title="useRef" />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection id="introduction">
             <Text size="large">Introduction</Text>
             <Text>{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="detailed-breakdown">
             <Text size="large">Detailed Breakdown of useRef</Text>
             <Text>Importing useRef </Text>
             <Text>To use useRef, you need to import it from React:</Text>
             <CodeDisplay language="javascript" text={IMPORT_EXAMPLE} />
+          </StyledSubsection>
+          <StyledSubsection>
             <Text>Basic Usage</Text>
             <Text>
               useRef returns a mutable object that persists for the lifetime of
@@ -150,14 +152,19 @@ const UseRef: React.FC = () => {
               argument.
             </Text>
             <CodeDisplay language="javascript" text={BASIC_USAGE_EXAMPlE} />
-            <Text>Example Usage</Text>
-            <List>
+          </StyledSubsection>
+          <StyledSubsection>
+            <List title={<Text>Example Usage</Text>}>
               <ListItem>
-                Accessing DOM Elements:
-                <Text>
+                <Text>Accessing DOM Elements:</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   useRef is commonly used to access DOM elements directly.
                 </Text>
-                <CodeDisplay language="javascript" text={ACCESS_DOM} />
+                <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
+                  language="javascript"
+                  text={ACCESS_DOM}
+                />
                 <List variant="unordered">
                   <ListItem>
                     inputRef is created using useRef(null), initializing it with
@@ -174,17 +181,18 @@ const UseRef: React.FC = () => {
                   </ListItem>
                 </List>
               </ListItem>
-              <ListItem>
-                Storing Mutable Values
-                <Text>
+              <ListItem style={{ marginTop: "0.25rem" }}>
+                <Text>Storing Mutable Values</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   useRef can store values that persist across renders without
                   causing re-renders.
                 </Text>
                 <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
                   language="javascript"
                   text={STORING_MUTABLE_EXAMPLE}
                 />
-                <List>
+                <List variant="unordered">
                   <ListItem>
                     count is created using useRef(0), initializing it with 0.
                   </ListItem>
@@ -199,18 +207,19 @@ const UseRef: React.FC = () => {
                   </ListItem>
                 </List>
               </ListItem>
-              <ListItem>
-                Persisting Values Across Renders:
-                <Text>
+              <ListItem style={{ marginTop: "0.25rem" }}>
+                <Text>Persisting Values Across Renders:</Text>
+                <Text style={{ marginTop: "0.25rem" }}>
                   useRef can be used to keep track of values that need to
                   persist across renders but do not require re-rendering when
                   updated.
                 </Text>
                 <CodeDisplay
+                  style={{ marginTop: "0.5rem" }}
                   language="javascript"
                   text={VALUE_ACROSS_RERENDERS}
                 />
-                <List>
+                <List variant="unordered">
                   <ListItem>
                     intervalId is created using useRef(null), initializing it
                     with null.
@@ -230,9 +239,10 @@ const UseRef: React.FC = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="summary">
-            <Text size="large">Summary</Text>
-            <List>
+            <List title={<Text size="large">Summary</Text>}>
               <ListItem>
                 Initialization: useRef(initialValue) returns a ref object with a
                 current property set to initialValue.

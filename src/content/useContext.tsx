@@ -133,29 +133,34 @@ const UseContext: React.FC = () => {
     }
   };
 
-  if(!isMounted) return <StyledMain>{null}</StyledMain>;
+  if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
         <StyledSection>
-          <StyledSubsection>
+          <StyledSubsection id="what-is-context">
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-context" title="useContext" />
             </Breadcrumbs>
-          </StyledSubsection>
-          <StyledSubsection id="what-is-context">
-            <Text size="large">What is context?</Text>
+            <Text size="large" style={{ marginTop: "1rem" }}>
+              What is context?
+            </Text>
             <Text>{INTRODUCTION_CONTENT}</Text>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="creating-context">
             <Text size="large">Creating Context</Text>
-            <Text>
-              Before you can use the useContext hook, you need to create a
-              Context object using React.createContext. This object will include
-              two key components:
-            </Text>
-            <List>
+            <List
+              title={
+                <Text>
+                  Before you can use the useContext hook, you need to create a
+                  Context object using React.createContext. This object will
+                  include two key components:
+                </Text>
+              }
+            >
               <ListItem>
                 Provider: A component that holds the context's value and
                 provides it to its descendant components.
@@ -171,6 +176,8 @@ const UseContext: React.FC = () => {
               text={CREATING_CONTEXT_EXAMPLE}
             />
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="using-the-context">
             <Text size="large">Using the Context with useContext</Text>
             <Text>
@@ -213,9 +220,13 @@ const UseContext: React.FC = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="best-practices">
-            <Text size="large">Best Practices</Text>
-            <List>
+            <List
+              title={<Text size="large">Best Practices</Text>}
+              variant="unordered"
+            >
               <ListItem>
                 Default Values: Provide a default value when creating the
                 context to ensure that your components have a fallback if
@@ -233,6 +244,8 @@ const UseContext: React.FC = () => {
               </ListItem>
             </List>
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="examples-with-multiple-contexts">
             <Text size="large">Examples with Multiple Contexts</Text>
             <Text>
@@ -241,18 +254,24 @@ const UseContext: React.FC = () => {
               different context value to its descendants.
             </Text>
             <CodeDisplay
+              style={{ marginTop: "0.25rem" }}
               language="javascript"
               text={EXAMPLE_MULTIPLE_CONTEXT}
             />
           </StyledSubsection>
+        </StyledSection>
+        <StyledSection>
           <StyledSubsection id="context-vs-props">
             <Text size="large">Context vs Props</Text>
-            <Text>
-              Context is useful for passing data that is needed by many
-              components in your application. It's a way to avoid prop drilling
-              and make your code cleaner and more maintainable.
-            </Text>
-            <List>
+            <List
+              title={
+                <Text>
+                  Context is useful for passing data that is needed by many
+                  components in your application. It's a way to avoid prop
+                  drilling and make your code cleaner and more maintainable.
+                </Text>
+              }
+            >
               <ListItem>
                 Context: Use context when you have data that needs to be
                 accessed by many components at different levels of the component
@@ -263,7 +282,7 @@ const UseContext: React.FC = () => {
                 single component or a few components.
               </ListItem>
             </List>
-            <Text>
+            <Text style={{marginTop:"0.5rem"}}>
               By using useContext, you simplify the process of accessing and
               managing global state in your React applications.
             </Text>
