@@ -146,7 +146,7 @@ const ClassComponent = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
 
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
 

@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   Alert,
+  useTheme,
 } from "stelios";
 import {
   StyledMain,
@@ -17,18 +18,21 @@ import {
   StyledTopicContent,
 } from "../components/StyledInternalComponents/StyledInternalComponents";
 
-const sections = [{ id: "introduction", title: "Introduction" }];
+const sections = [
+  { id: "introduction", title: "Introduction" },
+  { id: "why-use-jsx", title: "Why use JSX?" },
+  { id: "jsx-syntax", title: "JSX Syntax" },
+  { id: "components-and-jsx", title: "Components and JSX" },
+  { id: "jsx-differences", title: "JSX Differences" },
+  { id: "jsx-expressions", title: "Javascript Expressions" }
+];
 
-const INTRODUCTION_FIRST = `JSX (JavaScript XML) is a syntax extension for JavaScript commonly used with React, a popular JavaScript library for building user interfaces. JSX allows you to write HTML-like code within JavaScript, making it easier to create and manage UI components. Here's a detailed explanation:`;
 const WHAT_IS_JSX_1 = `JSX is not a separate language but a syntax extension that looks similar to HTML or XML. It allows you to write HTML-like elements directly within JavaScript code.`;
 const WHAT_IS_JSX_2 = `JSX code is transformed into JavaScript objects by tools like Babel before being executed by the browser. Under the hood, each JSX element is converted into a React.createElement() call.`;
 const WHY_USE_JSX_TITLE = `Why Use JSX?`;
-const WHY_USE_JSX_1 = `Readability: JSX makes it easier to visualize the structure of the UI components because it closely resembles HTML.`;
-const WHY_USE_JSX_2 = `Integration: It allows you to integrate HTML with JavaScript seamlessly, enabling dynamic content creation.`;
 const WHY_USE_JSX_3 = `Component Structure: JSX makes it straightforward to define the structure and layout of React components.`;
 const BASIC_SYNTAX_1 = `Tags: JSX uses tags similar to HTML. Tags can be self-closing (e.g., <input />) or have opening and closing tags (e.g., <div></div>).`;
 const BASIC_SYNTAX_2 = `Embedding Expressions: You can embed JavaScript expressions within JSX using curly braces {}. For example, {2 + 2} or {user.name}.`;
-const BASIC_SYNTAX_3 = `Attributes: JSX supports HTML attributes like class, id, and style. You can also use custom attributes and event handlers.`;
 const BASIC_SYNTAX_EXAMPLE = `const element = <h1>Hello, {user.name}!</h1>;`;
 const BASIC_SYNTAX_LAST = `This JSX code will render an h1 element with the text "Hello, [user's name]!"`;
 const COMPONENTS_JSX_1 = `Function Components: You can create components as functions that return JSX.`;
@@ -52,16 +56,11 @@ const COMPONENTS_JSX_3_EXAMPLE = `function App() {
   );
 }
 `;
-const JSX_DIFFERENCES_1 = `className instead of class: In JSX, className is used instead of class because class is a reserved keyword in JavaScript.`;
 const JSX_DIFFERENCES_2 = `camelCase for Attributes: Attributes in JSX are in camelCase (onClick, tabIndex) rather than lowercase.`;
 const JSX_DIFFERENCES_3 = `JSX is JavaScript: Since JSX is closer to JavaScript, it follows JavaScript's rules. For example, you can't use if statements directly in JSX, but you can use ternary operators or logical &&.`;
-const JSX_EXPRESSION_1 = `You can include any JavaScript expression within JSX using curly braces {}. This includes variables, functions, or any valid JavaScript expression.`;
 const JSX_EXPRESSION_EXAMPLE = `const name = "John";
 const element = <h1>Hello, {name}!</h1>;
 `;
-const JSX_ELEMENTS_REACT_1 = `JSX Elements: Simple JSX elements represent HTML tags and are transformed into React elements.`;
-const JSX_ELEMENTS_REACT_2 = `React Components: If the tag name starts with an uppercase letter, JSX treats it as a React component.`;
-const JSX_ELEMENTS_TYPESAFE = `JSX is type-safe, meaning it can catch errors during compilation. For instance, if you pass a number to a component that expects a string, you may get a warning.`;
 const FRAGMENTS_1 = `React Fragments: Sometimes you need to return multiple elements from a component, but they need to be wrapped in a single parent. React fragments (<React.Fragment> or <> </>) allow you to do this without adding an extra DOM node.`;
 const FRAGMENTS_EXAMPLE = `function List() {
   return (
@@ -89,7 +88,6 @@ const element = <button onClick={handleClick}>Click Me</button>;
 `;
 const KEY_POINTS_1 = `JSX Must Have a Single Parent Element: JSX expressions must return a single element. If you have multiple elements, wrap them in a parent element or a fragment.`;
 const KEY_POINTS_2 = `JSX is not required: While JSX is commonly used in React, it's not required. You can use regular JavaScript to create elements using React.createElement(), but JSX is more concise and readable.`;
-const JSX_COMPILATION_1 = `Before JSX can be used in the browser, it must be compiled to regular JavaScript. This is typically done using a tool like Babel, which transforms JSX into React.createElement() calls.`;
 const CONCLUSION_1 = `JSX makes writing React components more intuitive by allowing you to describe the UI structure in a way that closely resembles HTML, while still being able to leverage JavaScript's power. It bridges the gap between markup and logic, providing a seamless way to build dynamic and interactive user interfaces.`;
 
 const JSX: React.FunctionComponent = () => {
@@ -126,7 +124,7 @@ const JSX: React.FunctionComponent = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -138,6 +136,89 @@ const JSX: React.FunctionComponent = () => {
       });
     }
   };
+
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_FIRST = (
+    <Text>
+      JSX (JavaScript XML) is a syntax extension for JavaScript commonly used
+      with React, a popular JavaScript library for building user interfaces. JSX
+      allows you to{" "}
+      <Highlighted>
+        write HTML-like code within JavaScript, making it easier to create and
+        manage UI components.
+      </Highlighted>{" "}
+      Here's a detailed explanation:
+    </Text>
+  );
+  const WHY_USE_JSX_1 = (
+    <Text>
+      Readability: JSX makes it easier to{" "}
+      <Highlighted>visualize the structure of the UI</Highlighted> components
+      because it closely resembles HTML.
+    </Text>
+  );
+  const WHY_USE_JSX_2 = (
+    <Text>
+      Integration: It allows you to integrate HTML with{" "}
+      <Highlighted>
+        JavaScript seamlessly, enabling dynamic content creation.
+      </Highlighted>
+    </Text>
+  );
+  const BASIC_SYNTAX_3 = (
+    <Text>
+      Attributes: JSX supports HTML attributes like class, id, and style.{" "}
+      <Highlighted>
+        You can also use custom attributes and event handlers.
+      </Highlighted>
+    </Text>
+  );
+  const JSX_DIFFERENCES_1 = (
+    <Text>
+      className instead of class: In JSX,{" "}
+      <Highlighted>
+        className is used instead of class because class is a reserved keyword
+        in JavaScript.
+      </Highlighted>
+    </Text>
+  );
+  const JSX_EXPRESSION_1 = (
+    <Text>
+      You can include any JavaScript expression within JSX using curly braces {}
+      .{" "}
+      <Highlighted>
+        This includes variables, functions, or any valid JavaScript expression.
+      </Highlighted>
+    </Text>
+  );
+  const JSX_ELEMENTS_TYPESAFE = (
+    <Text>
+      JSX is type-safe, meaning it can catch errors during compilation. For
+      instance, if you pass a{" "}
+      <Highlighted>
+        number to a component that expects a string, you may get a warning.
+      </Highlighted>
+    </Text>
+  );
+  const JSX_COMPILATION_1 = (
+    <Text>
+      Before JSX can be used in the browser,{" "}
+      <Highlighted>
+        it must be compiled to regular JavaScript. This is typically done using
+        a tool like Babel, which transforms JSX into React.createElement()
+        calls.
+      </Highlighted>
+    </Text>
+  );
+
+  /* ------------------------------------------------------------------------------------ */
 
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
 
@@ -151,7 +232,11 @@ const JSX: React.FunctionComponent = () => {
               <BreadcrumbsItem link="/guides/jsx" title="JSX" />
             </Breadcrumbs>
 
-            <Text variant="paragraph" size="large" style={{marginTop:"1rem"}}>
+            <Text
+              variant="paragraph"
+              size="large"
+              style={{ marginTop: "1rem" }}
+            >
               Introduction
             </Text>
             <Text>{INTRODUCTION_FIRST}</Text>
@@ -172,26 +257,20 @@ const JSX: React.FunctionComponent = () => {
             />
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="why-use-jsx">
           <Text size="large">{WHY_USE_JSX_TITLE}</Text>
           <StyledSubsection>
-            <List
-              variant="unordered"
-              title="Here are some features of JSX -"
-            >
+            <List variant="unordered" title="Here are some features of JSX -">
               <ListItem>{WHY_USE_JSX_1}</ListItem>
               <ListItem>{WHY_USE_JSX_2}</ListItem>
               <ListItem>{WHY_USE_JSX_3}</ListItem>
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="jsx-syntax">
           <Text size="large">JSX Syntax</Text>
           <StyledSubsection>
-            <List
-              variant="unordered"
-              title="Here is the syntax of JSX -"
-            >
+            <List variant="unordered" title="Here is the syntax of JSX -">
               <ListItem>
                 <Text>{BASIC_SYNTAX_1}</Text>
               </ListItem>
@@ -210,7 +289,7 @@ const JSX: React.FunctionComponent = () => {
             <Text style={{ marginTop: "1rem" }}>{BASIC_SYNTAX_LAST}</Text>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="components-and-jsx">
           <StyledSubsection>
             <Text size="large">Components and JSX</Text>
             <Text>{COMPONENTS_JSX_1}</Text>
@@ -221,7 +300,7 @@ const JSX: React.FunctionComponent = () => {
             <CodeDisplay text={COMPONENTS_JSX_3_EXAMPLE} language="jsx" />
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="jsx-differences">
           <StyledSubsection>
             <Text size="large">JSX Differences from HTML</Text>
             <List variant="unordered">
@@ -231,7 +310,7 @@ const JSX: React.FunctionComponent = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="jsx-expressions">
           <StyledSubsection>
             <Text size="large">Javascript Expressions in JSX</Text>
             <List variant="unordered">
@@ -293,7 +372,7 @@ const JSX: React.FunctionComponent = () => {
             </ListItem>
           </List>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="key-points">
           <StyledSubsection>
             <List
               variant="unordered"
@@ -310,7 +389,7 @@ const JSX: React.FunctionComponent = () => {
             <Text>{JSX_COMPILATION_1}</Text>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="conclusion">
           <StyledSubsection>
             <Text size="large">Conclusion</Text>
             <Text>{CONCLUSION_1}</Text>

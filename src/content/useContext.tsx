@@ -14,6 +14,7 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
 } from "stelios";
 
 const sections = [
@@ -29,7 +30,6 @@ const sections = [
   { id: "context-vs-props", title: "Context vs Props" },
 ];
 
-const INTRODUCTION_CONTENT = `In React, the Context API is a mechanism for passing data through the component tree without having to pass props down manually at every level. It's useful for sharing global data such as user information, themes, or settings that many components might need.`;
 const CREATING_CONTEXT_EXAMPLE = `import React, { createContext, useState } from 'react';
 
 // Create a Context with a default value
@@ -120,7 +120,28 @@ const UseContext: React.FC = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
+
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_CONTENT = (
+    <Text>
+      In React, the Context API is a mechanism for passing data through the
+      component tree without having to pass props down manually at every level.
+      It's useful for{" "}
+      <Highlighted>
+        sharing global data such as user information, themes, or settings that
+        many components might need.
+      </Highlighted>
+    </Text>
+  );
+  /* ----------------------------------------------------------------------------------- */
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -137,8 +158,8 @@ const UseContext: React.FC = () => {
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
-        <StyledSection>
-          <StyledSubsection id="what-is-context">
+        <StyledSection id="what-is-context">
+          <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-context" title="useContext" />
@@ -146,28 +167,35 @@ const UseContext: React.FC = () => {
             <Text size="large" style={{ marginTop: "1rem" }}>
               What is context?
             </Text>
-            <Text>{INTRODUCTION_CONTENT}</Text>
+            {INTRODUCTION_CONTENT}
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="creating-context">
+        <StyledSection id="creating-context">
+          <StyledSubsection>
             <Text size="large">Creating Context</Text>
             <List
               title={
                 <Text>
-                  Before you can use the useContext hook, you need to create a
-                  Context object using React.createContext. This object will
-                  include two key components:
+                  Before you can use the useContext hook, you need to create a{" "}
+                  <Highlighted>
+                    Context object using React.createContext.
+                  </Highlighted>{" "}
+                  This object will include two key components:
                 </Text>
               }
             >
               <ListItem>
-                Provider: A component that holds the context's value and
-                provides it to its descendant components.
+                <Text>
+                  <Highlighted>Provider:</Highlighted> A component that holds
+                  the context's value and provides it to its descendant
+                  components.
+                </Text>
               </ListItem>
               <ListItem>
-                Consumer: A component that subscribes to context changes and
-                uses the context value.
+                <Text>
+                  <Highlighted>Consumer:</Highlighted> A component that
+                  subscribes to context changes and uses the context value.
+                </Text>
               </ListItem>
             </List>
             <Text>Example</Text>
@@ -177,70 +205,101 @@ const UseContext: React.FC = () => {
             />
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="using-the-context">
-            <Text size="large">Using the Context with useContext</Text>
-            <Text>
-              The useContext hook allows you to access the context value from
-              the nearest Provider component in the component tree.
-            </Text>
-            <Text>Syntax</Text>
-            <CodeDisplay language="javascript" text={USE_CONTEXT_SYNTAX} />
-            <Text>Example</Text>
-            <CodeDisplay language="javascript" text={USE_CONTEXT_EXAMPLE} />
-          </StyledSubsection>
-          <StyledSubsection id="how-use-context-works">
+        <StyledSection id="using-the-context">
+          <Text size="large">Using the Context with useContext</Text>
+          <Text>
+            The useContext hook allows you to access the context value from the{" "}
+            <Highlighted>
+              nearest Provider component in the component tree.
+            </Highlighted>
+          </Text>
+          <Text>Syntax</Text>
+          <CodeDisplay language="javascript" text={USE_CONTEXT_SYNTAX} />
+          <Text style={{ marginTop: "0.5rem" }}>Example</Text>
+          <CodeDisplay language="javascript" text={USE_CONTEXT_EXAMPLE} />
+        </StyledSection>
+        <StyledSection id="how-use-context-works">
+          <StyledSubsection>
             <Text size="large">How useContext works?</Text>
             <Text>
               When you call useContext(MyContext) in a component, it reads the
               context value from the nearest Provider component in the component
-              tree. The useContext hook will re-render the component when the
-              context value changes.
+              tree.{" "}
+              <Highlighted>
+                The useContext hook will re-render the component when the
+                context value changes.
+              </Highlighted>
             </Text>
             <List>
               <ListItem>
-                Context Creation: First, you create a Context object using
-                createContext. This provides a Provider and a Consumer.
+                <Text>
+                  Context Creation: First, you create a Context object using
+                  createContext.{" "}
+                  <Highlighted>
+                    This provides a Provider and a Consumer.
+                  </Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
-                Provider Component: You wrap your component tree with the
-                Provider component from the context. The value prop on the
-                Provider specifies the value that will be available to all
-                descendants.
+                <Text>
+                  Provider Component: You wrap your component tree with the
+                  Provider component from the context. The value prop on the
+                  Provider{" "}
+                  <Highlighted>
+                    specifies the value that will be available to all
+                    descendants.
+                  </Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
-                Using useContext: Within a descendant component, you use the
-                useContext hook to access the context's value. This hook will
-                return the current context value.
+                <Text>
+                  Using useContext: Within a descendant component, you use the
+                  useContext hook to access the context's value.{" "}
+                  <Highlighted>
+                    This hook will return the current context value.
+                  </Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
-                Reactivity: When the value provided by the Provider changes, all
-                components using useContext will automatically re-render to
-                reflect the updated value.
+                <Text>
+                  Reactivity: When the value provided by the Provider changes,
+                  all components using{" "}
+                  <Highlighted>
+                    useContext will automatically re-render to reflect the
+                    updated value.
+                  </Highlighted>
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="best-practices">
+        <StyledSection id="best-practices">
+          <StyledSubsection>
             <List
               title={<Text size="large">Best Practices</Text>}
               variant="unordered"
             >
               <ListItem>
-                Default Values: Provide a default value when creating the
-                context to ensure that your components have a fallback if
-                they're used outside of a Provider.
+                <Text>
+                  Default Values: Provide a default value when creating the
+                  context to ensure that your components have a fallback if
+                  they're used outside of a Provider.
+                </Text>
               </ListItem>
               <ListItem>
-                Minimal State in Context: Only put the minimal required state in
-                context to avoid unnecessary re-renders. For more complex state
-                management, consider using state management libraries.
+                <Text>
+                  Minimal State in Context: Only put the minimal required state
+                  in context to avoid unnecessary re-renders. For more complex
+                  state management, consider using{" "}
+                  <Highlighted>state management libraries.</Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
-                Separate Contexts: Create separate contexts for different pieces
-                of state or different parts of your application to maintain
-                clarity and modularity.
+                <Text>
+                  Separate Contexts: Create separate contexts for different
+                  pieces of state or different parts of your application to{" "}
+                  <Highlighted>maintain clarity and modularity.</Highlighted>
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>
@@ -273,16 +332,25 @@ const UseContext: React.FC = () => {
               }
             >
               <ListItem>
-                Context: Use context when you have data that needs to be
-                accessed by many components at different levels of the component
-                tree.
+                <Text>
+                  Context: Use context when you have data that needs to be{" "}
+                  <Highlighted>
+                    accessed by many components at different levels of the
+                    component
+                  </Highlighted>{" "}
+                  tree.
+                </Text>
               </ListItem>
               <ListItem>
-                Props: Use props when you have data that is only needed by a
-                single component or a few components.
+                <Text>
+                  Props: Use props when you have data that is only needed by a{" "}
+                  <Highlighted>
+                    single component or a few components.
+                  </Highlighted>
+                </Text>
               </ListItem>
             </List>
-            <Text style={{marginTop:"0.5rem"}}>
+            <Text style={{ marginTop: "0.5rem" }}>
               By using useContext, you simplify the process of accessing and
               managing global state in your React applications.
             </Text>

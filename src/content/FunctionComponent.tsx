@@ -139,7 +139,7 @@ const FunctionComponent = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -159,8 +159,8 @@ const FunctionComponent = () => {
   return (
     <StyledMain id="styled-main">
       <StyledTopicContent>
-        <StyledSection>
-          <StyledSubsection id="introduction">
+        <StyledSection id="introduction">
+          <StyledSubsection >
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Components" />
               <BreadcrumbsItem
@@ -178,8 +178,8 @@ const FunctionComponent = () => {
             <Text>{INTRODUCTION}</Text>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="definition">
+        <StyledSection id="definition">
+          <StyledSubsection >
             <Text variant="paragraph" size="large">
               Definition
             </Text>

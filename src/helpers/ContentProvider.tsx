@@ -60,6 +60,12 @@ const UnderstandingReact = lazy(() => {
     new Promise((resolve) => setTimeout(resolve, 300)),
   ]).then(([moduleExports]) => moduleExports);
 });
+const VirtualDOM = lazy(() => {
+  return Promise.all([
+    import("../content/VirtualDOM"),
+    new Promise((resolve) => setTimeout(resolve, 300)),
+  ]).then(([moduleExports]) => moduleExports);
+});
 const JSX = lazy(() => {
   return Promise.all([
     import("../content/JSX"),
@@ -81,6 +87,8 @@ const ContentProvider = ({ topic, category }: ContentProviderProps) => {
             return <UnderstandingReact />;
           case "jsx":
             return <JSX />;
+          case "virtual-dom":
+            return <VirtualDOM />;
           default:
             return <Error />;
         }

@@ -14,7 +14,10 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
+  Alert,
 } from "stelios";
+import { IconMoodSmileDizzy } from "@tabler/icons-react";
 
 const sections = [
   { id: "introduction", title: "Introduction" },
@@ -25,7 +28,6 @@ const sections = [
   { id: "tips-and-best-practices", title: "Tips and Best Practices" },
 ];
 
-const INTRODUCTION_CONTENT = `useEffect is a Hook in React that allows you to perform side effects in function components. It serves a similar purpose to lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.`;
 const BASIC_USAGE_1 = `useEffect(() => {
   // Side effect code here
   return () => {
@@ -33,8 +35,6 @@ const BASIC_USAGE_1 = `useEffect(() => {
   };
 }, [dependencies]);
 `;
-const BASIC_USAGE_FN = `Function: This is the effect function where you write the side effect code. This function can optionally return a cleanup function, which is used to clean up the effect (like removing event listeners or canceling network requests) before the component is unmounted or before the effect runs again.`;
-const BASIC_USAGE_DEP = `Dependency Array: This is an array of values that the effect depends on. The effect will only run when one or more of these values change. If you omit this array, the effect will run after every render. If you pass an empty array, the effect will run only once, similar to componentDidMount.`;
 const BASIC_EXAMPLE_1 = `import React, { useEffect, useState } from 'react';
 
 function ExampleComponent() {
@@ -101,6 +101,74 @@ const UseEffect: React.FunctionComponent = () => {
     setIsMounted(true);
   }, []);
 
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const infoColor = useTheme().theme.colorPalette.info.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_CONTENT = (
+    <Text>
+      useEffect is a Hook in React that allows you to{" "}
+      <Highlighted>perform side effects in function components</Highlighted>. It
+      serves a similar purpose to lifecycle methods like componentDidMount,
+      componentDidUpdate, and componentWillUnmount in class components.
+    </Text>
+  );
+  const BASIC_USAGE_FN = (
+    <Text>
+      <Highlighted>Function:</Highlighted> This is the effect function where you
+      write the side effect code. This function can optionally return a cleanup
+      function, which is used to clean up the effect (like removing event
+      listeners or canceling network requests) before the component is unmounted
+      or before the effect runs again.`;
+    </Text>
+  );
+  const BASIC_USAGE_DEP = (
+    <Text>
+      <Highlighted>Dependency Array:</Highlighted> This is an array of values
+      that the effect depends on. The effect will only run when one or more of
+      these values change. If you omit this array, the effect will run after
+      every render. If you pass an empty array, the effect will run only once,
+      similar to componentDidMount.
+    </Text>
+  );
+  const SUBSCRIPTIONS_EXAMPLE = `useEffect(() => {
+  const socket = new WebSocket('wss://example.com/socket');
+
+  socket.addEventListener('message', (event) => {
+    setMessage(event.data); // Handle incoming data
+  });
+
+  return () => {
+    socket.close(); // Clean up the subscription
+  };
+}, []); // Empty array means this effect runs only on mount and unmount
+`;
+
+  const ALERT_DESCRIPTION = (
+    <Text noColor>
+      useEffect is inspired by React's class component lifecycle methods,
+      specifically componentDidMount, componentDidUpdate, and
+      componentWillUnmount. <br />
+      <br />
+      However, unlike class components, useEffect merges these three lifecycle
+      phases into a single, versatile hook that can handle side effects before
+      and after renders.
+      <br />
+      This means with useEffect, you can manage side effects in one place,
+      making functional components more powerful and concise than class
+      components, which required separate methods for these tasks. This is why
+      useEffect is often referred to as the{" "}
+      <span style={{ color: infoColor }}>Swiss Army knife</span> of React hooks!
+    </Text>
+  );
+
+  /* ------------------------------------------------------------------------------------ */
+
   React.useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       for (const entry of entries) {
@@ -127,7 +195,7 @@ const UseEffect: React.FunctionComponent = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -151,18 +219,25 @@ const UseEffect: React.FunctionComponent = () => {
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-effect" title="useEffect" />
             </Breadcrumbs>
-            <Text size="large" style={{ marginTop: "1rem" }}>
+            <Alert
+              color="info"
+              titleIcon={<IconMoodSmileDizzy />}
+              title="Fun Fact"
+              description={ALERT_DESCRIPTION}
+              style={{marginTop:"0.5rem"}}
+            />
+            <Text size="large" style={{ marginTop: "0.5rem" }}>
               Introduction
             </Text>
-            <Text>{INTRODUCTION_CONTENT}</Text>
+            {INTRODUCTION_CONTENT}
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
           <StyledSubsection id="basic-usage">
             <Text size="large">Basic Usage</Text>
             <Text>
-              The useEffect hook takes two arguments: a function and a
-              dependency array.
+              The useEffect hook takes two arguments:{" "}
+              <Highlighted>a function and a dependency array</Highlighted>.
             </Text>
             <CodeDisplay language="JSX" text={BASIC_USAGE_1} />
             <List variant="unordered">
@@ -217,14 +292,20 @@ const UseEffect: React.FunctionComponent = () => {
               title={<Text size="large">Rules of Hooks</Text>}
             >
               <ListItem>
-                Call Hooks at the Top Level: Don't call hooks inside loops,
-                conditions, or nested functions. Always use hooks at the top
-                level of your React function so that the hooks are called in the
-                same order each time a component renders.
+                <Text>
+                  <Highlighted>Call Hooks at the Top Level:</Highlighted> Don't
+                  call hooks inside loops, conditions, or nested functions.
+                  Always use hooks at the top level of your React function so
+                  that the hooks are called in the same order each time a
+                  component renders.
+                </Text>
               </ListItem>
               <ListItem>
-                Call Hooks from React Functions: Only call hooks from React
-                function components or custom hooks.
+                <Text>
+                  <Highlighted>Call Hooks from React Functions:</Highlighted>{" "}
+                  Only call hooks from React function components or custom
+                  hooks.
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>
@@ -235,9 +316,58 @@ const UseEffect: React.FunctionComponent = () => {
               variant="unordered"
               title={<Text size="large">Common Side Effects</Text>}
             >
-              <ListItem>Data fetching</ListItem>
-              <ListItem>Setting up subscriptions</ListItem>
-              <ListItem>Manually changing the DOM</ListItem>
+              <ListItem>
+                <Text>Data fetching</Text>
+                <Text>
+                  Typically, you want to{" "}
+                  <Highlighted>fetch data from an API</Highlighted> and update
+                  the state with the fetched data.
+                </Text>
+              </ListItem>
+              <ListItem>
+                <Text>Setting up subscriptions</Text>
+                <Text>
+                  You can create a connection or subscription{" "}
+                  <Highlighted>
+                    (like a WebSocket, event listener, or data stream)
+                  </Highlighted>{" "}
+                  when a component mounts and cleaning it up when the component
+                  unmounts or dependencies change
+                </Text>
+                <List title="Steps:" containerStyle={{ marginTop: "0.5rem" }}>
+                  <ListItem>
+                    <Text>
+                      <Highlighted>Initialize the Subscription:</Highlighted>{" "}
+                      Inside the useEffect, set up the subscription, such as
+                      opening a WebSocket connection or adding an event
+                      listener.
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>
+                      <Highlighted>Handle Data/Updates:</Highlighted> Define a
+                      function within the useEffect to handle incoming data or
+                      events, updating the component's state accordingly.
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>
+                      <Highlighted>Clean Up:</Highlighted> Return a cleanup
+                      function from useEffect to close the connection or remove
+                      the event listener when the component unmounts or when
+                      dependencies change.
+                    </Text>
+                    <CodeDisplay
+                      style={{ marginTop: "0.5rem" }}
+                      text={SUBSCRIPTIONS_EXAMPLE}
+                      language="javascript"
+                    />
+                  </ListItem>
+                </List>
+              </ListItem>
+              <ListItem style={{ marginTop: "0.25rem" }}>
+                <Text>Manually changing the DOM</Text>
+              </ListItem>
               <ListItem>Timers (e.g., setTimeout and setInterval)</ListItem>
               <ListItem>Logging</ListItem>
             </List>
@@ -245,21 +375,28 @@ const UseEffect: React.FunctionComponent = () => {
         </StyledSection>
         <StyledSection>
           <StyledSubsection id="tips-and-best-practices">
-            <Text size="large">Tips And Best Practices</Text>
-            <List>
+            <List title={<Text size="large">Tips And Best Practices</Text>}>
               <ListItem>
-                Use the dependency array to control when the effect runs.
+                <Text>
+                  Use the <Highlighted>dependency array</Highlighted> to control
+                  when the effect runs.
+                </Text>
               </ListItem>
               <ListItem>
-                Use cleanup functions to prevent memory leaks and clean up
-                resources.
+                <Text>
+                  Use <Highlighted>cleanup functions</Highlighted> to prevent
+                  memory leaks and clean up resources.
+                </Text>
               </ListItem>
               <ListItem>
                 Be mindful of the dependencies you include in the dependency
                 array.
               </ListItem>
               <ListItem>
-                Avoid using the dependency array as an optimization technique.
+                <Text>
+                  Avoid using the dependency array as an{" "}
+                  <Highlighted>optimization technique.</Highlighted>
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>

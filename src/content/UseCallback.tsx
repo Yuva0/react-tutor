@@ -14,6 +14,7 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
 } from "stelios";
 
 const sections = [
@@ -23,7 +24,6 @@ const sections = [
   { id: "summary", title: "Summary" },
 ];
 
-const INTRODUCTION_CONTENT = `\`useCallback\` is a hook provided by React that allows you to memoize a function. Memoization is a process where you cache the result of an expensive computation so that it doesn't have to be recalculated every time it's needed. useCallback is used to optimize the performance of React components by preventing unnecessary re-creation of functions on every render.`;
 const BASIC_USAGE_1 = `Here's the basic syntax of useCallback:`;
 const BASIC_USAGE_EXAMPLE = `const memoizedCallback = useCallback(() => {
   doSomething(a, b);
@@ -31,7 +31,6 @@ const BASIC_USAGE_EXAMPLE = `const memoizedCallback = useCallback(() => {
 `;
 const BASIC_USAGE_2 = `In this example, useCallback will return a memoized version of the doSomething function that only changes if a or b change. The dependencies are specified in the dependency array [a, b].`;
 
-const FUNCTION_DEFINITION = `When you define a function inside a React component, that function gets re-created on every render. This can be problematic if you pass that function as a prop to a child component, causing the child component to re-render unnecessarily.`;
 const FUNCTION_DEFINITION_EXAMPLE = `const MyComponent = () => {
   const handleClick = () => {
     console.log('Button clicked');
@@ -40,7 +39,6 @@ const FUNCTION_DEFINITION_EXAMPLE = `const MyComponent = () => {
   return <button onClick={handleClick}>Click Me</button>;
 };
 `;
-const FUNCTION_DEFINITION_EXPLANATION = `In this example, the handleClick function is re-created on every render of MyComponent. If MyComponent is a parent component and handleClick is passed as a prop to a child component, the child component will re-render every time MyComponent re-renders, even if handleClick hasn't changed.`;
 
 const MEMOIZATION_USE_CALLBACK = `const MyComponent = () => {
   const handleClick = useCallback(() => {
@@ -62,8 +60,6 @@ const DEPENDENCIES_EXAMPLE = `const MyComponent = ({ a, b }) => {
 };
 `;
 const DEPENDENCIES_EXPLANATION = `In this example, the handleClick function depends on the values of a and b. By including [a, b] in the dependency array, React will re-create the memoized function whenever a or b changes.`;
-
-const PERFORMANCE_CONSIDERATION = `While useCallback can help with performance by preventing unnecessary re-creations of functions, it's essential to use it judiciously. Overusing useCallback can lead to overly complex dependency arrays and make the code harder to read and maintain. Additionally, memoization itself has a cost, so it's only beneficial if the memoized function is expensive to re-create or if it causes unnecessary re-renders.`;
 
 const PRACTICAL_EXAMPLE_1 = `Consider a scenario where you have a parent component and a child component. The child component receives a callback as a prop.`;
 const PRACTICAL_EG_WO_CALLBACK = `const ParentComponent = () => {
@@ -141,7 +137,7 @@ const UseCallback = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -154,12 +150,66 @@ const UseCallback = () => {
     }
   };
 
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_CONTENT = (
+    <Text>
+      useCallback is a hook provided by React that allows you to memoize a
+      function. Memoization is a process where you cache the result of an
+      expensive computation so that it doesn't have to be recalculated every
+      time it's needed. useCallback is used to optimize the performance of React
+      components by{" "}
+      <Highlighted>
+        preventing unnecessary re-creation of functions on every render.
+      </Highlighted>
+    </Text>
+  );
+  const FUNCTION_DEFINITION = (
+    <Text>
+      When you define a function inside a React component, that function gets{" "}
+      <Highlighted>re-created on every render.</Highlighted> This can be
+      problematic if you pass that function as a prop to a child component,
+      causing the child component to re-render unnecessarily.
+    </Text>
+  );
+  const PERFORMANCE_CONSIDERATION = (
+    <Text>
+      While useCallback can help with performance by preventing unnecessary
+      re-creations of functions, it's essential to use it judiciously. Overusing
+      useCallback can lead to overly complex dependency arrays and make the code
+      harder to read and maintain. Additionally, memoization itself has a cost,{" "}
+      <Highlighted>
+        so it's only beneficial if the memoized function is expensive to
+        re-create or if it causes unnecessary re-renders.
+      </Highlighted>
+    </Text>
+  );
+
+  const FUNCTION_DEFINITION_EXPLANATION = (
+    <Text>
+      In this example, the handleClick function is re-created on every render of
+      MyComponent. If MyComponent is a parent component and handleClick is
+      passed as a prop to a child component,{" "}
+      <Highlighted>
+        the child component will re-render every time MyComponent re-renders,
+        even if handleClick hasn't changed.
+      </Highlighted>
+    </Text>
+  );
+
+  /* ----------------------------------------------------------------------------------- */
+
   if (!isMounted) return <StyledMain>{null}</StyledMain>;
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
-        <StyledSection>
-          <StyledSubsection id="introduction">
+        <StyledSection id="introduction">
+          <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-callback" title="useCallback" />
@@ -174,8 +224,8 @@ const UseCallback = () => {
             <Text style={{ marginTop: "0.5rem" }}>{BASIC_USAGE_2}</Text>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="detailed-breakdown">
+        <StyledSection id="detailed-breakdown">
+          <StyledSubsection>
             <List title={<Text size="large">Detailed Breakdown</Text>}>
               <ListItem>
                 <Text>Function Definition</Text>
@@ -230,8 +280,8 @@ const UseCallback = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="practical-example">
+        <StyledSection id="practical-example">
+          <StyledSubsection>
             <Text size="large">Practical Example</Text>
             <Text>{PRACTICAL_EXAMPLE_1}</Text>
             <Text>Without useCallback:</Text>
@@ -241,8 +291,11 @@ const UseCallback = () => {
             />
             <Text style={{ marginTop: "0.5rem" }}>
               In this example, every time ParentComponent re-renders,
-              handleClick is re-created, causing ChildComponent to re-render
-              even though it doesn't need to.
+              handleClick is re-created,{" "}
+              <Highlighted>
+                causing ChildComponent to re-render even though it doesn't need
+                to.
+              </Highlighted>
             </Text>
             <Text style={{ marginTop: "0.5rem" }}>With useCallback:</Text>
             <CodeDisplay
@@ -251,13 +304,15 @@ const UseCallback = () => {
             />
             <Text style={{ marginTop: "0.5rem" }}>
               By using useCallback to memoize handleClick, the function is only
-              created once and will not change on subsequent renders. This
-              prevents unnecessary re-renders of ChildComponent.
+              created once and will not change on subsequent renders.{" "}
+              <Highlighted>
+                This prevents unnecessary re-renders of ChildComponent.
+              </Highlighted>
             </Text>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="summary">
+        <StyledSection id="summary">
+          <StyledSubsection>
             <Text size="large">Summary</Text>
             <List variant="unordered" title={<Text>Key Takeaways:</Text>}>
               <ListItem>
@@ -273,9 +328,14 @@ const UseCallback = () => {
                 changes.
               </ListItem>
               <ListItem>
-                Using useCallback can optimize performance but should be used
-                judiciously to avoid overly complex dependency arrays and
-                unnecessary memoization overhead.
+                <Text>
+                  Using useCallback can optimize performance but should be used
+                  judiciously to{" "}
+                  <Highlighted>
+                    avoid overly complex dependency arrays and unnecessary
+                    memoization overhead.
+                  </Highlighted>
+                </Text>
               </ListItem>
             </List>
             <Text style={{ marginTop: "0.5rem" }}>

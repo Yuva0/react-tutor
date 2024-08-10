@@ -14,6 +14,7 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
 } from "stelios";
 
 const sections = [
@@ -23,10 +24,8 @@ const sections = [
   { id: "conclusion", title: "Conclusion" },
 ];
 
-const INTRODUCTION_CONTENT = `\`useMemo\` is a hook in React that allows you to memoize the result of a computation, preventing unnecessary recalculations and improving performance. Here’s a detailed explanation:`;
 const SYNTAX_EXAMPlE = `const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 `;
-const PURPOSE_CONTENT = `\`useMemo\` is used to optimize performance by avoiding expensive calculations on every render. If the dependencies have not changed since the last render, useMemo returns the previously computed value, effectively caching the result.`;
 const PURPOSE_EXAMPLE = `import React, { useState, useMemo } from 'react';
 
 function ExpensiveComponent({ a, b }) {
@@ -59,7 +58,6 @@ const COMP_PERFORMANCE = `const renderedItems = useMemo(() => {
   return items.map(item => <Item key={item.id} {...item} />);
 }, [items]);
 `;
-const CONCLUSION = `useMemo is a powerful tool in React for optimizing performance by memoizing expensive calculations and ensuring referential equality of complex objects and arrays. By understanding and properly using useMemo, you can create more efficient React applications, especially when dealing with complex state and computational logic.`;
 
 const UseMemo = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
@@ -94,7 +92,47 @@ const UseMemo = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
+
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+    |                            Data to be displayed                                       |
+    -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_CONTENT = (
+    <Text>
+      useMemo is a hook in React that allows you to memoize the result of a
+      computation,{" "}
+      <Highlighted>
+        preventing unnecessary recalculations and improving performance
+      </Highlighted>
+      . Here's a detailed explanation:
+    </Text>
+  );
+  const PURPOSE_CONTENT = (
+    <Text>
+      useMemo is used to optimize performance by{" "}
+      <Highlighted>avoiding expensive calculations on every render</Highlighted>
+      . If the dependencies have not changed since the last render, useMemo
+      returns the previously computed value, effectively caching the result.
+    </Text>
+  );
+  const CONCLUSION = (
+    <Text>
+      useMemo is a powerful tool in React for optimizing performance by
+      memoizing expensive calculations and ensuring referential equality of
+      complex objects and arrays. By understanding and properly using useMemo,
+      you can create more efficient React applications,{" "}
+      <Highlighted>
+        especially when dealing with complex state and computational logic.
+      </Highlighted>
+    </Text>
+  );
+
+  /* ------------------------------------------------------------------------------------ */
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -111,8 +149,8 @@ const UseMemo = () => {
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
-        <StyledSection>
-          <StyledSubsection id="introduction">
+        <StyledSection id="introduction">
+          <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-memo" title="useMemo" />
@@ -120,7 +158,7 @@ const UseMemo = () => {
             <Text size="large" style={{ marginTop: "1rem" }}>
               Introduction
             </Text>
-            <Text>{INTRODUCTION_CONTENT}</Text>
+            {INTRODUCTION_CONTENT}
           </StyledSubsection>
         </StyledSection>
         <StyledSection>
@@ -134,10 +172,17 @@ const UseMemo = () => {
                 </Text>
               }
             >
-              <ListItem>A function that computes a value.</ListItem>
               <ListItem>
-                A dependency array that lists variables which, when changed,
-                cause the function to recompute the value.
+                <Text>
+                  A function that <Highlighted>computes a value</Highlighted>
+                </Text>
+              </ListItem>
+              <ListItem>
+                <Text>
+                  A dependency array that lists variables which, when changed,
+                  cause the{" "}
+                  <Highlighted>function to recompute the value</Highlighted>
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>
@@ -145,7 +190,7 @@ const UseMemo = () => {
         <StyledSection>
           <StyledSubsection>
             <Text size="large">Purpose</Text>
-            <Text>{PURPOSE_CONTENT}</Text>
+            {PURPOSE_CONTENT}
             <Text>Example:</Text>
             <CodeDisplay text={PURPOSE_EXAMPLE} language="javascript" />
             <List
@@ -154,33 +199,45 @@ const UseMemo = () => {
               }
             >
               <ListItem>
-                The `expensiveCalculation` function is only called when `a` or
-                `b` changes.
+                <Text>
+                  The `expensiveCalculation` function is only called{" "}
+                  <Highlighted>when `a` or `b` changes.</Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
-                The memoized value is stored and returned if `a` and `b` remain
-                the same.
+                <Text>
+                  The memoized value is stored and returned if{" "}
+                  <Highlighted>`a` and `b` remain the same.</Highlighted>
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="detailed-breakdown">
+        <StyledSection id="detailed-breakdown">
+          <StyledSubsection>
             <List title={<Text size="large">Detailed Breakdown</Text>}>
               <ListItem>
-                <Text>Function Execution</Text>
+                <Text>
+                  <Highlighted>Function Execution</Highlighted>
+                </Text>
                 <Text style={{ marginTop: "0.25rem" }}>{FN_EXECUTION}</Text>
               </ListItem>
               <ListItem style={{ marginTop: "0.5rem" }}>
-                <Text>Dependency Array</Text>
+                <Text>
+                  <Highlighted>Dependency Array</Highlighted>
+                </Text>
                 <Text style={{ marginTop: "0.25rem" }}>{DEPENDENCY_ARRAY}</Text>
               </ListItem>
               <ListItem style={{ marginTop: "0.5rem" }}>
-                <Text>Memoization</Text>
+                <Text>
+                  <Highlighted>Memoization</Highlighted>
+                </Text>
                 <Text style={{ marginTop: "0.25rem" }}>{MEMOIZATION}</Text>
               </ListItem>
               <ListItem style={{ marginTop: "0.5rem" }}>
-                <Text>Caching Strategy</Text>
+                <Text>
+                  <Highlighted>Caching Strategy</Highlighted>
+                </Text>
                 <List
                   variant="unordered"
                   title={
@@ -203,7 +260,9 @@ const UseMemo = () => {
                 </List>
               </ListItem>
               <ListItem style={{ marginTop: "0.5rem" }}>
-                <Text>Comparison with useCallback</Text>
+                <Text>
+                  <Highlighted>Comparison with useCallback</Highlighted>
+                </Text>
                 <Text style={{ marginTop: "0.25rem" }}>
                   useCallback is similar to useMemo, but it memoizes a function
                   instead of a value:
@@ -222,8 +281,8 @@ const UseMemo = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="practical-use-cases">
+        <StyledSection id="practical-use-cases">
+          <StyledSubsection>
             <List
               variant="ordered"
               title={<Text size="large">Practical Use Cases</Text>}
@@ -257,8 +316,10 @@ const UseMemo = () => {
                 <Text>Component Performance</Text>
                 <Text style={{ marginTop: "0.25rem" }}>
                   In components with heavy computations or expensive renders,
-                  useMemo can significantly improve performance by minimizing
-                  unnecessary calculations:
+                  useMemo can significantly{" "}
+                  <Highlighted>
+                    improve performance by minimizing unnecessary calculations:
+                  </Highlighted>
                 </Text>
                 <CodeDisplay
                   style={{ marginTop: "0.5rem" }}
@@ -269,8 +330,8 @@ const UseMemo = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="conclusion">
+        <StyledSection id="conclusion">
+          <StyledSubsection>
             <Text size="large">Conclusion</Text>
             <Text>{CONCLUSION}</Text>
           </StyledSubsection>

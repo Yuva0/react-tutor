@@ -19,8 +19,6 @@ const Header = () => {
   
   const colorPalette = useTheme().theme.colorPalette;
 
-  console.log(colorPalette);
-
   return (
     <HeaderUI id="header" expandable={false} height="3.5rem" style={{outline:0}}>
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>

@@ -14,10 +14,10 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
+  Alert,
 } from "stelios";
-
-const INTRODUCTION_CONTENT =
-  "The useState Hook is a fundamental part of the React Hooks API. It allows functional components to have their own state, a feature previously only available to class components. This capability enhances the flexibility and simplicity of functional components, enabling them to manage their own state without needing to convert them into class components.";
+import { IconMoodSmileDizzy } from "@tabler/icons-react";
 const BASIC_USAGE_1 = `import React, { useState } from 'react';`;
 const BASIC_USAGE_SYNTAX = `const [state, setState] = useState(initialState);`;
 const BASIC_USAGE_EXAMPLE = `import React, { useState } from 'react';
@@ -38,8 +38,6 @@ function Counter() {
 
 export default Counter;
 `;
-const EXPLANATION_1 = `The Counter component declares a state variable 'count' using the useState Hook with an initial value of 0. It then renders a paragraph element that displays the current count value and a button that increments the count value when clicked.`;
-const EXPLANATION_2 = `When the button is clicked, the setCount function is called with the new count value as an argument. This triggers a re-render of the component with the updated count value displayed in the paragraph element.`;
 const INITIAL_STATE_1 = `const [state, setState] = useState(initialValue);`;
 const INITIAL_STATE_2 = `const [state, setState] = useState(() => {
   const initialState = someExpensiveComputation();
@@ -70,6 +68,45 @@ const UseState: React.FunctionComponent = () => {
   const [sidebarSelected, setSidebarSelected] = React.useState("introduction");
   const [isMounted, setIsMounted] = React.useState(false);
 
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const EXPLANATION_1 = (
+    <Text>
+      The Counter component declares a state variable{" "}
+      <Highlighted>count</Highlighted> using the useState Hook with an initial
+      value of 0. It then renders a paragraph element that displays the current
+      count value and a button that increments the count value when clicked.
+    </Text>
+  );
+  const EXPLANATION_2 = (
+    <Text>
+      When the button is clicked, the setCount function is called with the{" "}
+      <Highlighted>new count value as an argument</Highlighted>. This triggers a
+      re-render of the component with the updated count value displayed in the
+      paragraph element.
+    </Text>
+  );
+
+  const INTRODUCTION_CONTENT = (
+    <Text>
+      The useState Hook is a fundamental part of the React Hooks API. It allows
+      functional components to <Highlighted>have their own state</Highlighted>,
+      a feature previously only available to class components. This capability
+      enhances the flexibility and simplicity of functional components, enabling
+      them to <Highlighted>manage their own state</Highlighted> without needing
+      to convert them into class components.
+    </Text>
+  );
+
+  /* ------------------------------------------------------------------------------------ */
+
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -86,7 +123,7 @@ const UseState: React.FunctionComponent = () => {
 
     const observer = new IntersectionObserver(handleIntersection, {
       threshold: 1,
-      rootMargin: "64px",
+      rootMargin: "0px",
     });
 
     const _sections = sections.map((section) =>
@@ -100,7 +137,7 @@ const UseState: React.FunctionComponent = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -118,20 +155,25 @@ const UseState: React.FunctionComponent = () => {
   return (
     <StyledMain>
       <StyledTopicContent className={isMounted ? "fade-in" : ""}>
-        <StyledSection>
-          <StyledSubsection id="introduction">
+        <StyledSection id="introduction">
+          <StyledSubsection>
             <Breadcrumbs size="small" color="primary" delimiter="/">
               <BreadcrumbsItem title="Hooks" />
               <BreadcrumbsItem link="/hooks/use-state" title="useState" />
             </Breadcrumbs>
-            <Text size="large" style={{ marginTop: "1rem" }}>
-              Introduction
-            </Text>
-            <Text variant="paragraph">{INTRODUCTION_CONTENT}</Text>
+            <Alert
+              titleIcon={<IconMoodSmileDizzy />}
+              color="info"
+              title="Fun Fact!"
+              description="The useState Hook is the most commonly used Hook in React."
+              style={{ marginTop: "0.5rem" }}
+            />
+            <Text size="large" style={{marginTop:"0.5rem"}}>Introduction</Text>
+            {INTRODUCTION_CONTENT}
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="basic-usage">
+        <StyledSection id="basic-usage">
+          <StyledSubsection>
             <Text size="large">Basic Usage</Text>
             <Text>
               To use the useState Hook, you need to import it from React:
@@ -139,94 +181,116 @@ const UseState: React.FunctionComponent = () => {
             <CodeDisplay language="JSX" text={BASIC_USAGE_1} />
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="syntax">
+        <StyledSection id="syntax">
+          <StyledSubsection>
             <Text size="large">Syntax</Text>
-            <Text>
-              The useState Hook takes the initial state as an argument and
-              returns an array with two elements:
-            </Text>
-            <List variant="ordered">
-              <ListItem>The first element is the current state value.</ListItem>
+            <List
+              variant="ordered"
+              title={
+                <Text>
+                  The useState Hook takes the initial state as an argument and
+                  returns an array with two elements:
+                </Text>
+              }
+            >
               <ListItem>
-                The second element is a function that allows you to update the
-                state value.
+                <Text>
+                  The first element is the{" "}
+                  <Highlighted>current state value.</Highlighted>
+                </Text>
+              </ListItem>
+              <ListItem>
+                <Text>
+                  The second element is a function that{" "}
+                  <Highlighted>
+                    allows you to update the state value.
+                  </Highlighted>
+                </Text>
               </ListItem>
             </List>
             <Text>Here's the syntax:</Text>
             <CodeDisplay language="JSX" text={BASIC_USAGE_SYNTAX} />
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="example">
-            <Text size="large">Example</Text>
-            <Text>
-              Here's an example of a simple counter component that uses the
-              useState Hook:
-            </Text>
-            <CodeDisplay language="JSX" text={BASIC_USAGE_EXAMPLE} />
-          </StyledSubsection>
+        <StyledSection id="example">
+          <Text size="large">Example</Text>
+          <Text>
+            Here's an example of a simple counter component that uses the
+            useState Hook:
+          </Text>
+          <CodeDisplay language="JSX" text={BASIC_USAGE_EXAMPLE} />
         </StyledSection>
-        <StyledSection>
+        <StyledSection id="explanation">
           <Text size="large">Explanation</Text>
           <StyledSubsection>
-            <Text>{EXPLANATION_1}</Text>
-            <Text>{EXPLANATION_2}</Text>
+            {EXPLANATION_1}
+            {EXPLANATION_2}
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="rules-of-hooks">
-            <List title={<Text size="large">Rules of Hooks</Text>}>
-              <ListItem>
-                Hooks should only be called at the top level of a functional
-                component or another custom Hook.
-              </ListItem>
-              <ListItem>
-                Hooks should not be called inside loops, conditions, or nested
-                functions.
-              </ListItem>
-              <ListItem>
-                Hooks should always be called in the same order, and they should
-                not be called conditionally.
-              </ListItem>
-            </List>
-          </StyledSubsection>
+        <StyledSection id="rules-of-hooks">
+          <List title={<Text size="large">Rules of Hooks</Text>}>
+            <ListItem>
+              <Text>
+                Hooks should only be called at{" "}
+                <Highlighted>
+                  the top level of a functional component or another custom
+                  Hook.
+                </Highlighted>
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Hooks should not be called inside{" "}
+                <Highlighted>
+                  loops, conditions, or nested functions.
+                </Highlighted>
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Hooks should always be called in the{" "}
+                <Highlighted>same order</Highlighted>, and they should not be
+                called <Highlighted>conditionally</Highlighted>.
+              </Text>
+            </ListItem>
+          </List>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="initial-state">
-            <Text size="large">Initial State</Text>
-            <Text>The initial state can be a value or a function:</Text>
-            <CodeDisplay language="JSX" text={INITIAL_STATE_1} />
-            <Text>
-              If the initial state is a function, it will be executed only on
-              the first render:
-            </Text>
-            <CodeDisplay language="JSX" text={INITIAL_STATE_2} />
-          </StyledSubsection>
+        <StyledSection id="initial-state">
+          <Text size="large">Initial State</Text>
+          <Text>The initial state can be a value or a function:</Text>
+          <CodeDisplay language="JSX" text={INITIAL_STATE_1} />
+          <Text style={{ marginTop: "1rem" }}>
+            If the initial state is a function, it will be executed{" "}
+            <Highlighted>only on the first render:</Highlighted>
+          </Text>
+          <CodeDisplay language="JSX" text={INITIAL_STATE_2} />
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="updating-state">
-            <Text size="large">Updating State</Text>
-            <Text>
-              To update the state, you can call the function returned by the
-              useState Hook with the new state value as an argument.
-            </Text>
-            <Text>
-              Here's an example of updating the state in a counter component:
-            </Text>
-            <CodeDisplay language="JSX" text={UPDATING_STATE} />
-          </StyledSubsection>
+        <StyledSection id="updating-state">
+          <Text size="large">Updating State</Text>
+          <Text>
+            To update the state, you can call the function returned by the
+            useState Hook with the new state value as an argument.
+          </Text>
+          <Text>
+            Here's an example of updating the state in a counter component:
+          </Text>
+          <CodeDisplay language="JSX" text={UPDATING_STATE} />
         </StyledSection>
         <StyledSection>
           <StyledSubsection>
             <List variant="ordered" title={<Text size="large">Summary</Text>}>
               <ListItem>
-                The useState Hook allows functional components to have their own
-                state.
+                <Text>
+                  The useState Hook allows functional components to{" "}
+                  <Highlighted>have their own state.</Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
-                It takes the initial state as an argument and returns an array
-                with the current state value and a function to update the state.
+                <Text>
+                  It takes the initial state as an argument and returns an array
+                  with the <Highlighted>current state value</Highlighted> and a{" "}
+                  <Highlighted>function to update the state</Highlighted>.
+                </Text>
               </ListItem>
               <ListItem>
                 The initial state can be a value or a function that returns the

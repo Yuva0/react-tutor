@@ -14,6 +14,7 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
 } from "stelios";
 
 const sections = [
@@ -22,7 +23,6 @@ const sections = [
   { id: "summary", title: "Summary" },
 ];
 
-const INTRODUCTION_CONTENT = `useRef is a hook in React that provides a way to create a mutable object which persists for the lifetime of the component. It is often used for accessing and manipulating DOM elements directly, storing mutable values that do not cause re-renders when updated, and maintaining values across renders without triggering a component update.`;
 const IMPORT_EXAMPLE = `import React, { useRef } from 'react';`;
 const BASIC_USAGE_EXAMPlE = `const myRef = useRef(initialValue);`;
 const ACCESS_DOM = `import React, { useRef, useEffect } from 'react';
@@ -110,7 +110,31 @@ const UseRef: React.FC = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
+
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_CONTENT = (
+    <Text>
+      useRef is a hook in React that provides a way to create a mutable object
+      which persists for the lifetime of the component. It is often used for
+      <Highlighted>
+        {" "}
+        accessing and manipulating DOM elements directly, storing mutable values
+        that do not cause re-renders when updated,
+      </Highlighted>{" "}
+      and maintaining values across renders without triggering a component
+      update.
+    </Text>
+  );
+
+  /* ----------------------------------------------------------------------------------- */
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -134,11 +158,11 @@ const UseRef: React.FC = () => {
               <BreadcrumbsItem link="/hooks/use-ref" title="useRef" />
             </Breadcrumbs>
             <Text size="large">Introduction</Text>
-            <Text>{INTRODUCTION_CONTENT}</Text>
+            {INTRODUCTION_CONTENT}
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="detailed-breakdown">
+        <StyledSection id="detailed-breakdown">
+          <StyledSubsection>
             <Text size="large">Detailed Breakdown of useRef</Text>
             <Text>Importing useRef </Text>
             <Text>To use useRef, you need to import it from React:</Text>
@@ -148,8 +172,10 @@ const UseRef: React.FC = () => {
             <Text>Basic Usage</Text>
             <Text>
               useRef returns a mutable object that persists for the lifetime of
-              the component. It accepts an optional initial value as an
-              argument.
+              the component.{" "}
+              <Highlighted>
+                It accepts an optional initial value as an argument.
+              </Highlighted>
             </Text>
             <CodeDisplay language="javascript" text={BASIC_USAGE_EXAMPlE} />
           </StyledSubsection>
@@ -167,17 +193,26 @@ const UseRef: React.FC = () => {
                 />
                 <List variant="unordered">
                   <ListItem>
-                    inputRef is created using useRef(null), initializing it with
-                    null.
+                    <Text>
+                      inputRef is created using useRef(null),{" "}
+                      <Highlighted>initializing it with null.</Highlighted>
+                    </Text>
                   </ListItem>
                   <ListItem>
-                    The ref attribute of the input element is set to inputRef,
-                    connecting the DOM element to the ref.
+                    <Text>
+                      The ref attribute of the input element is set to inputRef,{" "}
+                      <Highlighted>
+                        connecting the DOM element to the ref.
+                      </Highlighted>
+                    </Text>
                   </ListItem>
                   <ListItem>
-                    In the useEffect hook, inputRef.current gives direct access
-                    to the DOM element, allowing us to call the focus method on
-                    it.
+                    <Text>
+                      In the useEffect hook,{" "}
+                      <Highlighted>inputRef.current</Highlighted> gives direct
+                      access to the DOM element, allowing us to call the focus
+                      method on it.
+                    </Text>
                   </ListItem>
                 </List>
               </ListItem>
@@ -240,25 +275,32 @@ const UseRef: React.FC = () => {
             </List>
           </StyledSubsection>
         </StyledSection>
-        <StyledSection>
-          <StyledSubsection id="summary">
+        <StyledSection id="summary">
+          <StyledSubsection>
             <List title={<Text size="large">Summary</Text>}>
               <ListItem>
                 Initialization: useRef(initialValue) returns a ref object with a
                 current property set to initialValue.
               </ListItem>
               <ListItem>
-                DOM Access: Attach the ref to a DOM element using the ref
-                attribute. Access the element via ref.current.
+                <Text>
+                  DOM Access: Attach the ref to a DOM element using the ref
+                  attribute.{" "}
+                  <Highlighted>Access the element via ref.current</Highlighted>
+                </Text>
               </ListItem>
               <ListItem>
                 Mutable Values: Store mutable values that persist across renders
                 without causing re-renders.
               </ListItem>
               <ListItem>
-                Persistent Values: Maintain values across renders without
-                causing re-renders, suitable for storing interval IDs, timers,
-                and other values.
+                <Text>
+                  Persistent Values: Maintain values across renders without
+                  causing re-renders,{" "}
+                  <Highlighted>
+                    suitable for storing interval IDs, timers, and other values.
+                  </Highlighted>
+                </Text>
               </ListItem>
             </List>
           </StyledSubsection>

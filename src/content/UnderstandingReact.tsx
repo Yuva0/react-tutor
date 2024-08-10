@@ -15,6 +15,7 @@ import {
   ListItem,
   SideBar,
   SideBarItem,
+  useTheme,
 } from "stelios";
 import { IconInfoCircle } from "@tabler/icons-react";
 
@@ -66,30 +67,19 @@ const ALERT_DESCRITPION = (
   </>
 );
 const INTRODUCTION_TITLE = `Introduction`;
-const INTRODUCTION_1 = `React is a popular JavaScript library for building user interfaces (UIs) on the web. It is declarative and component-based, enabling developers to create reusable UI components. React employs a Virtual DOM (Document Object Model) approach to optimize rendering performance by minimizing direct DOM updates, making it fast and efficient. Additionally, React integrates seamlessly with other tools and libraries, providing flexibility and enhancing the development experience.`;
 const KEY_CONCEPTS_TITLE = `Key Concepts`;
 const JSX_EXAMPLE = `const element = <h1>Hello, world!</h1>;`;
-const COMPONENTS_1 = `React is component-based. This means the UI is divided into small, reusable pieces called components.`;
-const COMPONENTS_2 = `Each component encapsulates its own structure (HTML), style (CSS), and behavior (JavaScript).`;
 const COMPONENTS_3 = `Components can be functional (simple functions) or class-based (ES6 classes).`;
 const JSX_1 = `JSX stands for JavaScript XML. It is a syntax extension for JavaScript that looks similar to HTML.`;
 const JSX_2 = `JSX makes it easier to write and add HTML in React.`;
-const VIRTUAL_DOM_1 = `React uses a virtual DOM, which is a lightweight representation of the actual DOM.`;
 const VIRTUAL_DOM_2 = `When the state of an object changes, React updates the virtual DOM first, then compares it with the previous state, and only updates the actual DOM where changes have occurred.`;
-const VIRTUAL_DOM_3 = `This process, called reconciliation, makes updates more efficient.`;
-const STATE_PROPS_1 = `State: An object that holds data that may change over the lifetime of the component. State is managed within the component (usually in class components using this.state or in functional components using the useState hook).`;
 const STATE_PROPS_2 = `Props: Short for properties, props are read-only data passed from parent components to child components.`;
 const LIFECYCLE_METHODS_1 = `Class components have lifecycle methods that you can override to run code at specific times during a component's life (e.g., componentDidMount, shouldComponentUpdate, componentWillUnmount).`;
 const LIFECYCLE_METHODS_2 = `Functional components use hooks like useEffect to manage side effects.`;
-const DECLARATIVE_1 = `React allows you to describe what you want the UI to look like, and it handles the rendering.`;
 const DECLARATIVE_2 = `This makes it easier to understand and debug the application.`;
-const COMPONENT_ARCHITECTURE_1 = `Encourages code reusability by dividing the UI into independent, reusable components.`;
 const COMPONENT_ARCHITECTURE_2 = `Helps in organizing the codebase, making it more maintainable and scalable.`;
 const UNIDIRECTIONAL_FLOW_1 = `React follows a unidirectional data flow, meaning data flows from parent to child components.`;
-const UNIDIRECTIONAL_FLOW_2 = `This makes it easier to debug and understand the state changes in the application.`;
 const HOOKS_1 = `Introduced in React 16.8, hooks allow you to use state and other React features in functional components.`;
-const HOOKS_2 = `Common hooks include useState, useEffect, useContext, useReducer, and custom hooks.`;
-const ECOSYSTEM_TOOLS_1 = `React has a rich ecosystem of tools and libraries, such as React Router for routing, Redux for state management, and Next.js for server-side rendering.`;
 const ECOSYSTEM_TOOLS_2 = `Developer tools like React Developer Tools (a browser extension) help in debugging and profiling React applications.`;
 const REACT_NATIVE_1 = `React can be used to build mobile applications through React Native, allowing you to write cross-platform apps for iOS and Android using the same React principles.`;
 const EXAMPLE_1 = `Here's a simple example of a React component that displays a greeting message:`;
@@ -150,7 +140,112 @@ const UnderstandingReact: React.FunctionComponent = () => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  });
+
+  const color = useTheme().theme.colorPalette.primary.accentScale[10];
+  const Highlighted = ({ children }: { children: React.ReactNode }) => {
+    return <span style={{ color: color }}>{children}</span>;
+  };
+
+  /* --------------------------------------------------------------------------------------
+  |                            Data to be displayed                                       |
+  -------------------------------------------------------------------------------------- */
+  const INTRODUCTION_1 = (
+    <Text>
+      React is a popular JavaScript library for building user interfaces (UIs)
+      on the web. It is declarative and component-based, enabling developers to
+      create reusable UI components. React employs a Virtual DOM (Document
+      Object Model) approach to optimize rendering performance by minimizing
+      direct DOM updates, making it fast and efficient. Additionally,{" "}
+      <Highlighted>
+        React integrates seamlessly with other tools and libraries, providing
+        flexibility and enhancing the development experience.
+      </Highlighted>
+    </Text>
+  );
+
+  const COMPONENTS_1 = (
+    <Text>
+      React is component-based. This means the UI is divided into{" "}
+      <Highlighted>small, reusable pieces called components.</Highlighted>
+    </Text>
+  );
+  const COMPONENTS_2 = (
+    <Text>
+      Each component encapsulates its{" "}
+      <Highlighted>
+        own structure (HTML), style (CSS), and behavior (JavaScript).
+      </Highlighted>
+    </Text>
+  );
+
+  const VIRTUAL_DOM_3 = (
+    <Text>
+      <Highlighted>
+        This process, called reconciliation, makes updates more efficient.
+      </Highlighted>
+    </Text>
+  );
+
+  const VIRTUAL_DOM_1 = (
+    <Text>
+      React uses a virtual DOM, which is a{" "}
+      <Highlighted>lightweight representation of the actual DOM.</Highlighted>
+    </Text>
+  );
+
+  const STATE_PROPS_1 = (
+    <Text>
+      State: An object that holds data that may{" "}
+      <Highlighted>change over the lifetime of the component.</Highlighted>{" "}
+      State is managed within the component (usually in class components using
+      this.state or in functional components using the useState hook).
+    </Text>
+  );
+
+  const DECLARATIVE_1 = (
+    <Text>
+      React allows you to describe what you want the UI to look like, and{" "}
+      <Highlighted>it handles the rendering.</Highlighted>
+    </Text>
+  );
+
+  const COMPONENT_ARCHITECTURE_1 = (
+    <Text>
+      Encourages code reusability by{" "}
+      <Highlighted>
+        dividing the UI into independent, reusable components.
+      </Highlighted>
+    </Text>
+  );
+
+  const UNIDIRECTIONAL_FLOW_2 = (
+    <Text>
+      This makes it easier to debug and understand the{" "}
+      <Highlighted>state changes in the application.</Highlighted>
+    </Text>
+  );
+
+  const HOOKS_2 = (
+    <Text>
+      Common hooks include{" "}
+      <Highlighted>
+        useState, useEffect, useContext, useReducer, and custom hooks.
+      </Highlighted>
+    </Text>
+  );
+
+  const ECOSYSTEM_TOOLS_1 = (
+    <Text>
+      React has a rich ecosystem of tools and libraries, such as{" "}
+      <Highlighted>
+        React Router for routing, Redux for state management, and Next.js for
+        server-side rendering.
+      </Highlighted>
+    </Text>
+  );
+
+  /* ------------------------------------------------------------------------------------ */
 
   const onSideBarItemClick = (id: string) => {
     const element = document.getElementById(id);
@@ -180,7 +275,7 @@ const UnderstandingReact: React.FunctionComponent = () => {
             <Text style={{ marginTop: "1rem" }} size="large">
               {INTRODUCTION_TITLE}
             </Text>
-            <Text>{INTRODUCTION_1}</Text>
+            {INTRODUCTION_1}
             <Alert
               color="warning"
               title={ALERT_TITLE}
@@ -201,7 +296,7 @@ const UnderstandingReact: React.FunctionComponent = () => {
               <ListItem>{COMPONENTS_2}</ListItem>
               <ListItem>{COMPONENTS_3}</ListItem>
               <ListItem>
-                Example:
+                <Text>Example:</Text>
                 <CodeDisplay
                   style={{ marginTop: "0.75rem" }}
                   language="JSX"
@@ -215,7 +310,7 @@ const UnderstandingReact: React.FunctionComponent = () => {
               <ListItem>{JSX_1}</ListItem>
               <ListItem>{JSX_2}</ListItem>
               <ListItem>
-                Example
+                <Text>Example:</Text>
                 <CodeDisplay
                   style={{ marginTop: "0.75rem" }}
                   language="JSX"
