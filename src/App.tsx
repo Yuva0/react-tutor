@@ -1,6 +1,6 @@
 import React from "react";
 // import NavigationBar from "./components/NavigationBar/NavigationBar";
-import { Routes, Route, Navigate, HashRouter } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { ScrollToTop } from "./helpers/helpers";
 import Header from "./components/Header/Header";
 import { ThemeProvider } from "stelios";
@@ -17,7 +17,7 @@ const StyledMainContainer = styled.div`
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <ThemeProvider
         accent={{ primary: colors.accent.primary }}
@@ -34,7 +34,7 @@ function App() {
           </Routes>
         </StyledMainContainer>
       </ThemeProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
