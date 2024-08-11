@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/react-tutor/static/css/main.ad08e59e.css",
+    "main.js": "/react-tutor/static/js/main.b1c8a6d5.js",
+    "static/js/47.12481bb9.chunk.js": "/react-tutor/static/js/47.12481bb9.chunk.js",
+    "static/js/233.6f72dcf5.chunk.js": "/react-tutor/static/js/233.6f72dcf5.chunk.js",
+    "static/js/113.eb9f0477.chunk.js": "/react-tutor/static/js/113.eb9f0477.chunk.js",
+    "static/js/166.af788cb2.chunk.js": "/react-tutor/static/js/166.af788cb2.chunk.js",
+    "static/js/566.63acfcd4.chunk.js": "/react-tutor/static/js/566.63acfcd4.chunk.js",
+    "static/js/872.de2278e7.chunk.js": "/react-tutor/static/js/872.de2278e7.chunk.js",
+    "static/js/322.2218a494.chunk.js": "/react-tutor/static/js/322.2218a494.chunk.js",
+    "static/js/928.e9819c49.chunk.js": "/react-tutor/static/js/928.e9819c49.chunk.js",
+    "static/js/278.7e49b6ba.chunk.js": "/react-tutor/static/js/278.7e49b6ba.chunk.js",
+    "static/js/165.ef69c41d.chunk.js": "/react-tutor/static/js/165.ef69c41d.chunk.js",
+    "static/js/463.b23277d2.chunk.js": "/react-tutor/static/js/463.b23277d2.chunk.js",
+    "index.html": "/react-tutor/index.html",
+    "main.ad08e59e.css.map": "/react-tutor/static/css/main.ad08e59e.css.map",
+    "main.b1c8a6d5.js.map": "/react-tutor/static/js/main.b1c8a6d5.js.map",
+    "47.12481bb9.chunk.js.map": "/react-tutor/static/js/47.12481bb9.chunk.js.map",
+    "233.6f72dcf5.chunk.js.map": "/react-tutor/static/js/233.6f72dcf5.chunk.js.map",
+    "113.eb9f0477.chunk.js.map": "/react-tutor/static/js/113.eb9f0477.chunk.js.map",
+    "166.af788cb2.chunk.js.map": "/react-tutor/static/js/166.af788cb2.chunk.js.map",
+    "566.63acfcd4.chunk.js.map": "/react-tutor/static/js/566.63acfcd4.chunk.js.map",
+    "872.de2278e7.chunk.js.map": "/react-tutor/static/js/872.de2278e7.chunk.js.map",
+    "322.2218a494.chunk.js.map": "/react-tutor/static/js/322.2218a494.chunk.js.map",
+    "928.e9819c49.chunk.js.map": "/react-tutor/static/js/928.e9819c49.chunk.js.map",
+    "278.7e49b6ba.chunk.js.map": "/react-tutor/static/js/278.7e49b6ba.chunk.js.map",
+    "165.ef69c41d.chunk.js.map": "/react-tutor/static/js/165.ef69c41d.chunk.js.map",
+    "463.b23277d2.chunk.js.map": "/react-tutor/static/js/463.b23277d2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ad08e59e.css",
+    "static/js/main.b1c8a6d5.js"
+  ]
+}
