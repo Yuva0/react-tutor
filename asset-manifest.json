@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-tutor/static/css/main.ad08e59e.css",
-    "main.js": "/react-tutor/static/js/main.b1c8a6d5.js",
+    "main.js": "/react-tutor/static/js/main.b8d8654e.js",
     "static/js/47.12481bb9.chunk.js": "/react-tutor/static/js/47.12481bb9.chunk.js",
     "static/js/233.6f72dcf5.chunk.js": "/react-tutor/static/js/233.6f72dcf5.chunk.js",
     "static/js/113.eb9f0477.chunk.js": "/react-tutor/static/js/113.eb9f0477.chunk.js",
@@ -15,7 +15,7 @@
     "static/js/463.b23277d2.chunk.js": "/react-tutor/static/js/463.b23277d2.chunk.js",
     "index.html": "/react-tutor/index.html",
     "main.ad08e59e.css.map": "/react-tutor/static/css/main.ad08e59e.css.map",
-    "main.b1c8a6d5.js.map": "/react-tutor/static/js/main.b1c8a6d5.js.map",
+    "main.b8d8654e.js.map": "/react-tutor/static/js/main.b8d8654e.js.map",
     "47.12481bb9.chunk.js.map": "/react-tutor/static/js/47.12481bb9.chunk.js.map",
     "233.6f72dcf5.chunk.js.map": "/react-tutor/static/js/233.6f72dcf5.chunk.js.map",
     "113.eb9f0477.chunk.js.map": "/react-tutor/static/js/113.eb9f0477.chunk.js.map",
@@ -30,6 +30,6 @@
   },
   "entrypoints": [
     "static/css/main.ad08e59e.css",
-    "static/js/main.b1c8a6d5.js"
+    "static/js/main.b8d8654e.js"
   ]
 }
