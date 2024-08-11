@@ -1,4 +1,3 @@
-import { ListItem } from "stelios";
 import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`

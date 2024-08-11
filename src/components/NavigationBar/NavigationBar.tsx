@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   ComponentHighlight,
   NavigationBarGroup,
