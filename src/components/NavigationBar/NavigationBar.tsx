@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import {
+  ComponentHighlight,
   NavigationBarGroup,
   NavigationBarGroupItem,
   NavigationBarItem,
   NavigationBar as NavigationBarUI,
+  Text,
   useTheme,
 } from "stelios";
 import Topics from "../../content/Topics";
@@ -14,6 +16,7 @@ const NavigationBar = () => {
 
   const { idTopic, idCategory } = useParams();
   const colorPalette = useTheme().theme.colorPalette;
+  console.log(colorPalette);
 
   const _onNavigateToTopic = (
     e: React.MouseEvent | React.KeyboardEvent,
@@ -65,6 +68,35 @@ const NavigationBar = () => {
       }}
     >
       {NavigationBarContent}
+      <div style={{ margin: "1rem 1rem" }}>
+        <ComponentHighlight
+          style={{
+            backgroundColor:
+              colorPalette.primary.appearance === "light" ? "white" : "black",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "0.75rem",
+              padding: "0.5rem 0",
+              textAlign: "center",
+            }}
+          >
+            <Text style={{ color: colorPalette.primary.accentScale[10] }}>
+              <b>
+                <u>Made using Stelios</u>
+              </b>
+            </Text>
+            <Text size="small" style={{ lineHeight: "1.5rem" }}>
+              Lightweight Responsive Component Design System
+            </Text>
+          </div>
+        </ComponentHighlight>
+      </div>
     </NavigationBarUI>
   );
 };

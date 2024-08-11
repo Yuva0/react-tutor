@@ -5,7 +5,7 @@ import {
   HeaderItem,
   IconButton,
   Input,
-  useTheme,
+  Autocomplete,
 } from "stelios";
 import {
   IconBrandGithub,
@@ -17,8 +17,6 @@ import Settings from "./Settings";
 
 const Header = () => {
   
-  const colorPalette = useTheme().theme.colorPalette;
-
   return (
     <HeaderUI id="header" expandable={false} height="3.5rem" style={{outline:0}}>
       <HeaderGroup style={{ marginLeft: "4rem", height: "100%" }}>
@@ -32,12 +30,12 @@ const Header = () => {
         </HeaderItem>
       </HeaderGroup>
       <HeaderGroup>
-        <Input
-          color="primary"
-          leadingIcon={<IconSearch />}
-          width="40rem"
-          placeholder="Search..."
-        />
+        <Autocomplete options={[{title: "Understanding React", value: "understanding-react"},
+          {title: "JSX", value: "jsx"},
+          {title: "Virtual DOM", value: "virtual-dom"},
+          {title: "Function Components", value: "function-components"},
+          {title: "Class Components", value: "class-components"},
+        ]}/>
       </HeaderGroup>
       <HeaderGroup style={{ marginRight: "4rem" }}>
         <HeaderItem>
