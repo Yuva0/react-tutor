@@ -1,7 +1,7 @@
 {
   "name": "cstutor",
   "homepage": "https://yuva0.github.io/react-tutor/",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "@mdx-js/mdx": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
