@@ -98,7 +98,7 @@ const NavigationBar = () => {
               </b>
             </Text>
             <Text size="small" style={{ lineHeight: "1.5rem" }}>
-              Lightweight Responsive Component Design System
+              Themable Responsive Component Design System
             </Text>
           </div>
         </ComponentHighlight>
