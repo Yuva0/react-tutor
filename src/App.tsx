@@ -18,7 +18,7 @@ const StyledMainContainer = styled.div`
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="https://yuva0.github.io/react-tutor/">
       <ScrollToTop />
       <ThemeProvider
         accent={{ primary: colors.accent.primary }}
