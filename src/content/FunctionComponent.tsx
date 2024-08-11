@@ -171,7 +171,7 @@ const FunctionComponent = () => {
               <BreadcrumbsItem title="Components" />
               <BreadcrumbsItem
                 link="/components/function-component"
-                title="Function Components"
+                title="Function Component"
               />
             </Breadcrumbs>
             <Text

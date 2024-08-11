@@ -16,7 +16,6 @@ const NavigationBar = () => {
 
   const { idTopic, idCategory } = useParams();
   const colorPalette = useTheme().theme.colorPalette;
-  console.log(colorPalette);
 
   const _onNavigateToTopic = (
     e: React.MouseEvent | React.KeyboardEvent,

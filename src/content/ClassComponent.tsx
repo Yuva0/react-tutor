@@ -179,7 +179,7 @@ const ClassComponent = () => {
               <BreadcrumbsItem title="Components" />
               <BreadcrumbsItem
                 link="/components/class-component"
-                title="Class Components"
+                title="Class Component"
               />
             </Breadcrumbs>
             <Alert

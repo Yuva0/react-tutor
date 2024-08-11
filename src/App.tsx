@@ -28,7 +28,7 @@ function App() {
         <StyledMainContainer>
           <NavigationBar />
           <Routes>
-            <Route index element={<Homepage />} />
+            <Route index element={<Navigate to="/guides/understanding-react" />} />
             <Route path="/:idCategory/:idTopic" element={<Topic />} />
             <Route path="/404-not-found" element={<Error />} />
             <Route path="*" element={<Navigate to="/404-not-found" />} />

@@ -28,10 +28,10 @@ const Topics: TopicsProps = {
     title: "Components",
     content: {
       "function-component": {
-        title: "Function Components",
+        title: "Function Component",
       },
       "class-component": {
-        title: "Class Components",
+        title: "Class Component",
       },
     },
   },
