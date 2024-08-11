@@ -17,7 +17,7 @@ const StyledMainContainer = styled.div`
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <ScrollToTop />
       <ThemeProvider
         accent={{ primary: colors.accent.primary }}

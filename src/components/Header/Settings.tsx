@@ -62,6 +62,8 @@ const Settings = () => {
     setDrawerOpen(false);
   };
 
+  console.log(colorPalette.primary);
+
   const _handleAppearanceChange = (e: React.MouseEvent, value?: string) => {
     if (!value || (value !== "light" && value !== "dark")) return;
 
