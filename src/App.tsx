@@ -5,7 +5,6 @@ import { ScrollToTop } from "./helpers/helpers";
 import Header from "./components/Header/Header";
 import { ThemeProvider } from "stelios";
 import colors from "./tokens/colors.json";
-import Homepage from "./pages/Homepage/Homepage";
 import Error from "./pages/Error/Error";
 import Topic from "./pages/Topic/Topic";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
@@ -18,7 +17,7 @@ const StyledMainContainer = styled.div`
 
 function App() {
   return (
-    <BrowserRouter basename="https://yuva0.github.io/react-tutor/">
+    <BrowserRouter basename="/react-tutor/">
       <ScrollToTop />
       <ThemeProvider
         accent={{ primary: colors.accent.primary }}
