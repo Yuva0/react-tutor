@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ComponentHighlight,
@@ -15,6 +15,14 @@ const NavigationBar = () => {
   const navigate = useNavigate();
 
   const { idTopic, idCategory } = useParams();
+  const [_topicParam, setTopic] = React.useState<string | undefined>(idTopic);
+  const [_categoryParam, setCategory] = React.useState<string | undefined>(idCategory);
+
+  useEffect(() => {
+    setTopic(idTopic);
+    setCategory(idCategory);
+  },[idTopic, idCategory]);
+
   const colorPalette = useTheme().theme.colorPalette;
 
   const _onNavigateToTopic = (
@@ -36,14 +44,14 @@ const NavigationBar = () => {
     return (
       <NavigationBarGroup
         title={Topics[_category].title}
-        expanded={_category === idCategory}
+        expanded={_category === _categoryParam}
         onClick={(e) => e.preventDefault()}
       >
         {Object.keys(Topics[_category].content).map((_topic) => (
           <NavigationBarGroupItem
             key={_topic}
             value={_topic}
-            selected={_topic === idTopic}
+            selected={_topic === _topicParam}
             onClick={(e) => _onNavigateToTopic(e, _topic, _category)}
           >
             {Topics[_category].content[_topic].title}
